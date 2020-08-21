@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require( 'bcryptjs' );
 const jwt = require( 'jsonwebtoken' );
 const User = require('../Models/user')
-const { generateToken, generateRefreshToken} = require('../Middleware/modules')
+const { generateJwtToken,refreshJwtToken, generateRefreshToken, verifyToken} = require('../Middleware/modules')
 
 
 //@route POST api/user/register
@@ -64,7 +64,7 @@ router.post( '/register', ( req, res ) => {
 //@desc  Login Users
 //@ccess  Public
 
-router.post( '/login', ( req, res ) => {
+router.post( '/login',  ( req, res ) => {
     const { username, password } = req.body;
     if ( !username || !password  || username === '' || password === '') {
         res.status( 400 ).json( 'Please Enter All Fields'  );
@@ -92,7 +92,7 @@ router.post( '/login', ( req, res ) => {
                        }
 
                        //Generate Jwt
-                        const token = generateToken({id: user._id})
+                        const token = generateJwtToken({id: user._id})
                            
                        if ( token ) {
                                 res.json(token)
@@ -108,6 +108,14 @@ router.post( '/login', ( req, res ) => {
     ]
 })
 
+
+//@route POST api/user/refresh_token
+//@desc  Refresh Tokens
+//@access  Private
+
+router.get( '/refresh_token', verifyToken, refreshJwtToken, ( req,res )=> {
+    res.status(202).json('Token Generated Successfully')
+} )
 
 
 

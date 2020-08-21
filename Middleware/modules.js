@@ -1,7 +1,14 @@
 
 const crypto = require( 'crypto' )
 const jwt = require( 'jsonwebtoken' );
+const User = require('../Models/user')
+ 
 
+if ( process.env.NODE_ENV !== 'production' ) {
+    privateKey = require('../keys').privateKey
+} else {
+    privateKey = process.env.json_web_token_private_key 
+}
 
 //Generate Encryption Key
 const generatePrivateKey = () => {
@@ -11,6 +18,8 @@ console.log(key.getPrivateKey().toString('base64'))
 }
 
 
+//@desc Genarate Refresh Tokens
+//@access  Private
 const generateRefreshToken = () => {
     const key = crypto.createECDH('secp256k1');
     key.generateKeys()
@@ -20,9 +29,9 @@ const generateRefreshToken = () => {
 }
 
 
-const privateKey = process.env.json_web_toke_private_key || 'wcQu9WkbZwj4n4e1UPQlK6xUvVg4jTZupxm9K4IB6iw='
-
-const generateToken =({id}) => {
+//@desc Genarate Json Web Tokens
+//@access  Private
+const generateJwtToken =({id}) => {
  const token =   jwt.sign(
         { id},
             `${privateKey}`,
@@ -31,23 +40,62 @@ const generateToken =({id}) => {
     return token;
 }
 
+//@desc Verify Json Web Tokens
+//@access  Private
 const verifyToken = ( req, res, next ) => {
-    const token = req.header( 'x-auth-token' );
+    // const token = req.header( 'x-auth-token' );
+    const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmM2Y5Y2QzZmI4MTdiMTUxMDFkYzkyZiIsImlhdCI6MTU5ODAxNjgyMywiZXhwIjoxNTk4MDIwNDIzfQ.ThkyBfH4oXIeT0oWkwct6ZKVAj5na1ngY_fSAl8U2AU"
 
     if ( !token ) {
         res.status( 401 ).status( 'No token, authorization denied' );
     } else {
         if ( token ) {
             try {
-                const decoded = jwt.verify( token, process.env.SESSION_SECRET );
+                const decoded = jwt.verify( token, privateKey);
                 req.user = decoded;
+                // decoded;
                 // console.log( decoded )
                 next();
             } catch ( e ) {
-                res.status( 403 ).json('Ivalid Token' )
+                // req.JWTerrorMessage = e.message;
+                res.status( 403 ).json( 'Invalid Token' )
+                next();
             }
         }
     }
 }
 
-module.exports = {generateToken, generateRefreshToken}
+//@desc Refresh Json Web Tokens
+//@access  Private
+
+//The Endpoint for this must have undergone 
+//token verification before procceding to this one
+const refreshJwtToken = ( req, res, next ) => {
+   
+    const { user } = req;
+
+    if ( user ) {
+        User.findOne( { _id: user.id } )
+            .then( user => { 
+                if ( !user ) {
+                    res.status(401).json('Unathorized action detected')
+                } else {
+                    if ( !user.refresh_token.isRevoked && user.refresh_token.value ) {
+                        //Regenerate New Token
+                       
+                        const token = generateJwtToken( { id: user._id } );
+                        req.newToken = token;
+                    
+                        
+                        next()
+                    } else {
+                        res.status(403).json('Forbidden Request')
+                    }
+                }
+            } )
+        .catch(err=> console.log(err))
+    }
+
+}
+
+module.exports = {generateJwtToken, generateRefreshToken, verifyToken, refreshJwtToken}
