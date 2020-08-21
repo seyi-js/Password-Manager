@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require( 'bcryptjs' );
 const jwt = require( 'jsonwebtoken' );
 const User = require('../Models/user')
-const { generateJwtToken,refreshJwtToken, generateRefreshToken, verifyToken} = require('../Middleware/modules')
+const { generateJwtToken,refreshJwtToken,verifyAdmin, generateRefreshToken, verifyToken} = require('../Middleware/modules')
 
 
 //@route POST api/user/register
@@ -13,7 +13,7 @@ const { generateJwtToken,refreshJwtToken, generateRefreshToken, verifyToken} = r
 
 
 
-router.post( '/register', ( req, res ) => {
+router.post( '/register', verifyToken,verifyAdmin, ( req, res ) => {
     const { username, password, isAdmin=false } = req.body;
 
     if ( username === '' ||!username || password === '' || !password ) {

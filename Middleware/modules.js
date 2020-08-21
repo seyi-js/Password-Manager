@@ -98,4 +98,26 @@ const refreshJwtToken = ( req, res, next ) => {
 
 }
 
-module.exports = {generateJwtToken, generateRefreshToken, verifyToken, refreshJwtToken}
+//@desc Verify if isAdmin
+//@access  Private
+
+const verifyAdmin = (req,res,next) => {
+    const { user } = req
+    
+    if ( !user ) {
+        res.status(400).json('Bad request')
+    } else {
+        User.findById( user.id )
+            .then( user => {
+                if ( user.isAdmin ) {
+                    // console.log('true')
+                    next();
+                } else {
+                    res.status(401).json('You are unauthorized to use this resource')
+                }
+            } )
+        .catch(err=> console.log(err))
+    }
+}
+
+module.exports = {generateJwtToken, generateRefreshToken, verifyToken, refreshJwtToken, verifyAdmin}
