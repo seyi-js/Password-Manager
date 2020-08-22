@@ -6,6 +6,11 @@ const passwordSchema = new mongoose.Schema( {
         required: true
     },
 
+    username: {
+        type: String,
+        required: true
+    },
+
     password: {
         type: String,
         required: true
@@ -14,4 +19,4 @@ const passwordSchema = new mongoose.Schema( {
 
 const Password = mongoose.model( 'passwords', passwordSchema );
 
-module.exports = Password
+module.exports = Password;

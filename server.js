@@ -25,7 +25,7 @@ const userApi = require('./Routes/userApi')
 const passwordApi = require('./Routes/passwordApi')
 
 app.use( '/api/user', userApi );
-app.use('/api/user/password', passwordApi)
+app.use('/api/user/new_data', passwordApi)
 
 //
 

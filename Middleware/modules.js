@@ -1,13 +1,18 @@
-
 const crypto = require( 'crypto' )
 const jwt = require( 'jsonwebtoken' );
 const User = require('../Models/user')
- 
+const ag = 'aes-256-cbc'
+// const key = "a4e1112f45e84f785358bb86ba750f48";//Secret Key
+// console.log( key.toString('base64'))
 
 if ( process.env.NODE_ENV !== 'production' ) {
-    privateKey = require('../keys').privateKey
+    privateKey = require( '../keys' ).privateKey// This is For JWT TOKEN
+    encryptionKey = require( '../keys' ).EncryptionKey//This is For Encryption
+    iv = require('../keys').IV
 } else {
-    privateKey = process.env.json_web_token_private_key 
+    privateKey = process.env.json_web_token_private_key;
+    encryptionKey = process.env.EncryptionKey;
+    iv = process.env.IV;
 }
 
 //Generate Encryption Key
@@ -15,6 +20,23 @@ const generatePrivateKey = () => {
     const key = crypto.createECDH('secp256k1');
 key.generateKeys()
 console.log(key.getPrivateKey().toString('base64'))
+}
+
+//Generate Password
+const generatePassword = () => {
+    const password = crypto.randomBytes( 32 )
+    
+    return password;
+}
+
+//Encrypt Data
+const encryptData = ( data  ) => {
+    
+    let cipher = crypto.createCipheriv( ag, Buffer.from(encryptionKey),iv );
+    let encrypted = cipher.update(data );
+    encrypted = Buffer.concat( [ encrypted, cipher.final() ] );
+    
+    return {encryptedData: encrypted.toString( 'hex' ) };
 }
 
 
@@ -44,7 +66,7 @@ const generateJwtToken =({id}) => {
 //@access  Private
 const verifyToken = ( req, res, next ) => {
     // const token = req.header( 'x-auth-token' );
-    const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmM2Y5Y2QzZmI4MTdiMTUxMDFkYzkyZiIsImlhdCI6MTU5ODAxNjgyMywiZXhwIjoxNTk4MDIwNDIzfQ.ThkyBfH4oXIeT0oWkwct6ZKVAj5na1ngY_fSAl8U2AU"
+    const token =""
 
     if ( !token ) {
         res.status( 401 ).status( 'No token, authorization denied' );
@@ -59,7 +81,7 @@ const verifyToken = ( req, res, next ) => {
             } catch ( e ) {
                 // req.JWTerrorMessage = e.message;
                 res.status( 403 ).json( 'Invalid Token' )
-                next();
+                
             }
         }
     }
@@ -120,4 +142,25 @@ const verifyAdmin = (req,res,next) => {
     }
 }
 
-module.exports = {generateJwtToken, generateRefreshToken, verifyToken, refreshJwtToken, verifyAdmin}
+//@desc find Current User
+//@access  Private
+
+const findUser = (req,res,next) => {
+    const { user } = req;
+
+    User.findById( user.id )
+        .populate('generated_passwords')
+        .select("-password")
+        .then( user => {
+            userDetails = user;
+            next();
+        })
+        .catch( err => console.log( err ) );
+}
+
+
+
+
+
+
+module.exports = {generateJwtToken,generatePassword, encryptData, generateRefreshToken,findUser, verifyToken, refreshJwtToken, verifyAdmin}
