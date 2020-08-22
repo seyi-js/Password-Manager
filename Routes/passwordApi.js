@@ -3,7 +3,7 @@ const router = express.Router();
 const Password = require( '../Models/passwords' )
 const {verifyToken, findUser, encryptData, generatePassword} = require('../Middleware/modules')
 
-//@route POST api/user/new_data
+//@route POST api/new_data/
 //@desc  POST Add New Data
 //@ccess  Private
 
