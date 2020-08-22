@@ -8,11 +8,11 @@ const ag = 'aes-256-cbc'
 if ( process.env.NODE_ENV !== 'production' ) {
     privateKey = require( '../keys' ).privateKey// This is For JWT TOKEN
     encryptionKey = require( '../keys' ).EncryptionKey//This is For Encryption
-    iv = require('../keys').IV
+   
 } else {
     privateKey = process.env.json_web_token_private_key;
     encryptionKey = process.env.EncryptionKey;
-    iv = process.env.IV;
+   
 }
 
 //Generate Encryption Key
@@ -31,12 +31,12 @@ const generatePassword = () => {
 
 //Encrypt Data
 const encryptData = ( data  ) => {
-    
+    let iv = crypto.pseudoRandomBytes(16)
     let cipher = crypto.createCipheriv( ag, Buffer.from(encryptionKey),iv );
     let encrypted = cipher.update(data );
     encrypted = Buffer.concat( [ encrypted, cipher.final() ] );
     
-    return {encryptedData: encrypted.toString( 'hex' ) };
+    return { iv:iv.toString('hex'), encryptedData: encrypted.toString( 'hex' ) };
 }
 
 
@@ -149,8 +149,9 @@ const findUser = (req,res,next) => {
     const { user } = req;
 
     User.findById( user.id )
-        .populate('generated_passwords')
-        .select("-password")
+        .select( "-password" )
+        .select("-generated_passwords")
+        .select("-refresh_token")
         .then( user => {
             userDetails = user;
             next();

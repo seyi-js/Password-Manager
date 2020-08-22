@@ -7,13 +7,13 @@ const passwordSchema = new mongoose.Schema( {
     },
 
     username: {
-        type: String,
-        required: true
+        iv: String,
+        cipherText:String
     },
 
     password: {
-        type: String,
-        required: true
+        iv: String,
+        cipherText:String
     }
 } );
 
