@@ -7,7 +7,7 @@ const {verifyToken,getUserData, findUser, encryptData, generatePassword} = requi
 //@desc  POST Add New Data
 //@ccess  Private
 
-router.post( '/add', verifyToken, getUserData, ( req, res ) => {
+router.post( '/add', verifyToken, findUser, ( req, res ) => {
     var { linked_account, username } = req.body;
     if ( !linked_account || !username ) {
         res.status( 400 ).json( 'Please enter all fields' );
@@ -43,8 +43,8 @@ router.post( '/add', verifyToken, getUserData, ( req, res ) => {
                     data.save();
 
                     //Push the id into the current user details
-                    userData.generated_passwords.push( data._id );
-                    userData.save();
+                    userDetails.generated_passwords.push( data._id );
+                    userDetails.save();
                     res.status( 200 ).json( 'Data Created' )
                 } )
                 .catch( err => console.log( err ) )
@@ -59,15 +59,30 @@ router.post( '/add', verifyToken, getUserData, ( req, res ) => {
 //@desc  Delete Delete Data
 //@ccess  Private
 
-router.delete( '/delete/:id',verifyToken, ( req, res ) => {
+router.delete( '/delete/:id',verifyToken, findUser, ( req, res ) => {
     const { id } = req.params;
-    if(!id){
-        res.json(400).json('Bad Request')
+    
+    
+
+    var FoundData;
+
+    //Find if the passed in id belongs to the user
+    for ( i = 0; i < userDetails.generated_passwords.length; i++ ){
+       
+        if ( userDetails.generated_passwords[ i ] == id ) {
+            FoundData = id;
+        } 
+    }
+
+
+    
+    if(!FoundData){
+        res.json(401).json('Authorization Denied')
     } else {
-        Password.findById( id )
+        Password.findById( FoundData )
             .then( data => { 
                 data.remove();
-                res.status(200).json(id)
+                res.status(200).json(FoundData)
             } )
             .catch( err => {
                 console.log( err );

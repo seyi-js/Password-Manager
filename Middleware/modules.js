@@ -150,7 +150,7 @@ const findUser = (req,res,next) => {
 
     User.findById( user.id )
         .select( "-password" )
-        .select("-generated_passwords")
+        // .select("-generated_passwords")
         .select("-refresh_token")
         .then( user => {
             userDetails = user;
