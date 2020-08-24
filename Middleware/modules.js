@@ -66,7 +66,7 @@ const generateJwtToken =({id}) => {
 //@access  Private
 const verifyToken = ( req, res, next ) => {
     // const token = req.header( 'x-auth-token' );
-    const token =""
+    const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmM2Y5Y2QzZmI4MTdiMTUxMDFkYzkyZiIsImlhdCI6MTU5ODI1NDMzMiwiZXhwIjoxNTk4MjU3OTMyfQ.CIRuuh5CLxDmBuTcCAWXYRKFPe4_i_V_KjohKuVUPfc"
 
     if ( !token ) {
         res.status( 401 ).status( 'No token, authorization denied' );
@@ -159,9 +159,22 @@ const findUser = (req,res,next) => {
         .catch( err => console.log( err ) );
 }
 
+//@desc Get Current User data
+//@access  Private
+const getUserData = (req,res,next) => {
+    const { user } = req;
+
+    User.findById( user.id )
+        .populate("generated_passwords")
+        .select( "-password" )
+        .select("-refresh_token")
+        .then( user => {
+            userData = user;
+            next();
+        })
+        .catch( err => console.log( err ) );
+}
 
 
 
-
-
-module.exports = {generateJwtToken,generatePassword, encryptData, generateRefreshToken,findUser, verifyToken, refreshJwtToken, verifyAdmin}
+module.exports = {generateJwtToken,generatePassword,getUserData, encryptData, generateRefreshToken,findUser, verifyToken, refreshJwtToken, verifyAdmin}
