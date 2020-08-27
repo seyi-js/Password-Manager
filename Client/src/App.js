@@ -1,10 +1,10 @@
 import React, {useEffect}  from 'react';
 import { Switch, Route } from 'react-router-dom';
-import store from './store';
+// import store from './store';
 import { Provider } from 'react-redux';
 
 import './App.css'
-
+import Main from './components/Main'
 
 
 export const App =()=> {
@@ -12,11 +12,10 @@ export const App =()=> {
      
     
         return (
-             <Provider store={store}>
-                <Switch>
+             
                     <React.Fragment>
 
-                    <div><h1>Hello World</h1></div>
+                   <Main/>
                   
                     
                     
@@ -27,8 +26,7 @@ export const App =()=> {
                     
                     
                 </React.Fragment>
-                </Switch>
-                </Provider>
+               
         )
     
 }

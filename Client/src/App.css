@@ -1,6 +1,95 @@
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
-:root {
-  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+body{
+  height:100vh;
+  color: white;
+  overflow-x: hidden;
+  background-color: #0e0e0e;
+}
+
+/* MAIN WRAPPER */
+
+.main-wrapper {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  height:100vh; /*Can be increased*/
+  grid-gap:3px;
+}
+
+
+/* SIDE BAR WRAPPER */
+
+.sidebar-wrapper{
+  background: #282828;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+ 
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+div.sidebar-1{
+  margin-bottom: 15px;
+}
+
+div.sidebar-1  div{
+ display: flex;
+ justify-content: space-between;
+ margin: 20px 0;
+ height:30px;
+ padding: 20px 10px;
+align-items:center;
+cursor:pointer;
+ 
+
+
+  
+}
+
+div.sidebar-1  div:hover{
+  transition: all 0.5s ease-in-out;
+  background:#175ddc;
+  border-radius: 6px;
+}
+
+
+div.sidebar-1  div p{
+  font-size: 18px;
+  
+}
+
+div.sidebar-1  div p .fa{
+ 
+  margin-right:10px;
+   
+ }
+ div.sidebar-1  div p .fa-star{
+ 
+  color:#febf63;
+   
+ }
+
+ div.sidebar-1 div p .fa-trash{
+   color:#e84a5f;
+ }
+
+ 
+ div.sidebar-1  div span{
+ 
+  font-size:15px;
+  color:#8d97a9;
+   
+ }
+/* MAIN PAGE WRAPPER */
+
+.mainpage-wrapper{
+  background-color: aquamarine;
+}
+
 
