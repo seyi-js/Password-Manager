@@ -1,7 +1,7 @@
 const express = require( 'express' );
 const router = express.Router();
 const Password = require( '../Models/passwords' )
-const {verifyToken,getUserData, findUser, encryptData, generatePassword} = require('../Middleware/modules')
+const {verifyToken,getUserData,decryptData, findUser, encryptData, generatePassword} = require('../Middleware/modules')
 
 //@route POST api/data/add
 //@desc  POST Add New Data
@@ -97,8 +97,28 @@ router.delete( '/delete/:id',verifyToken, findUser, ( req, res ) => {
 //@desc  GET Get all Data
 //@ccess  Private
 
-router.get( '/', verifyToken,getUserData, ( req, res ) => {
-    res.status( 200 ).json( userData.generated_passwords );
+router.get( '/', verifyToken, getUserData, ( req, res ) => {
+    // decryptData( userData.generated_passwords )
+
+    const data =[]
+
+    for ( i = 0; i < userData.generated_passwords.length; i++ ){
+        const linked_account = userData.generated_passwords[ i ].password_linked_account;
+        const username = decryptData( userData.generated_passwords[ i ].username );
+        const password = decryptData( userData.generated_passwords[ i ].password );
+        
+        const decryptedData = {
+            username,
+            password,
+            linked_account
+
+        };
+
+        data.push(decryptedData)
+    }
+
+    res.status( 200 ).json(data);
+    
 })
 
 module.exports = router;

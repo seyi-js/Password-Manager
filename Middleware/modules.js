@@ -24,20 +24,47 @@ console.log(key.getPrivateKey().toString('base64'))
 
 //Generate Password
 const generatePassword = () => {
-    const password = crypto.randomBytes( 32 )
-    
-    return password;
+    var pass = ''; 
+    var str = 'ABCD454%EFGt454HI53$JKLMNOPQR76&6STUVWXYZ' +  
+            'ab)cdef=hijk135lmnopqr(tuvwxyz0123456789@#$'; 
+      
+    for (i = 1; i <= 50; i++) { 
+        var char = Math.floor(Math.random() 
+                    * str.length + 1); 
+          
+        pass += str.charAt(char) 
+    } 
+      
+    return pass; 
 }
+
 
 //Encrypt Data
 const encryptData = ( data  ) => {
     let iv = crypto.pseudoRandomBytes(16)
-    let cipher = crypto.createCipheriv( ag, Buffer.from(encryptionKey),iv );
+    let cipher = crypto.createCipheriv( ag, Buffer.from(encryptionKey, 'hex'),iv );
     let encrypted = cipher.update(data );
     encrypted = Buffer.concat( [ encrypted, cipher.final() ] );
     
     return { iv:iv.toString('hex'), encryptedData: encrypted.toString( 'hex' ) };
 }
+
+
+
+
+//Decrypt Data
+
+const decryptData = (data) => {
+    let iv = Buffer.from( data.iv, 'hex' );
+    let encryptedText = Buffer.from( data.cipherText, 'hex' );
+    let decipher = crypto.createDecipheriv( ag, Buffer.from( encryptionKey, 'hex' ), iv );
+    let decrypted = decipher.update( encryptedText );
+    decrypted = Buffer.concat( [ decrypted, decipher.final() ] );
+    return decrypted.toString()
+}
+
+
+
 
 
 //@desc Genarate Refresh Tokens
@@ -66,7 +93,7 @@ const generateJwtToken =({id}) => {
 //@access  Private
 const verifyToken = ( req, res, next ) => {
     // const token = req.header( 'x-auth-token' );
-    const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmM2Y5Y2QzZmI4MTdiMTUxMDFkYzkyZiIsImlhdCI6MTU5ODI1NDMzMiwiZXhwIjoxNTk4MjU3OTMyfQ.CIRuuh5CLxDmBuTcCAWXYRKFPe4_i_V_KjohKuVUPfc"
+    const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmM2Y5Y2QzZmI4MTdiMTUxMDFkYzkyZiIsImlhdCI6MTU5ODI3MzM4NywiZXhwIjoxNTk4Mjc2OTg3fQ.K05PF9koQ5g8qWrpSBsC0Z6z4ATOOoAVt7rTasg9yPI"
 
     if ( !token ) {
         res.status( 401 ).status( 'No token, authorization denied' );
@@ -177,4 +204,4 @@ const getUserData = (req,res,next) => {
 
 
 
-module.exports = {generateJwtToken,generatePassword,getUserData, encryptData, generateRefreshToken,findUser, verifyToken, refreshJwtToken, verifyAdmin}
+module.exports = {generateJwtToken,decryptData, generatePassword,getUserData, encryptData, generateRefreshToken,findUser, verifyToken, refreshJwtToken, verifyAdmin}
