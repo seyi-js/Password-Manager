@@ -4,6 +4,7 @@ const mainpage1 = () => {
     return (
         <div className="mainpage1-wrapper">
            <Header/> 
+         
         </div>
     )
 }

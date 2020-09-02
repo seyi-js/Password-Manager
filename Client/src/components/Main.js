@@ -7,7 +7,9 @@ const Main = () => {
         <div className="main-wrapper">
             <Sidebar />
             <Mainpage1/>
-            <Mainpage2/>
+            <Mainpage2 />
+            <div className="test">
+            </div>
         </div>
     )
 }
