@@ -24,24 +24,24 @@ const sidebar = () => {
             <div className="sidebar-2">
                 <h3>Types</h3>
                 <div>
-                    <i className="fas fa-shield"></i>
-                    <p>Login</p>
-                    <span>19</span>
+                    <i className="fa fa-sign-in-alt"></i>
+                    <p>Logins</p>
+                   
                 </div>
                 <div>
-                    <i className="fas fa-shield"></i>
-                    <p>Card</p>
-                    <span>19</span>
+                    <i className="fa fa-credit-card"></i>
+                    <p>Cards</p>
+                    
                 </div>
                 <div>
-                    <i className="fas fa-shield"></i>
-                    <p>Identify</p>
-                    <span>19</span>
+                    <i className="fa fa-address-book"></i>
+                    <p>Identity</p>
+                   
                 </div>
                 <div>
-                    <i className="fas fa-shield"></i>
-                    <p>Secure</p>
-                    <span>19</span>
+                    <i className="fa fa-sticky-note"></i>
+                    <p>Secure Notes</p>
+                   
                 </div>
             </div>
 

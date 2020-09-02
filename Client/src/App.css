@@ -11,6 +11,7 @@ body{
   color: white;
   overflow-x: hidden;
   background-color: #0e0e0e;
+  font-family: 'sans-serif'
 }
 
 /* MAIN WRAPPER */
@@ -52,7 +53,7 @@ cursor:pointer;
   
 }
 
-div.sidebar-1  div:hover{
+div.sidebar-1  div:hover, div.sidebar-2 div:hover{
   transition: all 0.5s ease-in-out;
   background:#175ddc;
   border-radius: 6px;
@@ -60,7 +61,7 @@ div.sidebar-1  div:hover{
 
 
 div.sidebar-1  div p{
-  font-size: 18px;
+  font-size: 16px;
   
 }
 
@@ -86,6 +87,30 @@ div.sidebar-1  div p .fa{
   color:#8d97a9;
    
  }
+
+ div.sidebar-2  div{
+  display: flex;
+  margin: 10px 0;
+  height:30px;
+  padding: 20px 10px;
+ align-items:center;
+ cursor:pointer;
+}
+
+div.sidebar-2 h3{
+  font-size:15px;
+  color:#929292;
+}
+
+div.sidebar-2 .fa{
+  color:#9e9e9e;
+  margin-right:10px;
+}
+
+
+
+
+
 /* MAIN PAGE WRAPPER */
 
 .mainpage-wrapper{
