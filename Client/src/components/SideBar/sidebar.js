@@ -22,7 +22,7 @@ const sidebar = () => {
                 
             </div>
             <div className="sidebar-2">
-                <h3>Types</h3>
+                <h3>Vault</h3>
                 <div>
                     <i className="fa fa-sign-in-alt"></i>
                     <p>Logins</p>
@@ -46,29 +46,17 @@ const sidebar = () => {
             </div>
 
             
-            <div className="sidebar-3">
-                <h3>Folders</h3>
-                <div>
-                    <i className="fas fa-shield"></i>
-                    <p>Work</p>
-                    
-                </div>
-                <div>
-                    <i className="fas fa-shield"></i>
-                    <p>Social</p>
-                    
-                </div>
-                <div>
-                    <i className="fas fa-shield"></i>
-                    <p>Personal</p>
-                    
-                </div>
-               
-            </div>
+           
 
             <div className="sidebar-footer">
-                <i className="fas fa "></i>
-                <p>New Folder</p>
+               <div>
+                    <i className="fa fa-cog"></i>
+                    <p>Settings</p>
+                </div>
+                <div>
+                    <i className="fa fa-sign-out-alt"></i>
+                    <p>Logout</p>
+                </div>
             </div>
         </section>
     )
