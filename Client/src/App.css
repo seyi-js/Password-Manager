@@ -17,7 +17,7 @@ body{
 
 .main-wrapper {
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 15% 42.5% 42.5%;
   height:100vh; /*Can be increased*/
   grid-gap:3px;
 }
