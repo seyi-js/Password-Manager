@@ -4,31 +4,30 @@ const allItems = () => {
     
     let alpha = [
         {
-            name:'samuel'
+            linked_acct: 'Facebook',
+            username_email: 'seyijs@username.com',
+            
         },
         {
-            name:'aope'
+            linked_acct: 'Twitter',
+            username_email: 'OLU_WASEYI',
         },
         {
-            name:'pivsg'
+            linked_acct: 'Amazon',
+            username_email: 'seyijs@username.com',
         },
         {
-            name:'jahs'
+            linked_acct: 'Instagram',
+            username_email: 'seyijs',
         }
     ]
 
-    const singers = [
-        { name: 'Steven Tyler', band: 'Aerosmith', born: 1948 },
-        { name: 'Karen Carpenter', band: 'The Carpenters', born: 1950 },
-        { name: 'Kurt Cobain', band: 'Nirvana', born: 1967 },
-        { name: 'Stevie Nicks', band: 'Fleetwood Mac', born: 1948 },
-      ];
       
 
     function compare(a, b) {
         // Use toUpperCase() to ignore character casing
-        const bandA = a.name.toUpperCase();
-        const bandB = b.name.toUpperCase();
+        const bandA = a.linked_acct.toUpperCase();
+        const bandB = b.linked_acct.toUpperCase();
      
         let comparison = 0;
         if (bandA > bandB) {
@@ -48,11 +47,18 @@ const allItems = () => {
             
             { sorted.map( obj => (
                
-                <>
-                    <p>{ obj.name }</p>
+                <div className="items">
+                    <div className="icon">
+                        <h1>{ obj.linked_acct[ 0 ] }</h1>
+                    </div>
+                    <div className="details">
+                        <p className="linked_acct">{ obj.linked_acct }</p>
+                        <p className="username">{ obj.username_email}</p>
+                    </div>
+                  
                    
                     
-                    </>
+                </div>
             ) ) }
             
             
