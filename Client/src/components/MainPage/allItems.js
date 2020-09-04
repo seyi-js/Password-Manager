@@ -6,19 +6,23 @@ const allItems = () => {
         {
             linked_acct: 'Facebook',
             username_email: 'seyijs@username.com',
+            type:'Login'
             
         },
         {
             linked_acct: 'Twitter',
             username_email: 'OLU_WASEYI',
+            type:'Login'
         },
         {
             linked_acct: 'Amazon',
             username_email: 'seyijs@username.com',
+            type:'Login'
         },
         {
             linked_acct: 'Instagram',
             username_email: 'seyijs',
+            type:'Login'
         }
     ]
 
@@ -54,6 +58,9 @@ const allItems = () => {
                     <div className="details">
                         <p className="linked_acct">{ obj.linked_acct }</p>
                         <p className="username">{ obj.username_email}</p>
+                    </div>
+                    <div>
+                        <p className="type">{ obj.type }</p>
                     </div>
                   
                    

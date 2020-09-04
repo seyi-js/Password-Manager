@@ -224,7 +224,7 @@ div.all-items{
 
 div.items{
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 20% 60% 20%;
   grid-gap: 5px;
   justify-content:flex-start;
   margin-top:10px;
@@ -277,6 +277,12 @@ div.details .linked_acct {
 div.details .username {
   
   
+  color:#7a7a7a;
+}
+
+.type{
+  font-size:15px;
+  font-weight:bolder;
   color:#7a7a7a;
 }
 
