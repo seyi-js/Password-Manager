@@ -59,9 +59,9 @@ const allItems = () => {
                         <p className="linked_acct">{ obj.linked_acct }</p>
                         <p className="username">{ obj.username_email}</p>
                     </div>
-                    <div>
+                    
                         <p className="type">{ obj.type }</p>
-                    </div>
+                   
                   
                    
                     
