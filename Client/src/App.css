@@ -297,12 +297,13 @@ right: 0;
 top: 0;
 bottom: 0;
 width:42.5%;
-padding: 20px;
+padding: 20px 30px;
 }
 
 .mainpage2-wrapper div.header{
   display: flex;
   flex-direction: row-reverse;
+  margin-bottom:20px;
 }
 
 .mainpage2-wrapper div.header p{
@@ -336,5 +337,44 @@ padding: 20px;
 }
 
 
+div.logins{
+  display:flex;
+  flex-direction: column;
+}
+
+.login-header{
+  display:grid;
+  grid-template-columns:20% 60% 20% ;
+  justify-content:flex-start;
+  margin:10px 0 10px 0;
+  border-bottom: 1px Solid #2c2c2c;
+  padding: 10px 0px;
+  transition:all 0.5s ease-in;
+}
+
+div.login-header .icon{
+  display:flex;
+  
+  margin-right: 15px;
+}
+div.login-header h1{
+ background:#404040;
+ text-align:center;
+ border-radius:5px;
+ width: 50px;
+ padding: 5px 10px;
+ font-weight:bold;
+ /* font-size:30px; */
+ 
+
+}
+
+div.login-header .star{
+  /* color:blue; */
+  display:flex;
+  justify-content:flex-end;
+}
+
+/* CHECK ALL ITEMS SECTION FOR STYLES NOT FOUND HERE */
 
 
