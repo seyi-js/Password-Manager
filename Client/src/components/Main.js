@@ -6,15 +6,18 @@ const Main = () => {
 
     const [ page, setPage ] = useState();
 
+    const [ data, setData ] = useState();
+
     const updatePage = (number) => {
-        setPage(number)
-        localStorage.setItem( 'page', page );//Save To Local Storage
+        setPage( number )
+        
+        localStorage.setItem( 'page', number );//Save To Local Storage
     }
     return (
         <div className="main-wrapper">
             <Sidebar updatePage={updatePage} />
-            <Mainpage1 page={ page}/>
-            <Mainpage2 />
+            <Mainpage1 page={ page } setData={ setData}/>
+            <Mainpage2 data={data} />
             <div className="test">
             </div>
         </div>

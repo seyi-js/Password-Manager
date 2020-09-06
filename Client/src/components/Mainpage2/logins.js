@@ -1,6 +1,6 @@
 import React,{ useRef, useState,useEffect }  from 'react'
 
-const Logins = () => {
+const Logins = ({data}) => {
     const inputEl = useRef( null );
     const [name,setName]=useState('My Name is')
     let alpha = [
@@ -65,8 +65,10 @@ const Logins = () => {
 }
 
     useEffect( () => {
-        loadDom()
-    }, [] );
+        if ( data !== undefined ) {
+            loadDom()
+        }
+    }, [data] );
 
 
     const copyToClipBoard = () => {
@@ -90,16 +92,17 @@ const Logins = () => {
         tooltip.innerHTML = "Copy";
     }
 
-
+console.log(data)
     return (
-        <div className="logins">
+        <>
+            {(data !== undefined)? <div className="logins">
             <div className="login-header">
                 <div className="icon">
-                    <h1>{ alpha[0].linked_acct[ 0 ] }</h1>
+                    <h1>{ data.linked_acct[ 0 ] }</h1>
                 </div>
                 <div className="details">
-                    <p className="linked_acct">{ alpha[0].linked_acct }</p>
-                    <p className="type">{ alpha[0].type }</p>
+                    <p className="linked_acct">{ data.linked_acct }</p>
+                    <p className="type">{ data.type }</p>
                 </div>
                 
                     <p className="type star"><i className="fa fa-star"></i></p>
@@ -110,11 +113,11 @@ const Logins = () => {
             <div className="login-body">
                 <div className="username">
                     <label>Username</label>
-                    <input type="text" className="username-input" value={ alpha[ 0 ].username_email } disabled={ true}/>
+                    <input type="text" className="username-input" value={ data.username_email } disabled={ true}/>
                 </div>
                 <div className="password">
                     <label>Password</label>
-                    <input  type="password" id="password-input" className="password-input" value={ alpha[ 0 ].username_email } disabled={false}  />
+                    <input  type="password" id="password-input" className="password-input" value={data.username_email } disabled={false}  />
                     <section className="logins-icons">
                         <span><i className="fa fa-eye"></i></span>
                         <span><i className="fa fa-eye-slash"></i></span>
@@ -128,7 +131,8 @@ const Logins = () => {
                 
             </div>
             
-        </div>
+        </div> : null}
+        </>
     )
 
     

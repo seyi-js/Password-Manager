@@ -1,15 +1,19 @@
 import React, {useEffect}  from 'react';
-import { Switch, Route } from 'react-router-dom';
-// import store from './store';
-import { Provider } from 'react-redux';
+import {loadData} from './actions/Actions';
+import store from './store'
+
 
 import './App.css'
 import Main from './components/Main'
 
 
+
+
 export const App =()=> {
 
-     
+        useEffect( () => {
+                store.dispatch(loadData())
+        }, [])
     
         return (
              

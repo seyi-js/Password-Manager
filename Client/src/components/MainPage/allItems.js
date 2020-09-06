@@ -1,32 +1,9 @@
 import React from 'react'
-
-const allItems = () => {
+import { connect } from 'react-redux'
+const allItems = ({setData,general}) => {
     
-    let alpha = [
-        {
-            linked_acct: 'Facebook',
-            username_email: 'seyijs@username.com',
-            type:'Login'
-            
-        },
-        {
-            linked_acct: 'Twitter',
-            username_email: 'OLU_WASEYI',
-            type:'Login'
-        },
-        {
-            linked_acct: 'Amazon',
-            username_email: 'seyijs@username.com',
-            type:'Login'
-        },
-        {
-            linked_acct: 'Instagram',
-            username_email: 'seyijs',
-            type:'Login'
-        }
-    ]
-
-      
+    //From redux store
+    const {data} = general
 
     function compare(a, b) {
         // Use toUpperCase() to ignore character casing
@@ -44,14 +21,14 @@ const allItems = () => {
         return comparison;
       }
       
-    const sorted = alpha.sort(compare)
+    const sorted = data.sort(compare)
 
     return (
         <div className="all-items">
             
             { sorted.map( obj => (
                
-                <div className="items" onClick={()=> alert('hello')}>
+                <div className="items" onClick={()=>setData(obj)}>
                     <div className="icon">
                         <h1>{ obj.linked_acct[ 0 ] }</h1>
                     </div>
@@ -74,4 +51,8 @@ const allItems = () => {
     )
 }
 
-export default allItems
+const mapStateToProps = ( state ) => ({
+    general: state.general
+  })
+
+export default connect(mapStateToProps, null)(allItems)

@@ -26,13 +26,13 @@ body{
 
 /* MAIN WRAPPER */
 
-/* .main-wrapper {
+.main-wrapper {
   display: grid;
   grid-template-columns: 15% 42.5% 42.5%;
    height:100%;/* Can be increased */
-  /* grid-gap:3px; */
+  grid-gap:3px;
 
-/* }  */
+} 
 
 
 /* SIDE BAR WRAPPER */
