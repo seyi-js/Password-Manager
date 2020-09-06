@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
 *{
   margin: 0;
   padding: 0;
@@ -12,9 +14,10 @@ body{
   color: white;
   overflow-x: hidden;
   background-color: #0e0e0e;
-  font-family: 'sans-serif';
+
   position:relative;
   height:200vh;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .active{
@@ -23,13 +26,13 @@ body{
 
 /* MAIN WRAPPER */
 
-.main-wrapper {
+/* .main-wrapper {
   display: grid;
   grid-template-columns: 15% 42.5% 42.5%;
-  height:100%; /*Can be increased*/
-  grid-gap:3px;
+   height:100%;/* Can be increased */
+  /* grid-gap:3px; */
 
-}
+/* }  */
 
 
 /* SIDE BAR WRAPPER */
@@ -42,6 +45,7 @@ body{
  position:fixed;
  top:0;
  bottom:0;
+ width:10.9%;
  
   /* justify-content: center; */
   /* align-items: center; */
@@ -65,11 +69,12 @@ cursor:pointer;
   
 }
 
-div.sidebar-1  div:hover, div.sidebar-2 div:hover{
+div.sidebar-1   div:hover , div.sidebar-2 div:hover {
   transition: all 0.3s ease-in;
   background:#f77c11d1;
   border-bottom-right-radius:10px;
   border-top-left-radius:10px;
+  
 }
 
 
@@ -90,7 +95,7 @@ div.sidebar-1  div p .fa{
  }
 
  div.sidebar-1 div p .fa-trash{
-   color:#e84a5f;
+   color:#b80e25;
  }
 
  
@@ -159,10 +164,11 @@ div.sidebar-footer div:nth-of-type(2):hover{
   background-color: #1e1e1e;
   position: absolute;
 left: 150px;
-right: 42.5%;
+right: 42.6%;
 top: 0;
 bottom: 0;
 padding: 20px;
+font-family: 'Roboto Slab', serif;
 /* width:42.5%; */
 
 }
@@ -297,6 +303,7 @@ right: 0;
 top: 0;
 bottom: 0;
 width:42.5%;
+
 padding: 20px 30px;
 }
 
@@ -304,6 +311,7 @@ padding: 20px 30px;
   display: flex;
   flex-direction: row-reverse;
   margin-bottom:20px;
+  font-family: 'Roboto Slab', serif;
 }
 
 .mainpage2-wrapper div.header p{
@@ -340,6 +348,7 @@ padding: 20px 30px;
 div.logins{
   display:flex;
   flex-direction: column;
+  margin-top:20%;
 }
 
 .login-header{
@@ -350,6 +359,7 @@ div.logins{
   border-bottom: 1px Solid #2c2c2c;
   padding: 10px 0px;
   transition:all 0.5s ease-in;
+  font-family: 'Roboto Slab', serif;
 }
 
 div.login-header .icon{
@@ -377,4 +387,121 @@ div.login-header .star{
 
 /* CHECK ALL ITEMS SECTION FOR STYLES NOT FOUND HERE */
 
+div.login-body{
+  display: flex;
+  flex-direction: column;
+}
 
+div.login-body div{
+  display: flex;
+  flex-direction: column;
+}
+
+div.username label,div.password label{
+  color:#686868;
+}
+div.username{
+  padding:10px 20px;
+  margin-bottom:20px;
+}
+
+div.login-body .username-input,div.login-body .password-input{
+  background: transparent;
+  outline: none;
+  border:none;
+  color:white;
+  margin-top: 10px;
+  padding-left:10px;
+  font-size:15px;
+  font-family: 'Quicksand', sans-serif;
+  
+}
+
+div.password{
+
+background-color: #292929;
+padding:10px 20px;
+border-bottom-left-radius:10px;
+border-top-right-radius:10px;
+width:100%;
+position: relative;
+
+
+}
+
+section.logins-icons{
+  display:flex;
+  flex-direction:row;
+  /* color:blue; */
+  position:absolute;
+  right:10px;
+  top:33px;
+  
+}
+section.logins-icons span{
+  color:#9e9e9e;
+  margin:0 5px;
+}
+
+section.logins-icons .fa-eye-slash{
+  position:absolute;
+  right:38px;
+  display: none;
+}
+
+section.logins-icons .fa-copy{
+  
+  visibility: hidden;
+}
+
+section.logins-icons .visible{
+  visibility:visible;
+}
+
+section.logins-icons .hide{
+  display: none;
+}
+
+section.logins-icons .show{
+  display: block;
+}
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+ 
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 100px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

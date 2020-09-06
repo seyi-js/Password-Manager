@@ -1,17 +1,24 @@
-import React from 'react'
+import React from 'react';
 
-const sidebar = () => {
-    return (
+
+
+const Sidebar = ({updatePage}) => {
+
+    
+
+    
+
+   return (
         <section className="sidebar-wrapper">
             <div className="sidebar-1">
-                <div>
+                <div  onClick={()=> updatePage(1)}>
                     
                     <p><i className="fa fa-shield-alt"></i>All Items</p>
                     <span>19</span>
                 </div>
-                <div>
+                <div onClick={()=> updatePage(2)}>
                     
-                    <p><i className="fa fa-star"></i>Favourites</p>
+                    <p ><i className="fa fa-star"></i>Favourites</p>
                     <span>4</span>
                 </div>
                 <div>
@@ -62,4 +69,4 @@ const sidebar = () => {
     )
 }
 
-export default sidebar
+export default Sidebar

@@ -51,7 +51,7 @@ const allItems = () => {
             
             { sorted.map( obj => (
                
-                <div className="items">
+                <div className="items" onClick={()=> alert('hello')}>
                     <div className="icon">
                         <h1>{ obj.linked_acct[ 0 ] }</h1>
                     </div>
