@@ -1,31 +1,7 @@
 import React,{ useRef, useState,useEffect }  from 'react'
 
 const Logins = ({data}) => {
-    const inputEl = useRef( null );
-    const [name,setName]=useState('My Name is')
-    let alpha = [
-        {
-            linked_acct: 'Facebook',
-            username_email: 'seyijs@username.com',
-            type: 'Login'
-            
-        },
-        {
-            linked_acct: 'Twitter',
-            username_email: 'OLU_WASEYI',
-            type: 'Login'
-        },
-        {
-            linked_acct: 'Amazon',
-            username_email: 'seyijs@username.com',
-            type: 'Login'
-        },
-        {
-            linked_acct: 'Instagram',
-            username_email: 'seyijs',
-            type: 'Login'
-        }
-    ];
+    
 
  
 
@@ -92,7 +68,7 @@ const Logins = ({data}) => {
         tooltip.innerHTML = "Copy";
     }
 
-console.log(data)
+
     return (
         <>
             {(data !== undefined)? <div className="logins">

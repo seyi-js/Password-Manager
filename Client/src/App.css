@@ -21,7 +21,10 @@ body{
 }
 
 .active{
+  transition: all 0.3s   ease-in;
   background:#f77c11d1;
+  border-bottom-right-radius:10px;
+  border-top-left-radius:10px;
 }
 
 /* MAIN WRAPPER */

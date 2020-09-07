@@ -9,12 +9,9 @@ const Mainpage1 = ({page,setData}) => {
     useEffect( () => {
 
        
-        if ( page === null || page === undefined ) {
-            setPageNumber( Number( localStorage.getItem( 'page' ) ) );
-           
-        } else {
+       
             setPageNumber(page)
-        }
+       
 
         
     },[page])

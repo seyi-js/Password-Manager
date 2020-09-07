@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
-const allItems = ({setData,general}) => {
+const AllItems = ({setData,general}) => {
     
     //From redux store
     const {data} = general
@@ -21,7 +21,12 @@ const allItems = ({setData,general}) => {
         return comparison;
       }
       
-    const sorted = data.sort(compare)
+    const sorted = data.sort( compare );
+
+
+    useEffect( () => {
+        setData(sorted[ 0 ])
+    })
 
     return (
         <div className="all-items">
@@ -55,4 +60,4 @@ const mapStateToProps = ( state ) => ({
     general: state.general
   })
 
-export default connect(mapStateToProps, null)(allItems)
+export default connect(mapStateToProps, null)(AllItems)

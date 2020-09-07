@@ -4,14 +4,14 @@ import Mainpage2 from './Mainpage2/mainpage2'
 import Sidebar from './SideBar/sidebar'
 const Main = () => {
 
-    const [ page, setPage ] = useState();
+    const [ page, setPage ] = useState(1);
 
     const [ data, setData ] = useState();
 
     const updatePage = (number) => {
         setPage( number )
         
-        localStorage.setItem( 'page', number );//Save To Local Storage
+        
     }
     return (
         <div className="main-wrapper">

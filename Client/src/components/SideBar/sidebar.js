@@ -1,27 +1,51 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 
 
 const Sidebar = ({updatePage}) => {
 
     
+    const setClass = ( {number, e} ) => {
+       
+        e.stopPropagation();
+        
+        const grandParentElement = e.currentTarget.parentElement.parentElement.children;//Grand Parent Element
+        const grandParentArray =Object.entries(grandParentElement)
+        // console.log(grandParentArray)
+        // console.log(element)
+       
 
+
+        grandParentArray.forEach(element => {
+          
+            let arr = Object.entries( element[ 1 ].children );
+            arr.forEach( e => {
+                e[ 1 ].classList.remove( 'active' );
+            })
+            
+        } );
+
+      
+        e.currentTarget.classList.add( 'active' )
+        // console.log(Object.entries(element))
+        updatePage( number );
+    }
     
 
    return (
         <section className="sidebar-wrapper">
             <div className="sidebar-1">
-                <div  onClick={()=> updatePage(1)}>
+                <div className="active" onClick={(e)=> setClass({number:1,e})}>
                     
                     <p><i className="fa fa-shield-alt"></i>All Items</p>
                     <span>19</span>
                 </div>
-                <div onClick={()=> updatePage(2)}>
+                <div onClick={(e)=> setClass({number:2,e})}>
                     
                     <p ><i className="fa fa-star"></i>Favourites</p>
                     <span>4</span>
                 </div>
-                <div>
+                <div onClick={(e)=> setClass({number:3,e})}>
                     
                     <p><i className="fa fa-trash"></i>Trash</p>
                     <span>19</span>
@@ -30,24 +54,24 @@ const Sidebar = ({updatePage}) => {
             </div>
             <div className="sidebar-2">
                 <h3>Vault</h3>
-                <div>
+                <div onClick={(e)=> setClass({number:4,e})}>
                     <i className="fa fa-sign-in-alt"></i>
                     <p>Logins</p>
                    
                 </div>
-                <div>
+                <div onClick={(e)=> setClass({number:5,e})}>
                     <i className="fa fa-credit-card"></i>
                     <p>Cards</p>
                     
                 </div>
-                <div>
+                <div onClick={(e)=> setClass({number:6,e})}>
                     <i className="fa fa-address-book"></i>
                     <p>Identity</p>
                    
                 </div>
-                <div>
+                <div onClick={(e)=> setClass({number:7,e})}>
                     <i className="fa fa-sticky-note"></i>
-                    <p>Secure Notes</p>
+                    <p>Notes</p>
                    
                 </div>
             </div>
@@ -56,7 +80,7 @@ const Sidebar = ({updatePage}) => {
            
 
             <div className="sidebar-footer">
-               <div>
+               <div onClick={(e)=> setClass({number:7,e})}>
                     <i className="fa fa-cog"></i>
                     <p>Settings</p>
                 </div>
