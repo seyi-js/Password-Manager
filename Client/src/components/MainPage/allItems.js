@@ -7,8 +7,9 @@ const AllItems = ({setData,general}) => {
 
     function compare(a, b) {
         // Use toUpperCase() to ignore character casing
-        const bandA = a.linked_acct.toUpperCase();
-        const bandB = b.linked_acct.toUpperCase();
+        
+        const bandA = a.type.toUpperCase();
+        const bandB = b.type.toUpperCase();
      
         let comparison = 0;
         if (bandA > bandB) {
@@ -23,7 +24,7 @@ const AllItems = ({setData,general}) => {
       
     const sorted = data.sort( compare );
 
-
+   
     useEffect( () => {
         setData(sorted[ 0 ])
     },[data])
@@ -33,13 +34,32 @@ const AllItems = ({setData,general}) => {
             
             { sorted.map( obj => (
                
-                <div className="items" onClick={()=>setData(obj)}>
+                <>
+                    { ( obj.type === 'Login' ) ? 
+                        <div className="items" onClick={ () => setData( obj ) }>
+                           
+                        <div className="icon">
+                            <h1>{ obj.linked_acct[ 0 ] }</h1>
+                        </div>
+                        <div className="details">
+                            <p className="linked_acct">{ obj.linked_acct }</p>
+                            <p className="username">{ obj.username_email}</p>
+                        </div>
+                        
+                            <p className="type">{ obj.type }</p>
+                       
+                      
+                       
+                        
+                        </div> : ( obj.type === 'card' ) ?
+                        <div className="items" onClick={ () => setData( obj ) }>
+                        
                     <div className="icon">
-                        <h1>{ obj.linked_acct[ 0 ] }</h1>
+                        <h1>{ obj.bank[ 0 ] }</h1>
                     </div>
                     <div className="details">
-                        <p className="linked_acct">{ obj.linked_acct }</p>
-                        <p className="username">{ obj.username_email}</p>
+                        <p className="linked_acct">{ obj.bank }</p>
+                        <p className="username">{ obj.CardNumber}</p>
                     </div>
                     
                         <p className="type">{ obj.type }</p>
@@ -47,7 +67,8 @@ const AllItems = ({setData,general}) => {
                   
                    
                     
-                </div>
+                </div>  : null }
+                </>
             ) ) }
             
             

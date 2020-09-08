@@ -1,38 +1,15 @@
 import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+const Cards = ({setData, page, general}) => {
 
-const Cards = ({setData, page}) => {
-
-
-    const cards = [
-        {
-            type: 'card',
-            bank: 'FirstBank',
-            CardNumber: '50348765908765',
-            pin: '1234',
-            cvv: '234',
-            name:'Visa',
-        },
-        {
-            type: 'card',
-            bank: 'UBA',
-            CardNumber: '50348765908765',
-            pin: '1234',
-            cvv: '234',
-            name:'Verve'
-        },
-        {
-            type: 'card',
-            bank: 'Eco Bank',
-            CardNumber: '50348765908765',
-            pin: '1234',
-            cvv: '234',
-            name: 'Mastercard'
-        },
-    ];
-
+ //From redux store
+ const {data} = general
+    
     function compare(a, b) {
         // Use toUpperCase() to ignore character casing
-        const bandA = a.bank.toUpperCase();
+        if ( a.type === 'card' && b.type === 'card' ) {
+           
+            const bandA = a.bank.toUpperCase();
         const bandB = b.bank.toUpperCase();
      
         let comparison = 0;
@@ -44,10 +21,12 @@ const Cards = ({setData, page}) => {
         }
         
         return comparison;
+        }
+        
       }
       
-    const sorted = cards.sort( compare );
-
+    const sorted = data.sort( compare );
+    
     useEffect( () => {
         setData(sorted[ 0 ])
     },[])
@@ -57,25 +36,29 @@ const Cards = ({setData, page}) => {
             
             { sorted.map( card => (
                 <>
-                <div className="items" onClick={()=>setData(card)} >
-                <div className="icon">
-                    <h1>{ card.bank[ 0 ] }</h1>
-                </div>
-                <div className="details">
-                    <p className="linked_acct">{ card.bank }</p>
-                    <p className="username">{ card.CardNumber}</p>
-                </div>
                 
-                   
-               
-              
-               
-                
-            </div>
+                    { ( card.bank ) ?
+                        
+                        <div className="items" onClick={()=>setData(card)} >
+                            <div className="icon">
+                                <h1>{ card.bank[ 0 ] }</h1>
+                               
+                            </div>
+                            <div className="details">
+                                <p className="linked_acct">{ card.bank }</p>
+                                <p className="username">{ card.CardNumber}</p>
+                            </div>
+                        
+                        </div>
+                        : null }
                 </>
             ))}
         </div>
     )
 }
 
-export default Cards
+const mapStateToProps = ( state ) => ( {
+    general: state.general
+} );
+
+export default connect(mapStateToProps, null)(Cards)
