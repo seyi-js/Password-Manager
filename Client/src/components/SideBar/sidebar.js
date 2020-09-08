@@ -46,11 +46,7 @@ const setClass = ( {number, e} ) => {
                     <p ><i className="fa fa-star"></i>Favourites</p>
                     <span>4</span>
                 </div>
-                <div onClick={(e)=> setClass({number:3,e})}>
-                    
-                    <p><i className="fa fa-trash"></i>Trash</p>
-                    <span>19</span>
-                </div>
+                
                 
             </div>
             <div className="sidebar-2">
@@ -67,7 +63,7 @@ const setClass = ( {number, e} ) => {
                 </div>
                 <div onClick={(e)=> setClass({number:6,e})}>
                     <i className="fa fa-address-book"></i>
-                    <p>Identity</p>
+                    <p>Address</p>
                    
                 </div>
                 <div onClick={(e)=> setClass({number:7,e})}>
