@@ -1,13 +1,14 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 
 
 const Sidebar = ({updatePage}) => {
 
-    
-    const setClass = ( {number, e} ) => {
+//Set Active Class
+const setClass = ( {number, e} ) => {
        
-        e.stopPropagation();
+    e.stopPropagation();
+    
         
         const grandParentElement = e.currentTarget.parentElement.parentElement.children;//Grand Parent Element
         const grandParentArray =Object.entries(grandParentElement)
@@ -15,7 +16,7 @@ const Sidebar = ({updatePage}) => {
         // console.log(element)
        
 
-
+//Loops through each Grandparent Element and its children removing all active classes
         grandParentArray.forEach(element => {
           
             let arr = Object.entries( element[ 1 ].children );

@@ -16,7 +16,7 @@ body{
   background-color: #0e0e0e;
 
   position:relative;
-  height:200vh;
+  min-height:100vh;
   font-family: 'Open Sans Condensed', sans-serif;
 }
 
@@ -507,4 +507,61 @@ section.logins-icons .show{
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+/* CARDS */
+
+.cards{
+  margin-top:30px;
+}
+.card-details{
+  /* background: blue; */
+  display:flex;
+  /* text-align:center; */
+  align-items: center;
+  justify-content:center;
+  
+
+}
+
+.card-details .card-design{
+  width:70%;
+  height:170px;
+  background: -webkit-linear-gradient(to right,#d16c148a, #1e1e1e); /*CHROME*/
+  background: -moz-linear-gradient(to right,#d16c148a, #1e1e1e); /*FIRE FOX*/
+  background: red; /* For browsers that do not support gradients */
+  background: linear-gradient(to right,#d16c148a, #1e1e1e);
+  margin-top:20%;
+  border-radius:10px;
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  padding:10px;
+  font-size:15px;
+  color:#1e1e1e;
+}
+
+.card-details .card-design .card-details-1, .card-details-3{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+.card-details-3{
+  align-items:flex-end;
+  color:#00f2d08a;
+}
+.card-details-1{
+  align-items:flex-start;
+}
+
+.card-details-2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:30px;
+}
+
+.card-details-1 p:nth-of-type(1){
+  color:#1e1e1e;
+  font-size:15px;
 }

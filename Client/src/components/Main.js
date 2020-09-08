@@ -17,7 +17,7 @@ const Main = () => {
         <div className="main-wrapper">
             <Sidebar updatePage={updatePage} />
             <Mainpage1 page={ page } setData={ setData}/>
-            <Mainpage2 data={data} />
+            <Mainpage2 data={data} page={page} />
             <div className="test">
             </div>
         </div>

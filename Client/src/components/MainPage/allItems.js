@@ -26,7 +26,7 @@ const AllItems = ({setData,general}) => {
 
     useEffect( () => {
         setData(sorted[ 0 ])
-    })
+    },[data])
 
     return (
         <div className="all-items">
