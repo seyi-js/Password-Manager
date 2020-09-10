@@ -62,8 +62,8 @@ const setClass = ( {number, e} ) => {
                     
                 </div>
                 <div onClick={(e)=> setClass({number:6,e})}>
-                    <i className="fa fa-address-book"></i>
-                    <p>Address</p>
+                    <i className="fa fa-user-shield"></i>
+                    <p>Vault Codes</p>
                    
                 </div>
                 <div onClick={(e)=> setClass({number:7,e})}>

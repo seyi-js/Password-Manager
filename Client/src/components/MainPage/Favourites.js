@@ -45,8 +45,8 @@ const Favourites = ({setData,general}) => {
                             <h1>{ obj.linked_acct[ 0 ] }</h1>
                         </div>
                         <div className="details">
-                            <p className="linked_acct">{ obj.linked_acct }</p>
-                            <p className="username">{ obj.username_email}</p>
+                            <p className="details-1">{ obj.linked_acct }</p>
+                            <p className="details-2">{ obj.username_email}</p>
                         </div>
                         
                             <p className="type">{ obj.type }</p>

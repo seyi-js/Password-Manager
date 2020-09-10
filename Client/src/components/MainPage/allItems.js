@@ -5,17 +5,17 @@ const AllItems = ({setData,general}) => {
     //From redux store
     const {data} = general
 
-    function compare(a, b) {
+    const compare =(a, b) =>{
         // Use toUpperCase() to ignore character casing
         
-        const bandA = a.type.toUpperCase();
-        const bandB = b.type.toUpperCase();
+        const A = a.type.toUpperCase();
+        const B = b.type.toUpperCase();
      
         let comparison = 0;
-        if (bandA > bandB) {
+        if (A > B) {
             comparison = 1;
             
-        } else if (bandA < bandB) {
+        } else if (A < B) {
           comparison = -1;
         }
         
@@ -29,6 +29,61 @@ const AllItems = ({setData,general}) => {
         setData(sorted[ 0 ])
     },[data])
 
+    const loginItems = ( obj ) => {
+        return (
+            <div className="items" onClick={ () => setData( obj ) }>
+                           
+                <div className="icon">
+                    <h1>{ obj.linked_acct[ 0 ] }</h1>
+                </div>
+                <div className="details">
+                    <p className="details-1">{ obj.linked_acct }</p>
+                    <p className="details-2">{ obj.username_email }</p>
+                </div>
+                
+                <p className="type">{ obj.type }</p>
+           
+          
+           
+            
+            </div>
+        )
+    };
+
+    const cardItems = ( obj ) => {
+        return (
+            <div className="items" onClick={ () => setData( obj ) }>
+                        
+                <div className="icon">
+                    <h1>{ obj.bank[ 0 ] }</h1>
+                </div>
+                <div className="details">
+                    <p className="details-1">{ obj.bank }</p>
+                    <p className="details-2">{ obj.CardNumber }</p>
+                </div>
+                
+                <p className="type">{ obj.type }</p>
+           
+          
+           
+            
+            </div>
+        )
+    };
+
+
+    
+    const vault = ( d ) => {
+        return (
+            <div className="code-vault-in-items" onClick={ () => setData( d ) }>
+                
+                <p>{ d.desc}</p>
+                <p className="type">{ d.type}</p>
+                <i className="fa fa-star"> </i>
+            </div>
+        )
+    };
+
     return (
         <div className="all-items">
             
@@ -36,38 +91,8 @@ const AllItems = ({setData,general}) => {
                
                 <>
                     { ( obj.type === 'Login' ) ? 
-                        <div className="items" onClick={ () => setData( obj ) }>
-                           
-                        <div className="icon">
-                            <h1>{ obj.linked_acct[ 0 ] }</h1>
-                        </div>
-                        <div className="details">
-                            <p className="linked_acct">{ obj.linked_acct }</p>
-                            <p className="username">{ obj.username_email}</p>
-                        </div>
-                        
-                            <p className="type">{ obj.type }</p>
-                       
-                      
-                       
-                        
-                        </div> : ( obj.type === 'card' ) ?
-                        <div className="items" onClick={ () => setData( obj ) }>
-                        
-                    <div className="icon">
-                        <h1>{ obj.bank[ 0 ] }</h1>
-                    </div>
-                    <div className="details">
-                        <p className="linked_acct">{ obj.bank }</p>
-                        <p className="username">{ obj.CardNumber}</p>
-                    </div>
-                    
-                        <p className="type">{ obj.type }</p>
-                   
-                  
-                   
-                    
-                </div>  : null }
+                        loginItems(obj) : ( obj.type === 'card' ) ?
+                     cardItems(obj)  :(obj.type === 'vault code')? vault(obj) :null }
                 </>
             ) ) }
             

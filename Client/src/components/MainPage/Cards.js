@@ -1,22 +1,22 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-const Cards = ({setData, page, general}) => {
+const Cards = ({setData,general}) => {
 
  //From redux store
  const {data} = general
     
-    function compare(a, b) {
+    const compare =(a, b) =>{
         // Use toUpperCase() to ignore character casing
         if ( a.type === 'card' && b.type === 'card' ) {
            
-            const bandA = a.bank.toUpperCase();
-        const bandB = b.bank.toUpperCase();
+            const cardA= a.bank.toUpperCase();
+        const cardB = b.bank.toUpperCase();
      
         let comparison = 0;
-        if (bandA > bandB) {
+        if (cardA > cardB) {
             comparison = 1;
             
-        } else if (bandA < bandB) {
+        } else if (cardA < cardB) {
           comparison = -1;
         }
         
@@ -45,8 +45,8 @@ const Cards = ({setData, page, general}) => {
                                
                             </div>
                             <div className="details">
-                                <p className="linked_acct">{ card.bank }</p>
-                                <p className="username">{ card.CardNumber}</p>
+                                <p className="details-1">{ card.bank }</p>
+                                <p className="details-2">{ card.CardNumber}</p>
                             </div>
                         
                         </div>

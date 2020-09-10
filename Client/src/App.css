@@ -241,13 +241,13 @@ div.items{
   /* background:blue; */
   
   padding: 10px 10px;
-  transition:all 0.5s ease-in;
+ 
   /* text-align: center; */
 }
 
-div.items:hover{
+div.items:hover, div.code-vault-in-items:hover{
  
-  
+  transition:all 0.5s ease-in;
   border-bottom-left-radius:10px;
   border-top-right-radius:10px;
   cursor:pointer;
@@ -279,7 +279,7 @@ div.items h1{
   flex-direction:column;
   justify-content:center;
 }
-div.details .linked_acct {
+div.details .details-1 {
   margin-bottom:3px;
   font-size:18px;
   
@@ -348,7 +348,7 @@ padding: 20px 30px;
 }
 
 
-div.logins{
+div.logins, div.vault-codes-mainpage-2{
   display:flex;
   flex-direction: column;
   margin-top:20%;
@@ -408,7 +408,7 @@ div.username{
   margin-bottom:20px;
 }
 
-div.login-body .username-input,div.login-body .password-input{
+div.login-body .username-input, .password-input{
   background: transparent;
   outline: none;
   border:none;
@@ -572,3 +572,47 @@ section.logins-icons .show{
 div.logins{
   margin-top:30px;
 }
+
+/* VAULT CODES */
+
+.vault-codes{
+  margin-top:30px;
+  display:flex;
+  flex-direction:column;  
+  justify-content: space-between;
+  
+}
+
+div.vault-codes .vault{
+  display:flex;
+  /* flex-direction:flex;   */
+  justify-content: space-between;
+  width:60%;
+  margin-top: 10px;
+  padding: 20px 10px;
+  background: #404040;
+  border-top-left-radius:10px;
+  border-bottom-right-radius:10px;
+  transition:all 0.4s ease-in-out;
+}
+
+div.vault-codes .vault:hover{
+  cursor:pointer;
+  background:#0a0a0a;
+}
+
+.code-vault-in-items{
+  display:flex;
+  /* flex-direction:flex;   */
+  justify-content: space-between;
+  width:60%;
+  margin-top: 10px;
+  padding: 20px 10px;
+  border-bottom-left-radius:10px;
+  border-top-right-radius:10px;
+}
+
+div.vault-codes-mainpage-2 .password-input{
+  padding: 10px 0;
+}
+

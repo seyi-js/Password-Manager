@@ -19,7 +19,7 @@ const Login = ({setData,general}) => {
         } else if (bandA < bandB) {
           comparison = -1;
         }
-        console.log(comparison)
+       
         return comparison;
         } else {
             return null
@@ -29,10 +29,17 @@ const Login = ({setData,general}) => {
     const sorted = data.sort( compare );
 
    
-    // useEffect( () => {
-    //     setData( sorted[ 0 ] );
-    //     console.log(sorted)
-    // },[])
+    useEffect( () => {
+        // setData( sorted[ 0 ] );
+        let i = 0;
+        for( i = 0; i < sorted.length; i++ ){
+            if ( sorted[ i ].type === 'Login' ) {
+                setData( sorted[ i ] )
+                break;
+            }
+            // console.log(sorted[i])
+        }
+    },[])
 
     return (
         <div className="logins">
@@ -49,7 +56,7 @@ const Login = ({setData,general}) => {
                         <p className="username">{ obj.username_email}</p>
                     </div>
                     
-                        <p className="type">{ obj.type }</p>
+                        
                    
                   
                    
