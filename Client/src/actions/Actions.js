@@ -8,23 +8,27 @@ export const loadData = () => ( dispatch ) => {
             {
                 linked_acct: 'Facebook',
                 username_email: 'seyijs@username.com',
-                type: 'Login'
+                type: 'Login',
+                fav: false
                 
             },
             {
                 linked_acct: 'Twitter',
                 username_email: 'OLU_WASEYI',
-                type: 'Login'
+                type: 'Login',
+                fav: false
             },
             {
                 linked_acct: 'Amazon',
                 username_email: 'seyijs@username.com',
-                type: 'Login'
+                type: 'Login',
+                fav: true
             },
             {
                 linked_acct: 'Instagram',
                 username_email: 'seyijs',
-                type: 'Login'
+                type: 'Login',
+                fav: true
             },
             {
                 type: 'card',
@@ -33,6 +37,7 @@ export const loadData = () => ( dispatch ) => {
                 pin: '1234',
                 cvv: '234',
                 name: 'Visa',
+                fav: false,
             },
             {
                 type: 'card',
@@ -40,22 +45,26 @@ export const loadData = () => ( dispatch ) => {
                 CardNumber: '50348765908765',
                 pin: '1234',
                 cvv: '234',
-                name: 'Verve'
+                name: 'Verve',
+                fav: true
             },
             {
                 desc: 'Home vault',
                 code: '1234',
-                type:'vault code'
+                type: 'vault code',
+                fav: false
             },
             {
                 desc: 'Office vault',
                 code: '2345',
-                type:'vault code'
+                type: 'vault code',
+                fav: true
             },
             {
                 desc: 'Bank vault',
                 code: '345667',
-                type:'vault code'
+                type: 'vault code',
+                fav: false
             },
             {
                 type: 'card',
@@ -63,7 +72,8 @@ export const loadData = () => ( dispatch ) => {
                 CardNumber: '50348765908765',
                 pin: '1234',
                 cvv: '234',
-                name: 'Mastercard'
+                name: 'Mastercard',
+                fav: false
             },
            
         ]
