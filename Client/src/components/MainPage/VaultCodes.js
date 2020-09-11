@@ -13,7 +13,7 @@ const VaultCodes = ({setData, general}) => {
         return (
             <div className="vault" onClick={ () => setData( d ) }>
                 
-                <p>{ d.desc.charAt( 0 ).toUpperCase() }</p>
+                <p>{ d.desc.toUpperCase() }</p>
                 
                 <i className="fa fa-star"> </i>
             </div>

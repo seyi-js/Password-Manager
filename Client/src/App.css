@@ -13,7 +13,7 @@ body{
   
   color: white;
   overflow-x: hidden;
-  background-color: #0e0e0e;
+  background-color: #1e1e1e;
 
   position:relative;
   height:100%;
@@ -30,9 +30,9 @@ body{
 /* MAIN WRAPPER */
 
 .main-wrapper {
-  display: grid;
+  /* display: grid; */
   grid-template-columns: 15% 42.5% 42.5%;
-  height:150vh;/* Can be increased */
+  height:100%;
   grid-gap:3px;
 
 } 
@@ -46,6 +46,7 @@ body{
   flex-direction: column;
   padding: 20px 10px;
  position:fixed;
+ clear:both;
  top:0;
  bottom:0;
  width:10.9%;
@@ -165,14 +166,14 @@ div.sidebar-footer div:nth-of-type(2):hover{
 
 .mainpage1-wrapper{
   background-color: #1e1e1e;
-  position: absolute;
+  position: relative;
 left: 150px;
 right: 42.6%;
 top: 0;
 bottom: 0;
 padding: 20px;
 font-family: 'Roboto Slab', serif;
-/* width:42.5%; */
+width:46.3%;
 
 }
 

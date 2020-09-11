@@ -71,13 +71,18 @@ const setClass = ( {number, e} ) => {
                     <p>Notes</p>
                    
                 </div>
+                <div onClick={(e)=> setClass({number:8,e})}>
+                <i className="fa fa-key"></i>
+                <p>Keys</p>
+               
+            </div>
             </div>
 
             
            
 
             <div className="sidebar-footer">
-               <div onClick={(e)=> setClass({number:7,e})}>
+               <div onClick={(e)=> setClass({number:9,e})}>
                     <i className="fa fa-cog"></i>
                     <p>Settings</p>
                 </div>
