@@ -75,6 +75,28 @@ export const loadData = () => ( dispatch ) => {
                 name: 'Mastercard',
                 fav: false
             },
+            {
+                type: 'keys',
+                category: 'SSH',
+                value: 'gdgdgdhdgdhdh',
+                desc:'Github SSH'
+                
+            },
+            {
+                type: 'keys',
+                category: 'RSA',
+                privateKey: 'hhshghjsgfgf',
+                publicKey: 'svhdvgsdvgvdsvdv',
+                desc: 'Messaging App',
+                
+
+            },
+            {
+                type: 'keys',
+                category: 'ENCRYPTION KEY',
+                value: 'dddddddddd',
+                desc: 'SD CARD',
+            }
            
         ]
     } )
