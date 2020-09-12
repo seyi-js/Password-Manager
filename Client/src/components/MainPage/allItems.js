@@ -84,6 +84,16 @@ const AllItems = ({setData,general}) => {
         )
     };
 
+    const keys = (key) => {
+        return (
+            <div className="key-items key-items-in-allitems" onClick={()=> setData(key)}>
+                <p>{ key.desc }</p>
+                <p className="type">{ key.category }</p>
+                <i className="fa fa-star"> </i>
+            </div>
+        )
+    }
+
     return (
         <div className="all-items">
             
@@ -92,7 +102,7 @@ const AllItems = ({setData,general}) => {
                 <>
                     { ( obj.type === 'Login' ) ? 
                         loginItems(obj) : ( obj.type === 'card' ) ?
-                     cardItems(obj)  :(obj.type === 'vault code')? vault(obj) :null }
+                     cardItems(obj)  :(obj.type === 'vault code')? vault(obj):(obj.type === 'keys')? keys(obj) :null }
                 </>
             ) ) }
             

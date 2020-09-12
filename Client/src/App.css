@@ -353,6 +353,7 @@ div.logins, div.vault-codes-mainpage-2{
   display:flex;
   flex-direction: column;
   margin-top:20%;
+  
 }
 
 .login-header{
@@ -522,6 +523,7 @@ section.logins-icons .show{
   align-items: center;
   justify-content:center;
   
+  
 
 }
 
@@ -599,7 +601,7 @@ div.vault-codes .vault{
 
 div.vault-codes .vault:hover{
   cursor:pointer;
-  background:#0a0a0a;
+  background-color: #dda26e;
 }
 
 .code-vault-in-items{
@@ -642,7 +644,12 @@ div.key-items{
 
 div.key-items:hover{
   cursor:pointer;
-  background:#0a0a0a;
+  background-color: #dda26e;
+}
+
+div.key-items-in-allitems{
+  border:none;
+  background:none;
 }
 
 
