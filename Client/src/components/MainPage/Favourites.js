@@ -97,6 +97,37 @@ const Favourites = ({setData,general}) => {
         )
     };
 
+    const keys = (key) => {
+        return (
+            <div className="key-items key-items-in-allitems" onClick={()=> setData(key)}>
+                <p>{ key.desc }</p>
+                <p className="type">{ key.category }</p>
+                <i className="fa fa-star"> </i>
+            </div>
+        )
+    };
+
+    const Note =(n)=>{
+
+        //Split the data content into half
+        const getNote=(n)=>{
+            const len = n.note.length;
+            const half = len/2
+           const words= n.note.slice(0,half)
+            
+           return words;
+        }
+        return(
+            <div className="notes-mainpage-1-inner" onClick={()=>setData(n)}>
+            <div className="notes-1">
+            <p>{n.desc}</p>
+            <p>{getNote(n)}...</p>
+        </div>
+        <i className="fa fa-star"></i>
+            </div>
+        )
+    };
+
     return (
         <div className="all-items">
             
@@ -105,7 +136,7 @@ const Favourites = ({setData,general}) => {
                 <>
                     { ( obj.type === 'Login' && obj.fav ) ? 
                         loginItems(obj) : ( obj.type === 'card' && obj.fav ) ?
-                     cardItems(obj)  :(obj.type === 'vault code' && obj.fav)? vault(obj) :null }
+                     cardItems(obj)  :(obj.type === 'vault code' && obj.fav)? vault(obj):(obj.type === 'keys' && obj.fav)? keys(obj):(obj.type === 'Notes' && obj.fav)? Note(obj) :null }
                 </>
             ) ) }
             

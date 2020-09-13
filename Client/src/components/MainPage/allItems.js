@@ -92,7 +92,28 @@ const AllItems = ({setData,general}) => {
                 <i className="fa fa-star"> </i>
             </div>
         )
-    }
+    };
+
+    const Note =(n)=>{
+
+        //Split the data content into half
+        const getNote=(n)=>{
+            const len = n.note.length;
+            const half = len/2
+           const words= n.note.slice(0,half)
+            
+           return words;
+        }
+        return(
+            <div className="notes-mainpage-1-inner" onClick={()=>setData(n)}>
+            <div className="notes-1">
+            <p>{n.desc}</p>
+            <p>{getNote(n)}...</p>
+        </div>
+        <i className="fa fa-star"></i>
+            </div>
+        )
+    };
 
     return (
         <div className="all-items">
@@ -102,7 +123,7 @@ const AllItems = ({setData,general}) => {
                 <>
                     { ( obj.type === 'Login' ) ? 
                         loginItems(obj) : ( obj.type === 'card' ) ?
-                     cardItems(obj)  :(obj.type === 'vault code')? vault(obj):(obj.type === 'keys')? keys(obj) :null }
+                     cardItems(obj)  :(obj.type === 'vault code')? vault(obj):(obj.type === 'keys')? keys(obj) :(obj.type === 'Notes')? Note(obj):null }
                 </>
             ) ) }
             
