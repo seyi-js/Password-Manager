@@ -82,6 +82,10 @@ const setClass = ( {number, e} ) => {
            
 
             <div className="sidebar-footer">
+            <div onClick={(e)=> setClass({number:10,e})}>
+                    <i className="fa fa-share-alt"></i>
+                    <p>Sharing Center</p>
+                </div>
                <div onClick={(e)=> setClass({number:9,e})}>
                     <i className="fa fa-cog"></i>
                     <p>Settings</p>

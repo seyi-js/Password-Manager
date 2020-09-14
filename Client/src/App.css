@@ -228,13 +228,7 @@ div.mainpage1-header .fa-plus{
 }
 
 
-div.test{
-  display: none;
-  background: blue;
-  width: 500px;
-  position:absolute;
-  z-index:5;
-}
+
 
 /* ALL ITEMS */
 
@@ -704,3 +698,47 @@ div.notes-mainpage-2{
 }
 
 
+/* POPUPS */
+/* SHARING CENTER */
+div.sharing-center{
+  display: block;
+  background:#eff5ff94;
+  width: 100%;
+  height:100%;
+  position:fixed;
+  z-index:5;
+  top:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+div.sharing-center-sub{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  /* margin:auto; */
+  /* margin-left:-1000px; */
+  background:blue;
+  width:60%;
+  height:70%;
+  border-radius:10px;
+  /* animation: sharing-center 1s infinite; */
+  opacity:0;
+}
+
+@keyframes sharing-center {
+  0%{
+   opacity:0;
+    /* margin-left:-1000px; */
+     
+    
+  }
+50%{
+  opacity:0.5;
+}
+
+  100%{
+      opacity:1;
+      /* margin-left:0; */
+  }
+}

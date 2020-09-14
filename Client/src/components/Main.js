@@ -1,7 +1,8 @@
 import React, {useState,useEffect} from 'react'
 import Mainpage1 from './MainPage/mainpage1'
 import Mainpage2 from './Mainpage2/mainpage2'
-import Sidebar from './SideBar/sidebar'
+import Sidebar from './SideBar/sidebar';
+import SharingCenter from './PopUps/SharingCenter'
 const Main = () => {
 
     const [ page, setPage ] = useState(1);
@@ -18,8 +19,7 @@ const Main = () => {
             <Sidebar updatePage={updatePage} />
             <Mainpage1 page={ page } setData={ setData}/>
             <Mainpage2 data={data} page={page} />
-            <div className="test">
-            </div>
+            <SharingCenter/>
         </div>
     )
 }
