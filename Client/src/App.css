@@ -10,10 +10,10 @@
 }
 
 *::-moz-selection{
-  background:#f77c11d1;
+  background:#b9916fd1;
 }
 *::selection{
-  background:#f77c11d1 ;
+  background:#b9916fd1 ;
 }
 
 
@@ -142,12 +142,13 @@ div.sidebar-2 .fa{
 div.sidebar-footer {
   position:absolute;
  bottom:0;
+ 
 }
 div.sidebar-footer div{
   display: flex;
-  margin: 10px 0;
+  margin: 10px 10px 10px 0;
   height:30px;
-  padding: 20px 10px;
+  padding: 20px 5px;
  align-items:center;
  cursor:pointer;
  
@@ -344,7 +345,8 @@ padding: 20px 30px;
   border-bottom-left-radius:10px;
   border-top-right-radius:10px;
 }
-.mainpage2-wrapper div.header p:nth-of-type(2):hover{
+.mainpage2-wrapper div.header p:nth-of-type(2):hover,
+.mainpage2-wrapper div.header p:nth-of-type(3):hover{
   transition:all 0.3s ease-in ;
   background:#d5841d;
   cursor:pointer;
@@ -461,6 +463,10 @@ section.logins-icons .fa-eye-slash{
 section.logins-icons .fa-copy{
   
   visibility: hidden;
+}
+section.logins-icons .fa-copy:hover{
+  transition:all 0.5s ease-in;
+  color:white;
 }
 
 section.logins-icons .visible{
@@ -608,6 +614,11 @@ div.vault-codes .vault:hover{
   background-color: #dda26e;
 }
 
+div.vault-codes-body h3{
+  color:grey;
+  text-align:center;
+
+}
 .code-vault-in-items{
   display:flex;
   /* flex-direction:flex;   */
@@ -699,34 +710,47 @@ div.notes-mainpage-2{
 
 
 /* POPUPS */
-/* SHARING CENTER */
-div.sharing-center{
-  display: block;
+
+div.blurry-popUp{
+  
   background:#eff5ff94;
   width: 100%;
   height:100%;
   position:fixed;
   z-index:5;
   top:0;
-  display:flex;
+  display:none;
   align-items:center;
   justify-content:center;
 }
 
-div.sharing-center-sub{
+div.show-blurry-popUp{
+  display:flex;
+}
+
+
+/* SHARING CENTER */
+div.share{
   display:grid;
   grid-template-columns:repeat(2, 1fr);
   /* margin:auto; */
   /* margin-left:-1000px; */
-  background:blue;
+  background:#1e1e1e;
   width:60%;
   height:70%;
-  border-radius:10px;
-  /* animation: sharing-center 1s infinite; */
+  /* border-radius:10px; */
+  position:relative;
   opacity:0;
+  border-bottom-right-radius:10px;
+  border-top-left-radius:10px;
 }
 
-@keyframes sharing-center {
+div.pop-up-box{
+  opacity:1;
+  /* animation: pop-up-box 1s infinite; */
+}
+
+@keyframes pop-up-box {
   0%{
    opacity:0;
     /* margin-left:-1000px; */
@@ -742,3 +766,153 @@ div.sharing-center-sub{
       /* margin-left:0; */
   }
 }
+div.share-to-one{
+  background:-moz-linear-gradient(to right,#865932, #3e2929,#865932);
+  background: -webkit-linear-gradient(to right,#865932, #3e2929,#865932); /*CHROME*/
+  background: linear-gradient(to right,#865932, #3e2929,#865932);
+  /* border-radius:10px; */
+  border-top-left-radius:10px;
+}
+div.share-to-one,
+div.share-to-many{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+div.share-to-one h1,
+div.share-to-many h1{
+  margin-bottom:30px;
+  font-size:18px;
+}
+div.share-to-one form,
+div.share-to-many form{
+  text-align:center;
+  width:50%;
+  
+}
+div.share-to-one div.form{
+  display:flex;
+  background:#404040;
+  padding:10px 10px;
+  margin-bottom:10px;
+  border-radius:10px;
+  width:100%;
+}
+
+div.share-to-many div.form{
+  display:flex;
+  flex-direction:row-reverse;
+  background:#404040;
+  padding:10px 10px;
+  margin-bottom:10px;
+  border-radius:10px;
+  width:100%;
+}
+
+div.share-to-one div.form .fa,
+div.share-to-many div.form .fa{
+  color:#7a7a7a;
+}
+
+div.share-to-many div.form .fa:hover{
+  transition:all 0.3s ease-in-out;
+  cursor:pointer;
+  color:white;
+}
+
+div.share-to-one div.form input,
+div.share-to-many div.form input{
+  background:transparent;
+  outline:none;
+  border:none;
+  padding:0 6px;
+  color:#7a7a7a;
+  width:100%;
+}
+
+div.share-to-one form button,
+div.share-to-many form button{
+  padding:5px 10px;
+  color:white;
+  background:#292929;
+  outline:none;
+  border:none;
+  border-radius:5px;
+  transition:all 0.3s ease-in-out;
+}
+
+
+div.share-to-one form button:hover,
+div.share-to-many form button:hover{
+  padding:10px 15px;
+  background:#d5841d;
+  cursor:pointer;
+  
+}
+
+div.share > p{
+  position:absolute;
+  right:20px;
+  bottom:20px;
+  background:#292929;
+  padding:10px 20px;
+  border-radius:5px;
+  transition:all 0.3s ease-in-out;
+}
+
+div.share > p:hover{
+  cursor:pointer;
+  background:#ff2525;
+}
+
+
+div.delete{
+  display:flex;
+  flex-direction:column;
+  width:20%;
+  height:30%;
+  background:#1e1e1e;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  padding:10px 10px;
+}
+
+div.delete h3{
+  font-size:20px;
+}
+div.delete .options{
+  display:flex;
+  margin-top:20px;
+}
+
+div.delete .options button{
+  margin:10px;
+  padding:10px 15px;
+  border:none;
+  background:#292929;
+  color:grey;
+  border-radius:5px;
+  transition:all 0.3s ease-in;
+}
+
+div.delete .options button:nth-of-type(1):hover{
+  background:#ff2525;
+  cursor:pointer;
+  color:white;
+}
+
+div.delete .options button:nth-of-type(2):hover{
+  background:green;
+  cursor:pointer;
+  color:white;
+}
+
+
+div.delete p{
+  font-size:13px;
+  color:grey;
+}
+

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
+import {getAndSetBlurryClass} from '../Utils/Utils'
 
 
-
-const Sidebar = ({updatePage}) => {
+const Sidebar = ({updatePage,setPopUpPage}) => {
 
 //Set Active Class
 const setClass = ( {number, e} ) => {
@@ -11,7 +11,7 @@ const setClass = ( {number, e} ) => {
     
         
         const grandParentElement = e.currentTarget.parentElement.parentElement.children;//Grand Parent Element
-        const grandParentArray =Object.entries(grandParentElement)
+        const grandParentArray =Object.entries(grandParentElement);//Converts Objects to Array
         // console.log(grandParentArray)
         // console.log(element)
        
@@ -31,7 +31,12 @@ const setClass = ( {number, e} ) => {
         // console.log(Object.entries(element))
         updatePage( number );
     }
-    
+
+    const setPopUp=({number, e} )=>{
+        setClass({number, e});
+        setPopUpPage('SharingCenter');
+        getAndSetBlurryClass()
+    }
 
    return (
         <section className="sidebar-wrapper">
@@ -82,7 +87,7 @@ const setClass = ( {number, e} ) => {
            
 
             <div className="sidebar-footer">
-            <div onClick={(e)=> setClass({number:10,e})}>
+            <div onClick={(e)=> setPopUp({number:10,e})}>
                     <i className="fa fa-share-alt"></i>
                     <p>Sharing Center</p>
                 </div>

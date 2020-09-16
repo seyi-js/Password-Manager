@@ -25,16 +25,22 @@ const Cards = ({setData,general}) => {
         
       }
       
-    const sorted = data.sort( compare );
+      let sorted;
+      if(data){
+        sorted = data.sort( compare );
+      }
     
     useEffect( () => {
+        if(sorted){
         setData(sorted[ 0 ])
-    },[])
+
+        }
+    },[sorted])
     return (
         <div className="cards">
 
             
-            { sorted.map( card => (
+            { (sorted)? sorted.map( card => (
                 <>
                 
                     { ( card.bank ) ?
@@ -52,7 +58,7 @@ const Cards = ({setData,general}) => {
                         </div>
                         : null }
                 </>
-            ))}
+            )): null}
         </div>
     )
 }

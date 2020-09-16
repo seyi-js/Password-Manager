@@ -34,18 +34,18 @@ const Note =({general, setData})=>{
         let i;
 
         for(i=0; i < data.length; i++){
-            if(data[i].type === 'Notes'){
+            if(data && data[i].type === 'Notes'){
                 setData(data[i])
                 break;
             }
         }
-    })
+    },[data])
 
     return(
         <div className="notes-mainpage-1">
-            {data.map(note=>(
+            {(data)? data.map(note=>(
                 <>{(note.type === 'Notes')? Note(note): null}</>
-            ))}
+            )) : null}
         </div>
     )
 }

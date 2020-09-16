@@ -22,17 +22,20 @@ const Keys = ({general,setData}) => {
         }
     };
 
-    const sorted = data.sort( compare );
+    let sorted;
+      if(data){
+        sorted = data.sort( compare );
+      }
 
     useEffect(()=>{
         let i;
         for ( i = 0; i < sorted.length; i++ ){
-            if ( sorted[ i ].type === 'keys' ) {
+            if (sorted && sorted[ i ].type === 'keys' ) {
                 setData( sorted[ i ] );
                 break;
             }
         }
-    },[])
+    },[sorted])
    
     const keys = (key) => {
         return (
@@ -47,9 +50,9 @@ const Keys = ({general,setData}) => {
     
     return (
         <div className="keys" >
-            { sorted.map( key => (
+            { (sorted)? sorted.map( key => (
                 <>{ (key.type === 'keys')? keys(key) : null}</>
-            ))}
+            )) : null}
         </div>
     )
 }

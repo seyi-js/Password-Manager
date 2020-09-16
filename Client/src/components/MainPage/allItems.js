@@ -21,12 +21,18 @@ const AllItems = ({setData,general}) => {
         
         return comparison;
       }
-      
-    const sorted = data.sort( compare );
+
+      let sorted;
+      if(data){
+        sorted = data.sort( compare );
+      }
+    // const sorted = data.sort( compare );
 
    
     useEffect( () => {
-        setData(sorted[ 0 ])
+        if(sorted){
+            setData(sorted[ 0 ])
+        }
     },[data])
 
     const loginItems = ( obj ) => {
@@ -118,14 +124,15 @@ const AllItems = ({setData,general}) => {
     return (
         <div className="all-items">
             
-            { sorted.map( obj => (
+            { (sorted)? 
+                sorted.map( obj => (
                
-                <>
-                    { ( obj.type === 'Login' ) ? 
-                        loginItems(obj) : ( obj.type === 'card' ) ?
-                     cardItems(obj)  :(obj.type === 'vault code')? vault(obj):(obj.type === 'keys')? keys(obj) :(obj.type === 'Notes')? Note(obj):null }
-                </>
-            ) ) }
+                    <>
+                        { ( obj.type === 'Login' ) ? 
+                            loginItems(obj) : ( obj.type === 'card' ) ?
+                         cardItems(obj)  :(obj.type === 'vault code')? vault(obj):(obj.type === 'keys')? keys(obj) :(obj.type === 'Notes')? Note(obj):null }
+                    </>
+                ) ) : <h1>No Data Available</h1>}
             
             
            

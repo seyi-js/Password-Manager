@@ -11,10 +11,10 @@ import Note from './Note'
 
 
 
-const mainpage2 = ({data,page}) => {
+const mainpage2 = ({data,page,setPopUpPage}) => {
     return (
         <div className="mainpage2-wrapper">
-            <Header /> 
+            <Header setPopUpPage={setPopUpPage} /> 
             { ( data && page === 4 && data.linked_acct || data && data.linked_acct  ) ? <Logins data={ data } />
                 : ( page === 5 && data.bank && data || data && data.bank ) ? <Cards data={ data } /> :( page === 6 && data.type === 'vault code' && data || data && data.type === 'vault code' ) ? <Vault data={ data } />:( page === 7 && data.type === 'Notes' && data || data && data.type === 'Notes' ) ? <Note data={ data } />:( page === 8 && data.type === 'keys' && data || data && data.type === 'keys' ) ? <Keys data={ data } />:
                     null }

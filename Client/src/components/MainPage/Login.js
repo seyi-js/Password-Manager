@@ -26,24 +26,27 @@ const Login = ({setData,general}) => {
         }
       }
       
-    const sorted = data.sort( compare );
+      let sorted;
+      if(data){
+        sorted = data.sort( compare );
+      }
 
    
     useEffect( () => {
         // setData( sorted[ 0 ] );
         let i = 0;
         for( i = 0; i < sorted.length; i++ ){
-            if ( sorted[ i ].type === 'Login' ) {
+            if (sorted && sorted[ i ].type === 'Login' ) {
                 setData( sorted[ i ] )
                 break;
             }
             // console.log(sorted[i])
         }
-    },[])
+    },[sorted])
 
     return (
         <div className="logins">
-            { sorted.map( obj => (
+            { (sorted)? sorted.map( obj => (
                 <>
                     {(obj.linked_acct)? <div className="items" onClick={ () => setData( obj ) }>
                            
@@ -63,7 +66,7 @@ const Login = ({setData,general}) => {
                     
                     </div>  : null}
                 </>
-        ))}
+        )) : null}
         </div>
     )
 }

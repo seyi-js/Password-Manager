@@ -23,22 +23,22 @@ const VaultCodes = ({setData, general}) => {
     useEffect( () => {
         let i;
         for ( i = 0; i < data.length; i++ ){
-            if ( data[ i ].type === 'vault code' ) {
+            if ( data && data[ i ].type === 'vault code' ) {
                 setData( data[ i ] );
                 break;
             }
         }
-    },[])
+    },[data])
     
    
 
     return (
         <div className="vault-codes">
-            { data.map( d => (
+            {(data)? data.map( d => (
                 <>
                     { ( d.type === 'vault code' ) ? vault(d)  : null}
                 </>
-            ))}
+            )) : null}
             
         </div>
     )

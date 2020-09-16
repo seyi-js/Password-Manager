@@ -9,8 +9,7 @@ const Favourites = ({setData,general}) => {
 
         if ( a.fav && b.fav ) {
              // Use toUpperCase() to ignore character casing
-        console.log(a)
-        console.log(b)
+        
         const A = a.type.toUpperCase();
         const B = b.type.toUpperCase();
      
@@ -29,13 +28,16 @@ const Favourites = ({setData,general}) => {
        
       }
       
-    const sorted = data.sort( compare );
+      let sorted;
+      if(data){
+        sorted = data.sort( compare );
+      }
 
    
     useEffect( () => {
         let i;
         for ( i = 0; i < sorted.length; i++ ){
-            if ( sorted[ i ].fav ) {
+            if ( sorted && sorted[ i ].fav ) {
                 setData( sorted[ i ] );
                 break;
             }
@@ -131,14 +133,14 @@ const Favourites = ({setData,general}) => {
     return (
         <div className="all-items">
             
-            { sorted.map( obj => (
+            { (sorted)? sorted.map( obj => (
                
                 <>
                     { ( obj.type === 'Login' && obj.fav ) ? 
                         loginItems(obj) : ( obj.type === 'card' && obj.fav ) ?
                      cardItems(obj)  :(obj.type === 'vault code' && obj.fav)? vault(obj):(obj.type === 'keys' && obj.fav)? keys(obj):(obj.type === 'Notes' && obj.fav)? Note(obj) :null }
                 </>
-            ) ) }
+            ) ) : null}
             
             
            
