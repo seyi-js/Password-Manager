@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {loadDom,copyToClipBoard} from '../Utils/Utils'
-const VaultCodes = ({data}) => {
+const VaultCodes = ({data,disabled,setDisabled}) => {
 
     
 
@@ -21,9 +21,9 @@ const VaultCodes = ({data}) => {
         
         <div className="password">
                     <label>{ data.desc}</label>
-            <input  type="password" id="password-input" className="password-input" value={data.code } disabled={false}  />
+            <input  type="password" id="password-input" disabled={disabled} className="password-input" value={data.code } />
             <section className="logins-icons">
-                <span><i className="fa fa-eye"></i></span>
+                <span onClick={()=>setDisabled(false)}><i className="fa fa-eye"></i></span>
                 <span><i className="fa fa-eye-slash"></i></span>
                 <div class="">
                     <span><i className="fa fa-copy" onClick={ () => copyToClipBoard("password-input") }  ></i></span>

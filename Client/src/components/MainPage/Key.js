@@ -33,6 +33,8 @@ const Keys = ({general,setData}) => {
             if (sorted && sorted[ i ].type === 'keys' ) {
                 setData( sorted[ i ] );
                 break;
+            } else {
+                setData()
             }
         }
     },[sorted])

@@ -40,6 +40,8 @@ const Favourites = ({setData,general}) => {
             if ( sorted && sorted[ i ].fav ) {
                 setData( sorted[ i ] );
                 break;
+            } else {
+                setData()
             }
         }
     },[data])

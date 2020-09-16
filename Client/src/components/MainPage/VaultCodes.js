@@ -26,6 +26,8 @@ const VaultCodes = ({setData, general}) => {
             if ( data && data[ i ].type === 'vault code' ) {
                 setData( data[ i ] );
                 break;
+            } else {
+                setData()
             }
         }
     },[data])

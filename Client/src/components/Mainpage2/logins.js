@@ -1,16 +1,22 @@
-import React,{ useRef, useState,useEffect }  from 'react'
+import React,{ useEffect }  from 'react'
 import {loadDom, copyToClipBoard} from '../Utils/Utils'
-const Logins = ({data}) => {
+const Logins = ({data,disabled,setDisabled}) => {
+    
     
 
  
-
+    const setD = () => {
+        setDisabled(false)
+        
+}
    
 
     useEffect( () => {
         if ( data !== undefined ) {
             loadDom()
         }
+
+       
     }, [data] );
 
 
@@ -42,9 +48,9 @@ const Logins = ({data}) => {
                 </div>
                 <div className="password">
                     <label>Password</label>
-                    <input  type="password" id="password-input" className="password-input" value={data.username_email } disabled={false}  />
+                    <input  type="password" id="password-input" className="password-input" value={data.username_email }  disabled={disabled}  />
                     <section className="logins-icons">
-                        <span><i className="fa fa-eye"></i></span>
+                        <span onClick={()=>setD()}><i className="fa fa-eye"></i></span>
                         <span><i className="fa fa-eye-slash"></i></span>
                         <div class="">
                             <span><i className="fa fa-copy" onClick={ () => copyToClipBoard("password-input") }  ></i></span>

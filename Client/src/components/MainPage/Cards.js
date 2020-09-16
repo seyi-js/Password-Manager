@@ -34,6 +34,8 @@ const Cards = ({setData,general}) => {
         if(sorted){
         setData(sorted[ 0 ])
 
+        } else {
+            setData()
         }
     },[sorted])
     return (

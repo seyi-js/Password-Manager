@@ -32,6 +32,8 @@ const AllItems = ({setData,general}) => {
     useEffect( () => {
         if(sorted){
             setData(sorted[ 0 ])
+        } else {
+            setData()
         }
     },[data])
 

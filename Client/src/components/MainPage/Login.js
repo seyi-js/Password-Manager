@@ -39,6 +39,8 @@ const Login = ({setData,general}) => {
             if (sorted && sorted[ i ].type === 'Login' ) {
                 setData( sorted[ i ] )
                 break;
+            } else{
+                setData()
             }
             // console.log(sorted[i])
         }

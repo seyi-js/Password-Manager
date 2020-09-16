@@ -24,6 +24,7 @@ body{
   color: white;
   overflow-x: hidden;
   background-color: #1e1e1e;
+  /* background-color: blue; */
 
   position:relative;
   height:100%;
@@ -37,13 +38,17 @@ body{
   border-top-left-radius:10px;
 }
 
+input{
+  text-decoration: none;
+  outline:none;
+}
 /* MAIN WRAPPER */
 
 .main-wrapper {
-  /* display: grid; */
-  grid-template-columns: 15% 42.5% 42.5%;
-  height:100%;
-  grid-gap:3px;
+  /* display: flex; */
+  /* grid-template-columns: 15% 42.5% 42.5%; */
+  /* height:100%; */
+  /* grid-gap:3px; */
 
 } 
 
@@ -178,7 +183,7 @@ div.sidebar-footer div:nth-of-type(2):hover{
 .mainpage1-wrapper{
   background-color: #1e1e1e;
   position: relative;
-left: 150px;
+left:11%;
 right: 42.6%;
 top: 0;
 bottom: 0;
@@ -196,7 +201,7 @@ width:46.3%;
   
 }
 
-input[type="search"]{
+div.mainpage1-header input[type="text"]{
   outline: none;
   border:none;
   background:transparent;
