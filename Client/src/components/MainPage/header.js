@@ -1,6 +1,13 @@
 import React from 'react'
+import {getAndSetBlurryClass} from '../Utils/Utils'
+function header({page, setPopUpPage}) {
 
-function header({page}) {
+    const AddTo = () => {
+        if ( page === 4 ) {
+            setPopUpPage( 'AddLogins' );
+            getAndSetBlurryClass();
+        }
+    }
     return (
         <div className="mainpage1-header">
             
@@ -8,7 +15,7 @@ function header({page}) {
                 <i className="fa fa-search"></i>
                 <input type="text" placeholder="Search Vault" />
             </div>
-           {(page !== 1 && page !== 2 )?  <i className="fa fa-plus"></i> : null}
+           {(page !== 1 && page !== 2 )?  <i className="fa fa-plus" onClick={()=>AddTo()}></i> : null}
         </div>
     )
 }

@@ -857,7 +857,7 @@ div.share-to-many form button:hover{
   
 }
 
-div.share > p{
+div.share > p,div.add-to-login > p{
   position:absolute;
   right:20px;
   bottom:20px;
@@ -867,11 +867,13 @@ div.share > p{
   transition:all 0.3s ease-in-out;
 }
 
-div.share > p:hover{
+div.share > p:hover,
+div.add-to-login > p:hover{
   cursor:pointer;
   background:#ff2525;
 }
 
+/* DELETE */
 
 div.delete{
   display:flex;
@@ -921,3 +923,83 @@ div.delete p{
   color:grey;
 }
 
+/* ADD To LOGIN */
+
+div.add-to-login{
+  width:60%;
+  height:70%;
+  background:#1e1e1e;
+  display: flex;
+  
+  position:relative;
+}
+
+div.add-to-login form{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  /* padding:20px; */
+  width:60%;
+}
+
+div.add-to-login >p:nth-of-type(1){
+  right: 130px;
+}
+
+div.add-to-login >p:nth-of-type(1):hover{
+  transition:all 0.3s ease-in-out;
+  background:green;
+}
+
+div.add-to-login form div{
+  margin:10px 0;
+  display:flex;
+  flex-direction:column;
+  /* align-items:center; */
+  /* justify-content:center; */
+  padding:5px 15px;
+  width:70%;
+}
+
+div.add-to-login form div label{
+  margin-bottom:5px;
+}
+
+div.add-to-login form div input[type="text"],
+div.add-to-login form div input[type="password"]{
+  border:none;
+  padding:5px 10px;
+  background:#404040;
+  color:#7a7a7a;
+  border-radius:5px;
+}
+
+div.add-to-login form div.generate_password{
+  flex-direction:row;
+
+}
+
+div.add-to-login form div.generate_password label{
+  margin-right:5px;
+}
+
+div.add-to-login form div.generate_password button{
+  background:#404040;
+  text-align:center;
+  /* height:15px; */
+  /* width:15px; */
+  border:none;
+  padding:5px 10px;
+}
+
+div.add-to-login form div.generate_password button .fa{
+  visibility:hidden;
+  
+}
+
+div.add-to-login form div.generate_password button .checked{
+  visibility:visible;
+  color:green;
+}

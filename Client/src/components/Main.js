@@ -17,7 +17,7 @@ const Main = () => {
     return (
         <div className="main-wrapper">
             <Sidebar updatePage={updatePage} setPopUpPage={setPopUpPage} />
-            <Mainpage1 page={ page } setData={ setData}/>
+            <Mainpage1 page={ page } setData={ setData } setPopUpPage={ setPopUpPage}/>
             <Mainpage2 data={data} page={page}  setPopUpPage={setPopUpPage} />
             <BlurryPopUp popUpPage={popUpPage} data={data}/>
         </div>
