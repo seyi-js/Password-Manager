@@ -926,11 +926,11 @@ div.delete p{
 /* ADD To LOGIN */
 
 div.add-to-login{
-  width:60%;
+  width:50%;
   height:70%;
   background:#1e1e1e;
   display: flex;
-  
+  border-radius:10px;
   position:relative;
 }
 
@@ -965,6 +965,7 @@ div.add-to-login form div{
 
 div.add-to-login form div label{
   margin-bottom:5px;
+  font-size: 15px;
 }
 
 div.add-to-login form div input[type="text"],
@@ -983,6 +984,7 @@ div.add-to-login form div.generate_password{
 
 div.add-to-login form div.generate_password label{
   margin-right:5px;
+  margin-bottom:0;
 }
 
 div.add-to-login form div.generate_password button{
@@ -991,15 +993,16 @@ div.add-to-login form div.generate_password button{
   /* height:15px; */
   /* width:15px; */
   border:none;
-  padding:5px 10px;
+  padding:2px 3px;
+  border-radius:2px;
 }
 
-div.add-to-login form div.generate_password button .fa{
+div.add-to-login form div.generate_password button .not-checked{
   visibility:hidden;
-  
+  color:green;
 }
 
 div.add-to-login form div.generate_password button .checked{
   visibility:visible;
-  color:green;
+  
 }

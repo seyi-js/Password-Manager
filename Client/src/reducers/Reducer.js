@@ -1,4 +1,4 @@
-import {LOAD_DATA,DELETE_DATA} from '../actions/types'
+import {LOAD_DATA,DELETE_DATA,ADD_LOGIN} from '../actions/types'
 
 const initialState = {
     data:[]
@@ -15,9 +15,14 @@ export default ( state = initialState, action ) => {
             };
 
         case DELETE_DATA:
-            return{
+            return {
                 ...state,
-                data:state.data.filter(d=> d.id !== action.payload )
+                data: state.data.filter( d => d.id !== action.payload )
+            };
+        case ADD_LOGIN:
+            return {
+                ...state,
+                data:[action.payload, ...state.data]
             }
         
             default:

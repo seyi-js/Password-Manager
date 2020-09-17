@@ -1,10 +1,18 @@
-import { LOAD_DATA,DELETE_DATA } from './types';
+import { LOAD_DATA,DELETE_DATA, ADD_LOGIN} from './types';
 
 
 export const deleteFromUI= (id)=>(dispatch)=>{
     dispatch({
         type:DELETE_DATA,
         payload:id
+    })
+}
+
+export const addLogin =(data)=>dispatch=>{
+    dispatch({
+        type:ADD_LOGIN,
+        payload:data
+
     })
 }
 
@@ -18,7 +26,8 @@ export const loadData = () => ( dispatch ) => {
                 linked_acct: 'Facebook',
                 username_email: 'seyijs@username.com',
                 type: 'Login',
-                fav: false
+                fav: false,
+                password:'sfsfsf'
                 
             },
             {   
@@ -26,6 +35,7 @@ export const loadData = () => ( dispatch ) => {
                 linked_acct: 'Twitter',
                 username_email: 'OLU_WASEYI',
                 type: 'Login',
+                password:'jjjjj',
                 fav: false
             },
             {
@@ -33,14 +43,16 @@ export const loadData = () => ( dispatch ) => {
                 linked_acct: 'Amazon',
                 username_email: 'seyijs@username.com',
                 type: 'Login',
-                fav: true
+                fav: true,
+                password:'sfsff'
             },
             {
                 id:'123676898',
                 linked_acct: 'Instagram',
                 username_email: 'seyijs',
                 type: 'Login',
-                fav: true
+                fav: true,
+                password:'Ssfsff'
             },
             {
                 id:'1234667',

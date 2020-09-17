@@ -48,7 +48,7 @@ const Logins = ({data,disabled,setDisabled}) => {
                 </div>
                 <div className="password">
                     <label>Password</label>
-                    <input  type="password" id="password-input" className="password-input" value={data.username_email }  disabled={disabled}  />
+                    <input  type="password" id="password-input" className="password-input" value={data.password }  disabled={disabled}  />
                     <section className="logins-icons">
                         <span onClick={()=>setD()}><i className="fa fa-eye"></i></span>
                         <span><i className="fa fa-eye-slash"></i></span>

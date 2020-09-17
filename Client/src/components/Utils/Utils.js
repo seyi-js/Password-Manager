@@ -1,7 +1,12 @@
 // THIS DOC IS FOR FUNCTIONS USED IN MORE THAN ONE COMPONENT
+
 import React from 'react'
+import Crypto from 'crypto'
 
-
+// Crypto.pbkdf2( 'samuelseyi', 'seyisam', 1000, 16, ( err, key ) => {
+//     if ( err ) throw err;
+//     console.log(key.toString('hex'))
+// })
 
 export   const loadDom = () => {
     const fa_eye = document.getElementsByClassName( 'fa-eye' );
@@ -84,4 +89,23 @@ export const copyToClipBoard = (className) => {
    
     
        
-      };
+};
+      
+
+ //Generate Password
+ export const generatePassword = () => {
+    var pass = ''; 
+    var str = 'ABCD454%EFt454HI53$JKL"NOPQR76&6STUVWXYZ' +  
+            'ab)cdef=hijk135lm#*opqr(tuvwxyz0123456789@#$'; 
+     let i;
+    for (i = 1; i <= 50; i++) { 
+        var char = Math.floor(Math.random() 
+                    * str.length + 1); 
+          
+        pass += str.charAt(char) 
+    } 
+      
+    return pass; 
+}
+
+

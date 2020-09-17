@@ -31,11 +31,15 @@ const Cards = ({setData,general}) => {
       }
     
     useEffect( () => {
-        if(sorted){
-        setData(sorted[ 0 ])
-
-        } else {
-            setData()
+        let i = 0;
+        for( i = 0; i < sorted.length; i++ ){
+            if (sorted && sorted[ i ].type === 'card' ) {
+                setData( sorted[ i ] )
+                break;
+            } else{
+                setData()
+            }
+            // console.log(sorted[i])
         }
     },[sorted])
     return (
