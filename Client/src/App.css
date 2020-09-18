@@ -857,7 +857,9 @@ div.share-to-many form button:hover{
   
 }
 
-div.share > p,div.add-to-login > p{
+div.share > p,
+div.add-to-login > p,
+div.add-to-card > p{
   position:absolute;
   right:20px;
   bottom:20px;
@@ -868,7 +870,8 @@ div.share > p,div.add-to-login > p{
 }
 
 div.share > p:hover,
-div.add-to-login > p:hover{
+div.add-to-login > p:hover,
+div.add-to-card > p:hover{
   cursor:pointer;
   background:#ff2525;
 }
@@ -923,7 +926,7 @@ div.delete p{
   color:grey;
 }
 
-/* ADD To LOGIN */
+/* ADD TO LOGIN */
 
 div.add-to-login{
   width:50%;
@@ -944,11 +947,13 @@ div.add-to-login form{
   width:60%;
 }
 
-div.add-to-login >p:nth-of-type(1){
+div.add-to-login >p.save,
+div.add-to-card >p.save{
   right: 130px;
 }
 
-div.add-to-login >p:nth-of-type(1):hover{
+div.add-to-login >p.save:hover,
+div.add-to-card >p.save:hover{
   transition:all 0.3s ease-in-out;
   background:green;
 }
@@ -974,7 +979,7 @@ div.add-to-login form div input[type="password"]{
   padding:5px 10px;
   background:#404040;
   color:#7a7a7a;
-  border-radius:5px;
+  /* border-radius:5px; */
 }
 
 div.add-to-login form div.generate_password{
@@ -1005,4 +1010,45 @@ div.add-to-login form div.generate_password button .not-checked{
 div.add-to-login form div.generate_password button .checked{
   visibility:visible;
   
+}
+
+/* ADD TO CARD */
+div.add-to-card{
+  width:50%;
+  height:70%;
+  background:#1e1e1e;
+  display: flex;
+  border-radius:10px;
+  position:relative;
+  align-items:center;
+  justify-content:center;
+}
+
+div.add-to-card form{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  width:70%;
+}
+
+div.add-to-card form div{
+  margin:15px 5px;
+  display:flex;
+  flex-direction:column;
+}
+
+div.add-to-card form div label{
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+div.add-to-card form div input{
+  border:none;
+  padding:5px 10px;
+  background:#404040;
+  color:#7a7a7a;
+  /* border-radius:5px; */
+}
+
+div.add-to-card form div.card-number{
+  grid-column:1/3;
 }

@@ -6,6 +6,9 @@ function header({page, setPopUpPage}) {
         if ( page === 4 ) {
             setPopUpPage( 'AddLogins' );
             getAndSetBlurryClass();
+        } else if ( page === 5 ) {
+            setPopUpPage( 'Card' );
+            getAndSetBlurryClass();
         }
     }
     return (

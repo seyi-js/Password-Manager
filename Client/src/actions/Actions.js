@@ -1,4 +1,4 @@
-import { LOAD_DATA,DELETE_DATA, ADD_LOGIN} from './types';
+import { LOAD_DATA,DELETE_DATA, ADD_DATA} from './types';
 
 
 export const deleteFromUI= (id)=>(dispatch)=>{
@@ -8,9 +8,9 @@ export const deleteFromUI= (id)=>(dispatch)=>{
     })
 }
 
-export const addLogin =(data)=>dispatch=>{
+export const addData =(data)=>dispatch=>{
     dispatch({
-        type:ADD_LOGIN,
+        type:ADD_DATA,
         payload:data
 
     })
@@ -62,6 +62,9 @@ export const loadData = () => ( dispatch ) => {
                 pin: '1234',
                 cvv: '234',
                 name: 'Visa',
+                expiryMonth:'01',
+                expiryYear:"20",
+                nameOnCard:'SEYI-JS',
                 fav: false,
             },
             {   
@@ -72,6 +75,9 @@ export const loadData = () => ( dispatch ) => {
                 pin: '1234',
                 cvv: '234',
                 name: 'Verve',
+                expiryMonth:'01',
+                expiryYear:"20",
+                nameOnCard:'SEYI-JS',
                 fav: true
             },
             {   
@@ -103,6 +109,9 @@ export const loadData = () => ( dispatch ) => {
                 pin: '1234',
                 cvv: '234',
                 name: 'Mastercard',
+                expiryMonth:'01',
+                expiryYear:"20",
+                nameOnCard:'SEYI-JS',
                 fav: false
             },
             {   

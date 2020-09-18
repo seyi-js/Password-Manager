@@ -1,13 +1,13 @@
 import React, {useState,useEffect} from 'react'
 import { cancel, getAndRemoveClass,generatePassword } from '../../Utils/Utils'
 import store from '../../../store'
-import {addLogin } from '../../../actions/Actions'
+import {addData} from '../../../actions/Actions'
 const Login = () => {
 
-    const [account, setAccount] = useState();
-    const [username, setUsername] = useState();
-    const [ password, setPassword ] = useState();
-    const [ errorMsg, setErrorMsg ] = useState();
+    const [account, setAccount] = useState('');
+    const [username, setUsername] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ errorMsg, setErrorMsg ] = useState('');
     const [ checkBox, setCheckBox ] = useState( true );
     const [allDone,setAlldone] = useState(false)
 
@@ -48,9 +48,9 @@ const Login = () => {
                 e.currentTarget.firstElementChild.classList.add( 'checked' );
                 const password = document.getElementsByClassName( 'add-to-login-password-input' )
                 
-                password[0].value=''
+                // password[0].value=''
                 setCheckBox( true )
-                setPassword()
+                setPassword('')
             }
         }
         
@@ -66,11 +66,13 @@ const Login = () => {
                 password:generatePassword(),
                 type: 'Login',
                 fav: false
-                //TODO
-                    //Add password field and change passwords in their respective places
+                
             }
-            store.dispatch(addLogin(loginCredential))
-            getAndRemoveClass() 
+            store.dispatch(addData(loginCredential))
+            getAndRemoveClass();
+            setAccount( '' );
+            setPassword( '' )
+            setUsername('')
         } else if ( account && username && password ) {
             const loginCredential = {
                 id: '121323',
@@ -79,12 +81,13 @@ const Login = () => {
                 password:password,
                 type: 'Login',
                 fav: false
-                //TODO
-                    //Add password field and change passwords in their respective places
+                
             }
-            store.dispatch(addLogin(loginCredential))
+            store.dispatch(addData(loginCredential))
             getAndRemoveClass();
-
+            setAccount( '' );
+            setPassword( '' )
+            setUsername('')
             
             
         }else{
@@ -98,17 +101,17 @@ const Login = () => {
             <form>
                 <div className="account">
                     <label>Account/Website</label>
-                    <input type="text" placeholder="e.g Twitter,Facebook e.t.c" onChange={(e)=>setAccount(e.target.value)} />
+                    <input type="text" value={account} placeholder="e.g Twitter,Facebook e.t.c" onChange={(e)=>setAccount(e.target.value)} />
                 
                 </div>
                 <div className="username_email">
                     <label>Username or Email</label>
-                    <input type="text" onChange={(e)=>setUsername(e.target.value)}/>
+                    <input type="text" value={username} onChange={(e)=>setUsername(e.target.value)}/>
                     
                 </div>
                 <div className="add-to-login-password">
                     <label>Password</label>
-                    <input type="text" className="add-to-login-password-input"  onChange={(e)=>setUpadtePassword(e)}/>
+                    <input type="password" value={password} className="add-to-login-password-input"  onChange={(e)=>setUpadtePassword(e)}/>
                     
                 </div>
                 <div className="generate_password">
@@ -118,7 +121,7 @@ const Login = () => {
                     </button>        
                 </div>
             </form>
-            {(allDone)? <p onClick={()=>saveForm()}>save</p>: null}
+            {(allDone)? <p className="save" onClick={()=>saveForm()}>save</p>: null}
             {cancel()}
             
         </div>
