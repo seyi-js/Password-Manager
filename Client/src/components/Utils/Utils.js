@@ -72,10 +72,10 @@ export const cancel=()=>{
 };
 
 
-export const copyToClipBoard = (className) => {
+export const copyToClipBoard = (id) => {
 
-    if(className){
-        var data = document.getElementById(className);
+    if(id){
+        var data = document.getElementById(id);
 
     /* Select the text field */
     data.select();
