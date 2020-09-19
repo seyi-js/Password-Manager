@@ -9,6 +9,9 @@ function header({page, setPopUpPage}) {
         } else if ( page === 5 ) {
             setPopUpPage( 'Card' );
             getAndSetBlurryClass();
+        } else if ( page === 6 ) {
+            setPopUpPage( 'Vault' );
+            getAndSetBlurryClass();
         }
     }
     return (

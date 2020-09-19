@@ -49,7 +49,7 @@ const Card = () => {
     };
     
     return (
-        <div className="add-to-card">
+        <div className="add-to-card pop-up-box">
             <form>
                 <div className="card-number">
                     <label>Number</label>
