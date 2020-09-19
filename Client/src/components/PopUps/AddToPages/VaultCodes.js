@@ -16,6 +16,8 @@ const VaultCodes = () => {
         if ( desc && code ) {
             setAllDone( true )
             
+        } else {
+            setAllDone( false )
         }
     }, [ desc, code ] );
 
@@ -31,10 +33,11 @@ const VaultCodes = () => {
         store.dispatch( addData( data ) );
         setDesc( '' )
         setCode( '' )
-        getAndRemoveClass()
+        getAndRemoveClass() 
+        setAllDone( false )
     }
     return (
-        <div className="add-to-vault-codes">
+        <div className="add-to-vault-codes pop-up-box">
             <form>
                 <div className="desc">
                     <label>Description</label>

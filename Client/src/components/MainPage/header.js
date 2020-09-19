@@ -12,6 +12,9 @@ function header({page, setPopUpPage}) {
         } else if ( page === 6 ) {
             setPopUpPage( 'Vault' );
             getAndSetBlurryClass();
+        }else if ( page === 7 ) {
+            setPopUpPage( 'Notes' );
+            getAndSetBlurryClass();
         }
     }
     return (

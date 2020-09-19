@@ -19,6 +19,7 @@
 
 
 
+
 body{
   
   color: white;
@@ -706,6 +707,7 @@ div.notes-mainpage-1-inner{
   border-bottom-left-radius:10px;
 border-top-right-radius:10px;
 width:60%;
+justify-content:space-between;
 
 }
 div.notes-mainpage-1-inner:hover{
@@ -879,7 +881,8 @@ div.share-to-many form button:hover{
 div.share > p,
 div.add-to-login > p,
 div.add-to-card > p,
-div.add-to-vault-codes > p
+div.add-to-vault-codes > p,
+div.add-to-notes > p
 {
   position:absolute;
   right:20px;
@@ -893,7 +896,8 @@ div.add-to-vault-codes > p
 div.share > p:hover,
 div.add-to-login > p:hover,
 div.add-to-card > p:hover,
-div.add-to-vault-codes > p:hover
+div.add-to-vault-codes > p:hover,
+div.add-to-notes > p:hover
 {
   cursor:pointer;
   background:#ff2525;
@@ -972,14 +976,16 @@ div.add-to-login form{
 
 div.add-to-login >p.save,
 div.add-to-card >p.save,
-div.add-to-vault-codes >p.save
+div.add-to-vault-codes >p.save,
+div.add-to-notes >p.save
 {
   right: 130px;
 }
 
 div.add-to-login >p.save:hover,
 div.add-to-card >p.save:hover
-div.add-to-vault-codes >p.save:hover
+div.add-to-vault-codes >p.save:hover,
+div.add-to-notes >p.save:hover
 {
   transition:all 0.3s ease-in-out;
   background:green;
@@ -1119,3 +1125,45 @@ div.add-to-vault-codes form div input{
   background:#404040;
   color:#7a7a7a;
 }
+
+/* ADD TO NOTES */
+div.add-to-notes{
+  width:40%;
+  height:50%;
+  background:#1e1e1e;
+  display: flex;
+  border-radius:10px;
+  position:relative;
+}
+
+div.add-to-notes form{
+  display:flex;
+  flex-direction:column;
+  /* align-items:center; */
+  /* justify-content:center; */
+  margin:auto;
+  /* padding:20px; */
+  width:70%;
+}
+
+div.add-to-notes form div{
+  margin-bottom:15px;
+  display:flex;
+  flex-direction:column;
+}
+
+div.add-to-notes form div input,
+div.add-to-notes form div textarea{
+  border:none;
+  padding:10px 10px;
+  background:#404040;
+  color:#7a7a7a;
+}
+
+
+
+div.add-to-notes form div textarea{
+  height:140px;
+  resize:none;
+}
+

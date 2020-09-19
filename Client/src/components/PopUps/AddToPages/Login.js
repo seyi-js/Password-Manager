@@ -72,7 +72,8 @@ const Login = () => {
             getAndRemoveClass();
             setAccount( '' );
             setPassword( '' )
-            setUsername('')
+            setUsername( '' )
+            
         } else if ( account && username && password ) {
             const loginCredential = {
                 id: '121323',

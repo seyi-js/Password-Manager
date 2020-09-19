@@ -17,6 +17,8 @@ const Card = () => {
     useEffect( () => {
         if ( cardName && cardNumber && cardPin && cvv && nameOnCard && bankName && expiryMonth && expiryYear ) {
             setAlldone( true )
+        } else {
+            setAlldone(false )
         }
     }, [ cardName, cardNumber, cardPin, cvv, nameOnCard, bankName, expiryMonth, expiryYear ] );
 
@@ -37,6 +39,7 @@ const Card = () => {
             }
             store.dispatch( addData( data ) );
             getAndRemoveClass();
+            
             setBankName( '' );
             setCardName( '' );
             setCardNumber( '' );
