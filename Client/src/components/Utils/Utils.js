@@ -1,8 +1,7 @@
 // THIS DOC IS FOR FUNCTIONS USED IN MORE THAN ONE COMPONENT
 
 import React from 'react'
-import Crypto from 'crypto'
-
+import { Crypt, RSA } from 'hybrid-crypto-js';
 // Crypto.pbkdf2( 'samuelseyi', 'seyisam', 1000, 16, ( err, key ) => {
 //     if ( err ) throw err;
 //     console.log(key.toString('hex'))
@@ -108,4 +107,26 @@ export const copyToClipBoard = (id) => {
     return pass; 
 }
 
+var rsa = new RSA();
+
+export const generateRSAkeys = async() => {
+
+    let privateKey;
+    let publicKey;
+    await rsa.generateKeyPairAsync().then(
+        async function ( keyPair ) {
+            publicKey = keyPair.publicKey;
+            privateKey = keyPair.privateKey;
+            // console.log( publicKey,privateKey );
+        } );
+    
+    console.log( "done with keys generation." );
+
+    return {pKey:privateKey, pubKey:publicKey};
+}
+
+// const p = generateRSAkeys()
+// p.then((r)=> console.log(r))
+
+ 
 

@@ -39,6 +39,7 @@ const generatePassword = () => {
 }
 
 
+
 //Encrypt Data
 const encryptData = ( data  ) => {
     let iv = crypto.pseudoRandomBytes(16)

@@ -15,6 +15,9 @@ function header({page, setPopUpPage}) {
         }else if ( page === 7 ) {
             setPopUpPage( 'Notes' );
             getAndSetBlurryClass();
+        }else if ( page === 8 ) {
+            setPopUpPage( 'Keys' );
+            getAndSetBlurryClass();
         }
     }
     return (

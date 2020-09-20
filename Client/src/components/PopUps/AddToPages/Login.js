@@ -57,9 +57,11 @@ const Login = () => {
     }
 
     const saveForm = () => {
+
+        let loginCredential;
         if ( account && username && checkBox) {
             
-            const loginCredential = {
+            loginCredential = {
                 id: '121323',
                 linked_acct: account,
                 username_email: username,
@@ -68,14 +70,10 @@ const Login = () => {
                 fav: false
                 
             }
-            store.dispatch(addData(loginCredential))
-            getAndRemoveClass();
-            setAccount( '' );
-            setPassword( '' )
-            setUsername( '' )
+            
             
         } else if ( account && username && password ) {
-            const loginCredential = {
+            loginCredential = {
                 id: '121323',
                 linked_acct: account,
                 username_email: username,
@@ -84,17 +82,19 @@ const Login = () => {
                 fav: false
                 
             }
-            store.dispatch(addData(loginCredential))
-            getAndRemoveClass();
-            setAccount( '' );
-            setPassword( '' )
-            setUsername('')
+            
             
             
         }else{
             setErrorMsg('opps!! Kindly fill in all fields')
         }
         
+
+        store.dispatch(addData(loginCredential))
+            getAndRemoveClass();
+            setAccount( '' );
+            setPassword( '' )
+            setUsername('')
     }
     return (
         <div className="add-to-login pop-up-box">

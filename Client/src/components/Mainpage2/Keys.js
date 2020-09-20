@@ -45,7 +45,7 @@ const Keys = ({data}) => {
             <div className="username">
                         <label>Public Key</label>
                         
-                <input  type="text" id="username-input" className="username-input" value={data.publicKey } disabled={true}  />
+                <textarea  type="text" id="username-input" className="username-input" value={data.publicKey } disabled={true}  ></textarea>
                
                 
         </div>

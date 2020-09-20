@@ -659,6 +659,11 @@ div.vault-codes-mainpage-2 .password-input{
   padding: 10px 0;
 }
 
+div.vault-codes-mainpage-2 div.vault-codes-body div.username textarea{
+  height:200px;
+  
+  resize: none;
+}
 /* KEYS */
 
 div.keys{
@@ -882,7 +887,8 @@ div.share > p,
 div.add-to-login > p,
 div.add-to-card > p,
 div.add-to-vault-codes > p,
-div.add-to-notes > p
+div.add-to-notes > p,
+div.add-to-keys > p
 {
   position:absolute;
   right:20px;
@@ -897,7 +903,8 @@ div.share > p:hover,
 div.add-to-login > p:hover,
 div.add-to-card > p:hover,
 div.add-to-vault-codes > p:hover,
-div.add-to-notes > p:hover
+div.add-to-notes > p:hover,
+div.add-to-keys > p:hover
 {
   cursor:pointer;
   background:#ff2525;
@@ -977,7 +984,8 @@ div.add-to-login form{
 div.add-to-login >p.save,
 div.add-to-card >p.save,
 div.add-to-vault-codes >p.save,
-div.add-to-notes >p.save
+div.add-to-notes >p.save,
+div.add-to-keys >p.save
 {
   right: 130px;
 }
@@ -985,7 +993,8 @@ div.add-to-notes >p.save
 div.add-to-login >p.save:hover,
 div.add-to-card >p.save:hover
 div.add-to-vault-codes >p.save:hover,
-div.add-to-notes >p.save:hover
+div.add-to-notes >p.save:hover,
+div.add-to-keys >p.save:hover
 {
   transition:all 0.3s ease-in-out;
   background:green;
@@ -1015,17 +1024,20 @@ div.add-to-login form div input[type="password"]{
   /* border-radius:5px; */
 }
 
-div.add-to-login form div.generate_password{
+div.add-to-login form div.generate_password,
+div.generate_e_key{
   flex-direction:row;
 
 }
 
-div.add-to-login form div.generate_password label{
+div.add-to-login form div.generate_password label,
+div.generate_e_key label{
   margin-right:5px;
   margin-bottom:0;
 }
 
-div.add-to-login form div.generate_password button{
+div.add-to-login form div.generate_password button,
+div.generate_e_key button{
   background:#404040;
   text-align:center;
   /* height:15px; */
@@ -1035,12 +1047,14 @@ div.add-to-login form div.generate_password button{
   border-radius:2px;
 }
 
-div.add-to-login form div.generate_password button .not-checked{
+div.add-to-login form div.generate_password button .not-checked,
+div.generate_e_key button .not-checked{
   visibility:hidden;
   color:green;
 }
 
-div.add-to-login form div.generate_password button .checked{
+div.add-to-login form div.generate_password button .checked,
+div.generate_e_key button .checked{
   visibility:visible;
   
 }
@@ -1167,3 +1181,89 @@ div.add-to-notes form div textarea{
   resize:none;
 }
 
+/* ADD TO  KEYS */
+div.add-to-keys{
+  width:60%;
+  height:70%;
+  background:#1e1e1e;
+  display: grid;
+  grid-template-columns:30% 70%;
+  border-radius:10px;
+  position:relative;
+ 
+}
+
+div.add-to-keys div{
+  display:flex;
+  flex-direction:column;
+  /* align-items:center; */
+  justify-content:center;
+  /* width:100%; */
+}
+
+div.add-to-keys div.keys-left{
+  margin:auto;
+}
+
+div.add-to-keys div.keys-left h1{
+  margin-bottom:20px;
+  font-size:30px;
+}
+
+div.add-to-keys div.keys-left p{
+  margin:5px 0;
+  background:#404040;
+  padding:10px 10px;
+  width:150px;
+  text-align:center;
+  font-size:13px;
+  border-bottom-left-radius:10px;
+  border-top-right-radius:10px;
+
+}
+
+div.add-to-keys div.keys-left p:hover{
+  transition:all 0.3s ease-in;
+  background:#d5841d;
+  cursor:pointer;
+}
+
+div.add-to-keys form{
+  display:flex;
+  flex-direction:column;
+  
+  margin:auto;
+ 
+  width:70%;
+}
+
+div.add-to-keys form div{
+  margin-bottom:15px;
+  /* display:flex; */
+  align-items:baseline;
+  /* flex-direction:column; */
+}
+
+div.add-to-keys form div label{
+  margin-bottom:5px;
+}
+
+div.add-to-keys form div input{
+  border:none;
+  padding:10px 10px;
+  background:#404040;
+  color:#7a7a7a;
+  width:300px;
+}
+
+div.keys-right{
+  margin:auto;
+}
+
+
+div.add-to-keys div.keys-left p.active{
+  transition: all 0.3s   ease-in;
+  background:#f77c11d1;
+  border-bottom-right-radius:10px;
+  border-top-left-radius:10px;
+}
