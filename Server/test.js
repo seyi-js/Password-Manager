@@ -1,21 +1,4 @@
-// const { generateKeyPair } = require('crypto');
-// generateKeyPair('rsa', {
-//   modulusLength: 4096,
-//   publicKeyEncoding: {
-//     type: 'spki',
-//     format: 'pem'
-//   },
-//   privateKeyEncoding: {
-//     type: 'pkcs8',
-//     format: 'pem',
-//     cipher: 'aes-256-cbc',
-//     passphrase: 'top secret'
-//   }
-// }, (err, publicKey, privateKey) => {
-//   // Handle errors and use the generated key pair.
-//   console.log( publicKey.toString('base64') )
-//           console.log( privateKey.toString('base64') )
-// });
+const { generateKeyPair } = require('crypto');
 
 const Crypto = require('hybrid-crypto-js');
 
@@ -44,7 +27,66 @@ async function main() {
 
 var counter = 0;
 
-main().then((r)=> console.log(r))
+// main().then((r)=> console.log(r))
 
 
-'-----BEGIN RSA PRIVATE KEY-----MIIJKAIBAAKCAgEA7DLO1FeJTUZzO0DaUFopprRK8EFEAoXLWxMbwifP31cn+0eW70LcXImnUGHhOqYuJbNj+h/eRhxY46b2I1C8K4EL8kob4CZ4ApZvdZ049SeClSj09bL4bQ+/txdbRtNPoAnG3WRGdcP+M8CfhrBy0DAnOrLZpw44cgoN1Na8h3/le2TvV4noKDcIIdDRl1pnVYn+9JgEGcUWmn5SiZoket+prvYiHilSWf4jEF1Ww8bmrMG4poNoRPqgOIWCn3sI3Owu+9pBL0C9SH0t9+rlGITSyJ8l+n6NqaUaMOv8pfW+APUNvtOvXSDIErVvDWuWjk/KaaGUnPwONdYAJ+D2zveozFNSoV5BgQZMq2HyARDSQ1sJHZGcjfTEThAFaKXwpuBnyiAhfKEKddkPYIxNX8lKosrYIN/EHkQWLFs57uhbUv1f3lIWhkf6sMScH6SVJQg9s7lG6rMAaJQgamOMZmV/NwvSqwdjwi/RPbyN0scGYq3bmdShBGzCqN7E12CDEHef50fUmpkT2zm6WfKOgW6HxWGQ3IckGFFM9P86Duuq9RsqgiCmNwi4hk32wWTloNQf6Vtiho7/cQ5Hoq34f1c/OnXnMDoQAFwunmTwM1AdAeW/AvY+23uzjZeFWLGBvZsmmbYBShiEO9bVGhn/mPYVd/ivVWUqYucJcIqL4fUCAwEAAQKCAgBIh5eMi+7NDGehF9qSFwW4O5/RY/E65xPZfSYmeiwydGSCHGskQH9DaT+4Br5vUI1WJV57daK/G8BN87ycfpOxtjhRZ+FkdNugS8qhLqzJVx8Zp5CFDDaN4uqnkeQE/SlzxtzKqhqa2hrqkGlMJk2zUT4Sn84HJu49UooJxADziNoSiJ2YX3ArPS7hl2ps1CVsFmp0eGO1+BfnTAgTWgJ+usSzxcAXS/AOU2Q4B7l3d9Ho1bnaY/q2R9HAWXsRdunzURFiZBRlKreVFV9yxC4iV9MUKQ6z+32LzPecczLLUYlNaPKWGRG+Aq19VTprQBDk1WqeAjCM/jds37B/jmyq7UstlmdtjZZkiqYaBQ7WUz6AdlJBke2Z2HObPvLqxOV+dUOr0IYoOZeJ5j8amQGhHuZYWJlb+ChiaYE129AWEJrfU/ljrQrTo0xYqFNWbp5qV5bT2hRREyGnxhrQVUDA19N2VO/+fnoetGWm+E2DU04Dg/K9gtcQhKYNiE8/PJw/MKfzLELWUuHVwmpe3z51zAmJXIxurTxZtechohRCakcdQCav6Xv0x9mr2Pwf4KZzY5EYJ6p8fyiRdqhPTpA0Umz5kKK4fcdpODs/9bNnM4QJn+Z9XWPM/4YlPCaK/lF13y4xPEdmLMqhaR6b0EtKd5QCG9lVZKUzHG8q5S0D1wKCAQEA91vZh6HGqr1Apv4SYBDkgijQJeta9KISIwy9w3TbfYE4PoNFkwJBR+3cBiy7GaHau+nNkSQWHqzeeMTz45DHBtLD5ial9y4QxdHupA5LhIzr9JuiHwIdpGSou/t0RTMrJy6Q3+j75Z6v1q9SWw4NeAvB9i76vjDnkh+6XcRdRC88u2+uL0hy/YGDo3r9nmufuPvkq2SxPtOFodFYYcfpIRgd2PM3VN7jcB9LFqtnUKG2RDA5LkQb+hMOvw2Pw41KqJ60OiTFVnLrAZJ6X4bAN3ac0Llj9UptJX1QrIVU8iV4tRBwLv7VHuC+B9e81B86xif1T5oUkLdxOaSrg2H4VwKCAQEA9HMmiVoChgcVV/cdUIItd/N7h3YvGAzWGSA9oDVSQbBpc6T9MWYgy+0qQjSDV48ecH/Psux1O83S4umuZtt2OD1CSm9LXgMLEMDck/HPmNmYZmlfcuVMK6JlsEhYWqtoGjP/9NCZe0C/WdwB73hO7/NCJSPXZtN+8QfRcEh9KlvUvcU0e1514ecrSJKTmWC17jafyjQ+cbocpVVqxa7lXCMyP0wfJ7Nthgh8Kp5P+a/1wZ+9zaQVpj3vg5UNuIpShgS4Trj4gOn/9KpsesG9WUTHqA91EJLoh1z+tz3szQkv5RmSjP/X6KpJw7gEhwZWErB1+SlJEr99ABTsWzr4kwKCAQBh8qX1ljLT4zLZrVvbXHUPsVeS3Fpc6lxiMqZl4j0TunpqDpMbPlZZRC/O5iGEadnydQdohLCZnvxNODgXEXouEoFt/jnT4hLUMmfb4Kk4qJC6gHI28yCHuzAxl8WXrUZWMpM9hsVQTID2cuAanDrrIUTB1iKF81mPPC8Q+DOyTz4uPm/r2zVlesaEkqwg8h8CIgSPdcTVyu5sgDgOKBoBd8pB4TU0zzmiaVHTfTXg8Nf6slnCH0gwwyEguB8IYUeB864MJAlcTQ8PxU/dyb8Nd1NrNy4EsF797FxopDdZ10qv7/1sLo53tqio9F2aZW9hjesOhUXFdE5KdBFSahXrAoIBAQCFoRUl7JCImAKw7aOWyTL16aJTsOWZrhqz7Y4CsGNhCYD7+Ot4P64aDHIXcwGBsfkf4p613tFPefqYlMoD7GC56bL9Yc2/fMZlyChMr9meYwUOpvfIpVR4XfRc4495MU5dVKPNPuNIH2L7Smu8bvYn8cDs8KTlzyQLuwxg5x+VMlIf01gXQNIMRgTBTW9mXxnVOQMs1FZ2cRkLwJ/3pN44+fyT4Zb+avWqWaUW3yg1BF3CFQL7EYHMOPtf4PF5OhRWsunWDwO55TFInIlkqdhKnnDOjHSgNM7sgIe1wCJdC3KlOM+GSK3MwJpGZagD8BDJcrFrHYiWuRsqGkYCsUAFAoIBAFygEwWHtD8f3dgg6G+HAohXLRtz5nAAU54lgMxpnDaddJkFR1U3YbWikiLNh9uA7bxXS62+02xT6xzvKIFWQekeU4yyAaXI/5dQkyA8DqxlsxZw+cruC58iaBPz1CC7bxxnqraDuE/MSdPRsbJ6Eczg9B0o/XTN+k4NfvqWsWHpSvgrzseEkz4C9Zv3x49oiv5j1M7LtJNpq7HctjnrZxIytQYL97PhoRBZGld5WF/CFx1xd66LAgkoEv0yT+F4cLcQO8vUHXiozjHWLlmYOHZtHenN12zV9ugdnaPiZHWUdmXRhouz3eYHSg/4Z2edWi12tDNCYXrGKXB5TJ8D5hY=-----END RSA PRIVATE KEY-----'
+
+
+
+
+const pub ='-----BEGIN PUBLIC KEY-----\r\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA4OD+HW0vhe80GumG6jds5EOQLeiiE2mQk0CraiPOfgQNMPFXWuCMzFJTN4oP/uiQtz75gVzPkKPJlWt87d6ckI3xMBFDj74AAukngsIXU3P76Vth9lxgri8jlOSXW6aSBrQwzCsslRcwxZeukDiKjvNkLfWWO+ci2Lls9vM7VZduM3NABANY/Pci1j7kvwk9p0ITpYFG6lmFk5s0yQKK7kAW6PNORCC1mnIVt4qAWDmY0NWC6L5mJwWwgJox+GIObmzU4BRBxFtyOND4NaPuS+iRinPuDZ37/xdKOxbHTXMvrs3D7/7aomLSnE/z7cnT5Bp9uyOPZjD3x23IYMvatvu+AT3v4r9ehVnZ48HQ2d+oUbbA96CT7PhnLnTBxzVPSqifhJEulbNjrOc067gDMEtB0t/VsZ+e/Qn7rIPhLssSLJEGiXh0mU4WWHwnJAQYRAAIXcoJYK5TfHNK0eQR7PoGAmPRFDkLY0cFFdzNeIrnHqdf7XFqVJaPPJH+hjclm1eQCuIPErfWwcWSiz/NYjooHdxfXnAWtqlvnM+JrNUjLlnW+fVVyPFmyYOM+TfIKgY+LrX3kgkZgn0aJ9XaukiCB2KsrrzJvlhOPPx4wf5RC4HQdDFKho7Tw782Yc+2i3vWgxrjn/F/IsJyrP++C0DreCsbwksr/hR+vR3MIPkCAwEAAQ==\r\n-----END PUBLIC KEY-----\r\n'
+
+const pr= '-----BEGIN RSA PRIVATE KEY-----\r\nMIIJKAIBAAKCAgEA4OD+HW0vhe80GumG6jds5EOQLeiiE2mQk0CraiPOfgQNMPFXWuCMzFJTN4oP/uiQtz75gVzPkKPJlWt87d6ckI3xMBFDj74AAukngsIXU3P76Vth9lxgri8jlOSXW6aSBrQwzCsslRcwxZeukDiKjvNkLfWWO+ci2Lls9vM7VZduM3NABANY/Pci1j7kvwk9p0ITpYFG6lmFk5s0yQKK7kAW6PNORCC1mnIVt4qAWDmY0NWC6L5mJwWwgJox+GIObmzU4BRBxFtyOND4NaPuS+iRinPuDZ37/xdKOxbHTXMvrs3D7/7aomLSnE/z7cnT5Bp9uyOPZjD3x23IYMvatvu+AT3v4r9ehVnZ48HQ2d+oUbbA96CT7PhnLnTBxzVPSqifhJEulbNjrOc067gDMEtB0t/VsZ+e/Qn7rIPhLssSLJEGiXh0mU4WWHwnJAQYRAAIXcoJYK5TfHNK0eQR7PoGAmPRFDkLY0cFFdzNeIrnHqdf7XFqVJaPPJH+hjclm1eQCuIPErfWwcWSiz/NYjooHdxfXnAWtqlvnM+JrNUjLlnW+fVVyPFmyYOM+TfIKgY+LrX3kgkZgn0aJ9XaukiCB2KsrrzJvlhOPPx4wf5RC4HQdDFKho7Tw782Yc+2i3vWgxrjn/F/IsJyrP++C0DreCsbwksr/hR+vR3MIPkCAwEAAQKCAgAkiURFfqsKd98/gh1FP4UQdHkKjxyKH+F5SI1bx36HUzGGIqf+irOFh4NKvO01YrlkdGBa/WZ3NGKORXJSPr6xmRuMeORBCJh9iz5mobyNdq+BQ14gBfPqnkZfLLakvDmcdOPlasb/Cs9bQyDTAMS4+LVtkX77s5Ah+xpyPaQwbKk0cG9VrOo6i2KcbDKDu+90QH7q/x0zpSDX5w8am4Wms5X6pNEyA3MjU+bQX7nThmQcMJxoznUlYOjDiYnrNkSW+f//eiW8o945JJvh3IUHzeebluigoMBDupfOZY3duQRlwmZTv1SWroypEIUWvMRm7/Y+lJv5+U8V6/HIPEaynHF9KE51uER0hEqnCWbP7bLaM1C/9nCRTVib/XA/iT+2L286DZ8D2+6McG/foCPtOtc+RNMNHi3+tDmMhXdhV+tgBZnoQ+jE5ZDS+tdEmg86/wHQXKXOZ7PL+ahXUAx6oJRs6/7duapj69mxXp/o5gWv5dXkicT6nYG1BBnQxfP8ZojxFiCU9pfX6nL6IpzizNqPXitDy1lYEm4ft6i3Wb3Z3JJ0vTd+m0pxjwPOFVw4vvw+Zv9M6QItC3l0533Hk+OR5LRfGAieWOLxXdQyXOFYPvv7IKuP8EU9k7026Ia8lp4TtyFbSjgGwT/5rHhtN1JygYPnSQ3KbFDGcZh8mwKCAQEA+nCRbdJ83hbCpGu0fjie+UxNZm+/YcdpIe+0g0OGC/TtuPC+SOMKeS2I5xM1EfRs2ycUiBiP7fWcPSD9dIuHAk1itZg4IlScCSD40GwtfzjhW4SMjQb6ls6/GWjokNNFrchRuj1Z2ZFS+aSUuEhJ1KzfkJpU7AR/f3Aewbbu3b0CfA0sLMyPU+0VSqY3LwgdZiLo/gOZpmTS4bfGL8bN2Vmd2eb0Blcjbn2GgSLIsiZhW5pAmA5A/7r1yfvZDQziU+z280dHVRRZmjCM6FtoEPsZ4Y5Y78T1G6AVNqOhNZQOHe1L2/RHHkefN2Smv49W2BaSm49W+yUbPVZsVCFXwwKCAQEA5d8kw+41w/4OPXqCsKacjlZYYtrtnOyiRw9Dp4JDIQtbbA1q/iyxoOMRrS+MY8RyhECwGZbhp8cIhOGO3NkKOhRbwFY352eWodI27EQtuYJyqUWZP5X8cfQOUbRV7nvcgaA/gSeftIIXfkClnY0drOWhhrXlJPy1pKTIrxO7DMJPnqGqWI9jBVvFX4NpwfV77HmRD9ax0tsRgJZ745pDWpDcotLVCPulPXOKoP57I0VewS0ntnbAo2Mf2Q6t12rfBRNrp1MSiJXkjFVGoDhzVYfcZ5a2kg80XqMkaPyKItpGhHqoF5Rpjoo9k7dv93e3l9jCeca4CoW4++fV486UkwKCAQACFiIACjrkFsh0Wjlcu9gHN62FZvTvOZwUnkygs1VQkC/S1J6hONMDg2+ajTxp8+FcSg0PvTSlxOASWk4CRI9RY5eo76W4E4BhSxcHlX8jijPGcWpCWoaH7x0Edy1I15nDAuI7bPtspptMXSSoDGIhFXefWsnOVZNCWorHDmEbE9ILeoidru6awmTlBFF9YNHt4eiTBTCohDqFiuRpzXw1jVuVTylFTECNURpnxQRrB4rUGorjOWstNj+J+UErrKnODTFZgYSEnvDIKhNidDB/w7fJe0geZ0OrgT/r/pz/N0aO1UVGhdh51hrreTkya11L25RJG36cBQkfD7NDWCvFAoIBAQCAaPDeyrkaLVfDHCbZi5k1IiLpxiaqXL4iN/KxJmFdmjyN1ckJB+qKV45OUpt4OAtIueIlyVVxJgwqPt5RnKTL4QeIICHGkOVirE2mGkf4s1heGtUK4jxNY+qD1duTB3ocp2oSOhJLAckh6/cYVfZX2UcsO3wv90N5H9xDgSAidoGHugOwyRilq6hMPNrdUMbTSO2yDVr00Q+r52R5tnkdpIK8Kk57YCfkdiDg4ofjIiNWgmUG1ruyCfOGi16tUbQX38tpg0x9JE6x3glAA4jaJLUI4PZIDVpR64yxYTHBWnG+G86+rVdyGuNfGz/e2++hUaMB5/JzXlQB1HZ1dbclAoIBABtjXfPQNYRh31BmtHGzye0RO1Z9lD7nJfJOLjCUwaaqtd9ToMb0W9BHEPxqfL0ICLEHGBlXbAqULNSG309yxY6hYBYTXqP5c1lrW1yOWvNuX+h/n/MgjB1t7b9SHWfOM+yt3XEm+ZLn2wa3HMU2OlcnUDPKajtaQjcTUG0seTAq/WdRY6Her0+OcdJ9bTnaJMsrZOCUu+5R1mxTCV2tR61MLJDcBgWpeWNkRKS6Af9Pz/+K5cMGx3yVLjoHhtupXrLPQAG9FXmPEHjt6lZc3vByAAwvFxWiz0psLaZPdt3qixsGEf41WWMrjMCN3jchJU+VREyqG70AVRszpm6WGl8=\r\n-----END RSA PRIVATE KEY-----\r\n'
+
+const crypto =require('crypto')
+
+const dec =()=>{
+    generateKeyPair('rsa', {
+        modulusLength: 4096,
+        publicKeyEncoding: {
+          type: 'spki',
+          format: 'pem'
+        },
+        privateKeyEncoding: {
+          type: 'pkcs8',
+          format: 'pem',
+          cipher: 'aes-256-cbc',
+          passphrase: 'top secret'
+        }
+      }, (err, publicKey, privateKey) => {
+        // Handle errors and use the generated key pair.
+        // console.log( publicKey.toString('base64') )
+                // console.log( privateKey.toString('base64') )
+                
+                function encrypt(toEncrypt) {
+                   
+                    
+                    const buffer = Buffer.from(toEncrypt, 'utf8')
+                    const encrypted = crypto.publicEncrypt(pub, buffer)
+                    console.log(encrypted.toString('base64'))
+                    return encrypted.toString('base64')
+                  }
+
+                //   encrypt('how are you')
+                  
+                  function decrypt() {
+                    
+                    const buffer = Buffer.from(encrypt('how are you'), 'base64')
+                    const decrypted = crypto.privateDecrypt(
+                      {
+                        key: pr.toString(),
+                        passphrase: '',
+                      },
+                      buffer,
+                    )
+
+                    // console.log(decrypted)
+                    return decrypted.toString('utf8')
+                  }
+
+                  console.log(decrypt())
+      });
+}
+ 
+
+dec()

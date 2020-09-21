@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { cancel, getAndRemoveClass} from '../../Utils/Utils'
 import store from '../../../store'
 import {addData} from '../../../actions/Actions'
-const VaultCodes = () => {
+const VaultCodes = ({setPopUpPage}) => {
 
     const [ desc, setDesc ] = useState( '' )
     const [ code, setCode ] = useState( '' )
@@ -22,19 +22,23 @@ const VaultCodes = () => {
     }, [ desc, code ] );
 
     const saveForm = () => {
-        const data = {
-            id:'12575757',
-                desc,
-                code,
-                type: 'vault code',
-                fav: false
-        }
-
-        store.dispatch( addData( data ) );
-        setDesc( '' )
-        setCode( '' )
-        getAndRemoveClass() 
-        setAllDone( false )
+        setPopUpPage( 'Loading' )
+        
+        setTimeout( () => {
+            const data = {
+                id:'12575757',
+                    desc,
+                    code,
+                    type: 'vault code',
+                    fav: false
+            }
+    
+            store.dispatch( addData( data ) );
+            setDesc( '' )
+            setCode( '' )
+            getAndRemoveClass() 
+            setAllDone( false )
+        }, 1000 * 2)
     }
     return (
         <div className="add-to-vault-codes pop-up-box">

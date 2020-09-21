@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 import { cancel, getAndRemoveClass} from '../../Utils/Utils'
 import store from '../../../store'
 import {addData} from '../../../actions/Actions'
-const Card = () => {
+const Card = ({setPopUpPage}) => {
 
     const [allDone,setAlldone] = useState(false);
     const [cardName, setCardName] =useState('')
@@ -23,32 +23,36 @@ const Card = () => {
     }, [ cardName, cardNumber, cardPin, cvv, nameOnCard, bankName, expiryMonth, expiryYear ] );
 
     const saveForm = () => {
-        if ( cardName && cardNumber && cardPin && cvv && nameOnCard && bankName && expiryMonth && expiryYear ) {
-            const data = {
-                id: '123444467',
-                type: 'card',
-                bank: bankName,
-                CardNumber: cardNumber,
-                pin: cardPin,
-                cvv: cvv,
-                expiryMonth,
-                expiryYear,
-                nameOnCard,
-                name: cardName,
-                fav: false,
+        setPopUpPage( 'Loading' );
+
+        setTimeout( () => {
+            if ( cardName && cardNumber && cardPin && cvv && nameOnCard && bankName && expiryMonth && expiryYear ) {
+                const data = {
+                    id: '123444467',
+                    type: 'card',
+                    bank: bankName,
+                    CardNumber: cardNumber,
+                    pin: cardPin,
+                    cvv: cvv,
+                    expiryMonth,
+                    expiryYear,
+                    nameOnCard,
+                    name: cardName,
+                    fav: false,
+                }
+                store.dispatch( addData( data ) );
+                getAndRemoveClass();
+                
+                setBankName( '' );
+                setCardName( '' );
+                setCardNumber( '' );
+                setCardPin( '' );
+                setCvv( '' );
+                setExpiryMonth( '' )
+                setExpiryYear( '' )
+                setNameOnCard( '' )
             }
-            store.dispatch( addData( data ) );
-            getAndRemoveClass();
-            
-            setBankName( '' );
-            setCardName( '' );
-            setCardNumber( '' );
-            setCardPin( '' );
-            setCvv( '' );
-            setExpiryMonth( '' )
-            setExpiryYear( '' )
-            setNameOnCard( '' )
-        }
+        }, 1000 * 2)
     };
     
     return (

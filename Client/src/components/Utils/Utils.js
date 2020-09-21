@@ -1,11 +1,12 @@
 // THIS DOC IS FOR FUNCTIONS USED IN MORE THAN ONE COMPONENT
 
 import React from 'react'
-import { Crypt, RSA } from 'hybrid-crypto-js';
-// Crypto.pbkdf2( 'samuelseyi', 'seyisam', 1000, 16, ( err, key ) => {
-//     if ( err ) throw err;
-//     console.log(key.toString('hex'))
-// })
+import {  RSA } from 'hybrid-crypto-js';
+
+import Crypto from 'crypto'
+
+
+var rsa = new RSA();
 
 export   const loadDom = () => {
     const fa_eye = document.getElementsByClassName( 'fa-eye' );
@@ -107,8 +108,10 @@ export const copyToClipBoard = (id) => {
     return pass; 
 }
 
-var rsa = new RSA();
 
+
+
+//Generate Public and Private Keys
 export const generateRSAkeys = async() => {
 
     let privateKey;
@@ -120,13 +123,21 @@ export const generateRSAkeys = async() => {
             // console.log( publicKey,privateKey );
         } );
     
-    console.log( "done with keys generation." );
+   
 
     return {pKey:privateKey, pubKey:publicKey};
 }
 
-// const p = generateRSAkeys()
-// p.then((r)=> console.log(r))
+//Generate Encryption Keys
+export const generateENK= async ({pass,salt,iteration=100000,keyLen})=>{
+    let key;
+    // console.log(pass)
+  key = await Crypto.pbkdf2Sync(pass, salt, iteration, keyLen, 'sha256');
+    
+    return key;
+    
+}
 
- 
 
+// const result =generateENK({pass:"samuel", salt:"seyi",keyLen:16})
+// result.then(r=>console.log(r.toString('hex')))

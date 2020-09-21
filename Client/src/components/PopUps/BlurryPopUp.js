@@ -7,12 +7,18 @@ import Card from './AddToPages/Card'
 import Vault from './AddToPages/VaultCodes'
 import Notes from './AddToPages/Notes'
 import Keys from './AddToPages/Keys'
-const BlurryPopUp =({popUpPage,data})=>{
+import Loading from './LoadingPage'
+const BlurryPopUp =({popUpPage,data,setPopUpPage})=>{
     return(
         <div className="blurry-popUp">
-           {(popUpPage ==='SharingCenter')? <SharingCenter/>:
-           (popUpPage ==='Share')? <Share/>:(popUpPage ==='Delete')? <Delete data={data}/>
-           :(popUpPage === 'AddLogins')? <Login/>:(popUpPage === 'Card')? <Card/> :(popUpPage === 'Vault')? <Vault/>:(popUpPage === 'Notes')? <Notes/>:(popUpPage === 'Keys')? <Keys/>:<h1>Hello</h1>}
+           {(popUpPage ==='SharingCenter')? <SharingCenter/>
+           :
+           (popUpPage ==='Share')? <Share setPopUpPage={setPopUpPage}/>
+           :(popUpPage ==='Delete')? <Delete data={data} setPopUpPage={setPopUpPage}/>
+           :(popUpPage === 'AddLogins')? <Login setPopUpPage={setPopUpPage}/>:(popUpPage === 'Card')? <Card setPopUpPage={setPopUpPage}/> 
+           :(popUpPage === 'Vault')? <Vault setPopUpPage={setPopUpPage}/>:(popUpPage === 'Notes')? <Notes setPopUpPage={setPopUpPage}/>
+           :(popUpPage === 'Keys')? <Keys popUpPage={popUpPage} setPopUpPage={setPopUpPage}/>
+           :(popUpPage === 'Loading')? <Loading/>:<h1>Hello</h1>}
             
 
             

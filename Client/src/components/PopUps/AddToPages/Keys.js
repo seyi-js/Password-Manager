@@ -1,15 +1,19 @@
 import React,{useState, useEffect} from 'react'
-import { cancel, getAndRemoveClass,generateRSAkeys} from '../../Utils/Utils'
+import { cancel, getAndRemoveClass,generateRSAkeys,generateENK} from '../../Utils/Utils'
 import store from '../../../store'
 import {addData} from '../../../actions/Actions'
-const Keys = () => {
+const Keys = ({setPopUpPage,popUpPage}) => {
     const [ desc, setDesc ] = useState( '' );
+    const [ ENKdesc, setENKDesc ] = useState( '' );
     const [ value, setValue ] = useState( '' );
     const [ pubKey, setPubKey ] = useState( '' );
     const [ pKey, setPkey ] = useState( '' );
     const [ allDone, setAllDone ] = useState( false );
     const [ type, setType ] = useState( 'RSA' )
     const [ checkBox, setCheckBox ] = useState( true );
+    const [keyLen, setKeyLen] = useState('');
+    const [pass, setPass] = useState('')
+    const [salt, setSalt] = useState('')
     const[keys, setKeys] = useState()
 
    
@@ -21,12 +25,19 @@ const Keys = () => {
             
         } else if(pubKey && pKey && desc){
             setAllDone(true)
-        } else if( desc && checkBox){
+        }else if(ENKdesc && value){
+            setAllDone(true)
+            setCheckBox(false)
+        } else if( ENKdesc && checkBox && keyLen && pass && salt){
+            setAllDone(true)
+        }else if( desc && checkBox){
             setAllDone(true)
         }else{
             setAllDone(false)
         }
-    }, [ desc, value,pubKey,pKey,checkBox ] );
+
+        
+    }, [ desc, value,pubKey,pKey,checkBox,keyLen,pass,salt,ENKdesc ] );
 
 
     
@@ -34,6 +45,7 @@ const Keys = () => {
     const toggle = ( {e,d} ) => {
         setDesc( '' )
         setValue( '' )
+        setENKDesc('')
         setCheckBox(true)
         setType( d )
         
@@ -51,6 +63,10 @@ const Keys = () => {
         
     }
 
+
+
+
+
     const setUpdateKey = (e) => {
         const check = document.getElementsByClassName( 'fa-check' )
         if ( check[ 0 ].classList.contains( 'checked' ) ) {
@@ -60,6 +76,8 @@ const Keys = () => {
         }
         setValue( e.target.value );
     }
+
+
 
     const setUpdateRSAKeys = ({e,d}) => {
         const check = document.getElementsByClassName( 'fa-check' )
@@ -80,6 +98,8 @@ const Keys = () => {
        }
         
     }
+
+
 
 
 
@@ -106,90 +126,107 @@ const Keys = () => {
         
     }
 
+
+
+
     //SAVE FORM
     const saveForm = () => {
-
+        setPopUpPage( 'Loading' );
         let data;
-        if ( type === 'SSH' ) {
-            data = {
-                id:'123350098908908997945',
-                type: 'keys',
-                category: 'SSH',
-                value: value,
-                desc:desc,
-                fav: false
-            }
-            store.dispatch( addData( data ) )
-                getAndRemoveClass();
-                setDesc( '' )
-                setValue('')
-        } else if ( type === 'ENK' &&  !checkBox ) {
-            data = {
-                id:'177777777732235',
-                type: 'keys',
-                category: 'ENCRYPTION KEY',
-                value: value,
-                desc: desc,
-                fav: true
-            }
-            store.dispatch( addData( data ) )
-                getAndRemoveClass();
-                setDesc( '' )
-                setValue('')
-        }  else if ( type === 'ENK' && checkBox ) {
-            data = {
-                id:'177777777732235',
-                type: 'keys',
-                category: 'ENCRYPTION KEY',
-                value: value,//generate
-                desc: desc,
-                fav: true
-            }
-            store.dispatch( addData( data ) )
-                getAndRemoveClass();
-                setDesc( '' )
-                setValue('')
-        } else if ( type === 'RSA' && !checkBox ) {
-            data = {
-                id:'12438887970025465',
-                type: 'keys',
-                category: 'RSA',
-                privateKey: pKey,
-                publicKey: pubKey,
-                desc: desc,
-                fav: false
-            }
-
-            store.dispatch( addData( data ) )
-                getAndRemoveClass();
-                setDesc( '' )
-                setValue('')
-        } else if ( type === 'RSA' && checkBox ) {
-        //     let keyPairs = generateRSAkeys()
-        // console
-
-        generateRSAkeys().then( ( k ) => {
-            data = {
-                id:'12438887970025465',
-                type: 'keys',
-                category: 'RSA',
-                privateKey: k.pKey,//Generate
-                publicKey: k.pubKey,
-                desc: desc,
-                fav: false
+      
+            setTimeout(()=>{if ( type === 'SSH' ) {
+                data = {
+                    id:'123350098908908997945',
+                    type: 'keys',
+                    category: 'SSH',
+                    value: value,
+                    desc:desc,
+                    fav: false
                 }
-
                 store.dispatch( addData( data ) )
+                    getAndRemoveClass();
+                    setDesc( '' )
+                    setValue('')
+            } else if ( type === 'ENK' &&  !checkBox ) {
+                data = {
+                    id:'177777777732235',
+                    type: 'keys',
+                    category: 'ENCRYPTION KEY',
+                    value: value,
+                    desc: ENKdesc,
+                    fav: true
+                }
+                store.dispatch( addData( data ) )
+                    getAndRemoveClass();
+                    setDesc( '' )
+                    setValue('')
+            }  else if ( type === 'ENK' && checkBox ) {
+                
+    
+                generateENK( { pass, salt, keyLen} ).then( ( result ) => {
+                    data = {
+                        id:'177777777732235',
+                        type: 'keys',
+                        category: 'ENCRYPTION KEY',
+                        value: result.toString('hex'),
+                        desc: ENKdesc,
+                        fav: true
+                    }
+                    store.dispatch( addData( data ) )
+                        getAndRemoveClass();
+                        setDesc( '' )
+                        setValue('')
+                } ).catch( err => {
+                    console.log(err)
+                    getAndRemoveClass();
+                })
+                  
+                
+            } else if ( type === 'RSA' && !checkBox ) {
+                data = {
+                    id:'12438887970025465',
+                    type: 'keys',
+                    category: 'RSA',
+                    privateKey: pKey,
+                    publicKey: pubKey,
+                    desc: desc,
+                    fav: false
+                }
+    
+                store.dispatch( addData( data ) )
+                    getAndRemoveClass();
+                    setDesc( '' )
+                    setValue('')
+            } else if ( type === 'RSA' && checkBox ) {
+            //     let keyPairs = generateRSAkeys()
+            // console
+    
+            generateRSAkeys().then( ( k ) => {
+                data = {
+                    id:'12438887970025465',
+                    type: 'keys',
+                    category: 'RSA',
+                    privateKey: k.pKey,//Generate
+                    publicKey: k.pubKey,
+                    desc: desc,
+                    fav: false
+                    }
+    
+                store.dispatch( addData( data ) )
+                
+                    getAndRemoveClass();
+                    setDesc( '' )
+                    setValue('')
+            } ).catch( err => {
                 getAndRemoveClass();
-                setDesc( '' )
-                setValue('')
-        })
-        
+            })
             
                 
-              
-        };
-
+                    
+                  
+            };
+    }, 1000 * 2)
+       
         
         
     }
@@ -220,15 +257,27 @@ const Keys = () => {
         <form>
             <div className="desc">
                 <label>Description</label>
-                <input type="text" value={ desc } onChange={ ( e ) => setDesc( e.target.value ) } />
+                <input type="text" value={ ENKdesc } onChange={ ( e ) => setENKDesc( e.target.value ) } />
             </div>
             <div className="value">
                 <label>Key</label>
                 <input type="text" value={ value } onChange={ ( e ) => setUpdateKey(e ) } />
             </div>
-            
+        {(checkBox)? 
+       <> <div className="value">
+       <label>Key length</label>
+       <input type="number" value={keyLen} onChange={(e)=>setKeyLen(parseInt(e.target.value))} />
+   </div>
+   <div className="value">
+       <label>Password</label>
+       <input type="text" value={pass} onChange={(e)=>setPass(e.target.value)} />
+   </div>
+   <div className="value">
+       <label>Salt</label>
+       <input type="text" value={salt} onChange={(e)=>setSalt(e.target.value)} />
+   </div> </>: null}
             <div className="generate_e_key">
-            <label>Auto-Generate Key</label>
+            <label>Auto-Generate Key(pbkdf2)</label>
             <button className="checkbox" onClick={(e)=>toggleCheckBox(e)} >
                 <i className="fa fa-check checked not-checked"></i>
             </button>        
@@ -238,6 +287,8 @@ const Keys = () => {
     </div>
         )
     }
+
+    
 
     const RSA = () => {
         return (

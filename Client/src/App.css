@@ -591,7 +591,9 @@ div.card-details div.cvv .fa-copy{
   transition:all 0.3s ease-in;
 }
 
-div.card-details div.card-number .fa:hover{
+div.card-details div.card-number .fa:hover,
+div.card-details div.card-pin .fa-copy:hover,
+div.card-details div.cvv .fa-copy:hover{
   color:white;
   cursor:pointer;
 }

@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 import { cancel, getAndRemoveClass} from '../../Utils/Utils'
 import store from '../../../store'
 import {addData} from '../../../actions/Actions'
-const Notes = () => {
+const Notes = ({setPopUpPage}) => {
 
     const [ desc, setDesc ] = useState( '' )
     const [ note, setNote ] = useState( '' )
@@ -24,18 +24,22 @@ const Notes = () => {
 
 
     const saveForm = () => {
-        const data={
-            id:'12323435',
-            type:'Notes',
-            desc,
-            note,
-            fav: true
-        }
+        setPopUpPage('Loading')
 
-        store.dispatch( addData( data ) );
-        getAndRemoveClass()
-        setDesc( '' )
-        setNote( '' )
+        setTimeout( () => {
+            const data={
+                id:'12323435',
+                type:'Notes',
+                desc,
+                note,
+                fav: true
+            }
+    
+            store.dispatch( addData( data ) );
+            getAndRemoveClass()
+            setDesc( '' )
+            setNote( '' )
+        }, 1000 * 2)
     }
     return (
         <div className="add-to-notes pop-up-box">

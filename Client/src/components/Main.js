@@ -19,7 +19,7 @@ const Main = () => {
             <Sidebar updatePage={updatePage} setPopUpPage={setPopUpPage} />
             <Mainpage1 page={ page } setData={ setData } setPopUpPage={ setPopUpPage}/>
             <Mainpage2 data={data} page={page}  setPopUpPage={setPopUpPage} />
-            <BlurryPopUp popUpPage={popUpPage} data={data}/>
+            <BlurryPopUp popUpPage={popUpPage} setPopUpPage={setPopUpPage} data={data}/>
         </div>
     )
 }

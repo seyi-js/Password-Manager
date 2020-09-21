@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 import { cancel, getAndRemoveClass,generatePassword } from '../../Utils/Utils'
 import store from '../../../store'
 import {addData} from '../../../actions/Actions'
-const Login = () => {
+const Login = ({setPopUpPage}) => {
 
     const [account, setAccount] = useState('');
     const [username, setUsername] = useState('');
@@ -59,42 +59,45 @@ const Login = () => {
     const saveForm = () => {
 
         let loginCredential;
-        if ( account && username && checkBox) {
+        setPopUpPage( 'Loading' );
+        setTimeout( () => {
+            if ( account && username && checkBox) {
             
-            loginCredential = {
-                id: '121323',
-                linked_acct: account,
-                username_email: username,
-                password:generatePassword(),
-                type: 'Login',
-                fav: false
+                loginCredential = {
+                    id: '121323',
+                    linked_acct: account,
+                    username_email: username,
+                    password:generatePassword(),
+                    type: 'Login',
+                    fav: false
+                    
+                }
                 
+                
+            } else if ( account && username && password ) {
+                loginCredential = {
+                    id: '121323',
+                    linked_acct: account,
+                    username_email: username,
+                    password:password,
+                    type: 'Login',
+                    fav: false
+                    
+                }
+                
+                
+                
+            }else{
+                setErrorMsg('opps!! Kindly fill in all fields')
             }
             
-            
-        } else if ( account && username && password ) {
-            loginCredential = {
-                id: '121323',
-                linked_acct: account,
-                username_email: username,
-                password:password,
-                type: 'Login',
-                fav: false
-                
-            }
-            
-            
-            
-        }else{
-            setErrorMsg('opps!! Kindly fill in all fields')
-        }
-        
-
-        store.dispatch(addData(loginCredential))
-            getAndRemoveClass();
-            setAccount( '' );
-            setPassword( '' )
-            setUsername('')
+    
+            store.dispatch(addData(loginCredential))
+                getAndRemoveClass();
+                setAccount( '' );
+                setPassword( '' )
+                setUsername('')
+        }, 1000 * 2)
     }
     return (
         <div className="add-to-login pop-up-box">
