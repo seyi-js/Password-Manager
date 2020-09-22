@@ -8,6 +8,7 @@ import Vault from './AddToPages/VaultCodes'
 import Notes from './AddToPages/Notes'
 import Keys from './AddToPages/Keys'
 import Loading from './LoadingPage'
+import Settings from './Settings/Settings'
 const BlurryPopUp =({popUpPage,data,setPopUpPage})=>{
     return(
         <div className="blurry-popUp">
@@ -18,7 +19,9 @@ const BlurryPopUp =({popUpPage,data,setPopUpPage})=>{
            :(popUpPage === 'AddLogins')? <Login setPopUpPage={setPopUpPage}/>:(popUpPage === 'Card')? <Card setPopUpPage={setPopUpPage}/> 
            :(popUpPage === 'Vault')? <Vault setPopUpPage={setPopUpPage}/>:(popUpPage === 'Notes')? <Notes setPopUpPage={setPopUpPage}/>
            :(popUpPage === 'Keys')? <Keys popUpPage={popUpPage} setPopUpPage={setPopUpPage}/>
-           :(popUpPage === 'Loading')? <Loading/>:<h1>Hello</h1>}
+           :(popUpPage === 'Loading')? <Loading/>
+           :(popUpPage === 'Settings')? <Settings />
+            :<h1>Hello</h1>}
             
 
             
