@@ -25,7 +25,7 @@ const Mainpage1 = ({page,setData,setPopUpPage}) => {
     return (
         <div className="mainpage1-wrapper">
             <Header page={ page } setPopUpPage={ setPopUpPage}/> 
-            { ( pageNumber === 1 ) ? <Allitems setData={ setData } />: ( pageNumber === 2 ) ? <Favourites setData={ setData } />:( pageNumber === 4 ) ? <Login setData={ setData } /> : ( pageNumber === 5 ) ? <Cards setData={ setData }/>:( pageNumber === 6 ) ? <VaultCodes setData={ setData } />: (pageNumber === 7 )? <Note setData={setData}/>:( pageNumber === 8 ) ? <Keys setData={ setData } />:<h1>hello</h1>}
+            { ( pageNumber === 1 ) ? <Allitems setData={ setData } />: ( pageNumber === 2 ) ? <Favourites setData={ setData } />:( pageNumber === 4 ) ? <Login setData={ setData } /> : ( pageNumber === 5 ) ? <Cards setData={ setData }/>:( pageNumber === 6 ) ? <VaultCodes setData={ setData } />: (pageNumber === 7 )? <Note setData={setData}/>:( pageNumber === 8 ) ? <Keys setData={ setData } />:null}
         </div>
     )
 }

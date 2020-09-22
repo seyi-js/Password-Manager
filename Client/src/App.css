@@ -890,7 +890,8 @@ div.add-to-login > p,
 div.add-to-card > p,
 div.add-to-vault-codes > p,
 div.add-to-notes > p,
-div.add-to-keys > p
+div.add-to-keys > p,
+div.settings > p
 {
   position:absolute;
   right:20px;
@@ -906,7 +907,8 @@ div.add-to-login > p:hover,
 div.add-to-card > p:hover,
 div.add-to-vault-codes > p:hover,
 div.add-to-notes > p:hover,
-div.add-to-keys > p:hover
+div.add-to-keys > p:hover,
+div.settings > p:hover
 {
   cursor:pointer;
   background:#ff2525;
@@ -1268,4 +1270,142 @@ div.add-to-keys div.keys-left p.active{
   background:#f77c11d1;
   border-bottom-right-radius:10px;
   border-top-left-radius:10px;
+}
+
+
+/* SETTINGS */
+
+div.settings{
+  width:60%;
+  height:70%;
+  background:#1e1e1e;
+  display: grid;
+  grid-template-columns:30% 70%;
+  border-radius:10px;
+  position:relative;
+  padding:0 20px;
+}
+
+div.settings div{
+  display:flex;
+  flex-direction:column;
+
+  justify-content:center;
+ 
+}
+div.settings div.left ul li.isActive{
+  transition: all 0.3s   ease-in;
+  background:#f77c11d1;
+
+}
+
+div.settings div.left ul li{
+  list-style: none;
+  margin:10px 0;
+  background:#404040;
+  padding:10px 10px;
+  width:150px;
+  text-align:center;
+  font-size:13px;
+  cursor:pointer;
+  /* border-bottom-left-radius:10px;
+  border-top-right-radius:10px; */
+}
+
+div.settings div.left ul li:hover{
+  transition: all 0.3s   ease-in;
+  background:#f77c11d1;
+}
+
+div.settings div.right{
+  /* background:pink; */
+}
+
+div.settings div.right div.change_password_form div.error-message h1,
+div.settings div.right div.delete_account div.error-message h1{
+  font-size:15px;
+  text-align:center;
+  margin-bottom: 20px;
+  color:#f77c11d1;
+}
+
+div.settings div.right div.change_password_form form,
+div.settings div.right div.delete_account
+{
+  display:flex;
+  flex-direction:column;
+  margin:auto;
+  width:60%;
+
+}
+
+div.settings div.right div.delete_account form{
+  display:flex;
+  flex-direction:column;
+  margin:auto;
+  width:100%;
+}
+
+
+div.settings div.right div.change_password_form form div,
+div.settings div.right div.delete_account form div{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  margin:5px 0;
+
+  /* align-items:baseline; */
+}
+div.settings div.right div.change_password_form form button{
+  width:20%;  
+  margin-top:20px;
+  outline:none;
+  border:none;
+  padding:10px 15px;
+  text-align:center;
+  background: #404040;
+  border-radius:5px;
+  cursor:pointer;
+  color:#7a7a7a;
+  transition:all 0.3s ease-in;
+  
+}
+
+div.settings div.right div.change_password_form form button:hover{
+  background:#7a7a7a;
+  color:#404040;
+}
+div.settings div.right div.change_password_form form div label,
+div.settings div.right div.delete_account form div label{
+  margin-bottom:5px;
+  font-size:13px;
+}
+div.settings div.right div.change_password_form form div input,
+div.settings div.right div.delete_account form div input{
+  border:none;
+  padding:10px 10px;
+  background:#404040;
+  color:#7a7a7a;
+}
+
+
+/* div.settings div.right div.delete_account form div input{
+
+} */
+
+
+div.settings div.right div.delete_account p{
+  background:#404040;
+  /* width:20%; */
+  /* display:block; */
+  text-align:center;
+  margin-top:20px;
+  padding:10px 15px;
+  transition:all 0.3s ease-in;
+  cursor:pointer;
+}
+
+div.settings div.right div.delete_account p:hover{
+  
+  background:#ff2525;
 }

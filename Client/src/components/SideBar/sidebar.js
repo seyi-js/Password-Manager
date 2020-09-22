@@ -32,9 +32,9 @@ const setClass = ( {number, e} ) => {
         updatePage( number );
     }
 
-    const setPopUp=({number, e} )=>{
+    const setPopUp=({number, e,page} )=>{
         setClass({number, e});
-        setPopUpPage('SharingCenter');
+        setPopUpPage(page);
         getAndSetBlurryClass()
     }
 
@@ -87,11 +87,8 @@ const setClass = ( {number, e} ) => {
            
 
             <div className="sidebar-footer">
-            <div onClick={(e)=> setPopUp({number:10,e})}>
-                    <i className="fa fa-share-alt"></i>
-                    <p>Sharing Center</p>
-                </div>
-               <div onClick={(e)=> setClass({number:9,e})}>
+           
+               <div onClick={(e)=> setPopUp({number:1,e, page:"Settings"})}>
                     <i className="fa fa-cog"></i>
                     <p>Settings</p>
                 </div>
