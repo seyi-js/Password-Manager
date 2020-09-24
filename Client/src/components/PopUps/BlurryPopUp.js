@@ -21,7 +21,7 @@ const BlurryPopUp =({popUpPage,data,setPopUpPage})=>{
            :(popUpPage === 'Keys')? <Keys popUpPage={popUpPage} setPopUpPage={setPopUpPage}/>
            :(popUpPage === 'Loading')? <Loading/>
            :(popUpPage === 'Settings')? <Settings />
-            :<h1>Hello</h1>}
+            :<Loading/>}
             
 
             

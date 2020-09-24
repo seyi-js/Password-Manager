@@ -2,8 +2,8 @@ import React from 'react'
 
 const LoadingPage = () => {
     return (
-        <div>
-            LoadingPage
+        <div className="loading">
+            <i className="fa fa-spinner"></i>
         </div>
     )
 }

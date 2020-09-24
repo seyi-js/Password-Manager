@@ -1,4 +1,4 @@
-import { LOAD_DATA,DELETE_DATA, ADD_DATA} from './types';
+import { LOAD_DATA,DELETE_DATA, ADD_DATA,GET_SHARE_REQUEST} from './types';
 
 
 export const deleteFromUI= (id)=>(dispatch)=>{
@@ -16,6 +16,43 @@ export const addData =(data)=>dispatch=>{
     })
 }
 
+export const loadRequest = () => dispatch => {
+    const requests = {
+        fromOne:[
+            {   
+                id:'1233555487698698635',
+                username:"seyi",
+                //Find Details to be Shared with id
+                type: 'vault code',
+                
+            },
+            {   
+                id:'12354547898769869866',
+                type: 'card',
+                username:"john",
+               
+            },
+         
+    
+        ],
+
+
+        fromMany:[
+            {
+            username:"seyi",
+            type:"card"
+            },
+            {
+                username:"john",
+                type:"keys"
+            },
+    ]
+    }
+    dispatch( {
+        type: GET_SHARE_REQUEST,
+        payload:requests
+    })
+}
 
 export const loadData = () => ( dispatch ) => {
     dispatch( {

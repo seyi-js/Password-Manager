@@ -1,7 +1,13 @@
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import { connect } from 'react-redux'
 const AllItems = ({setData,general}) => {
+    const [ currentPage, setCurrentPage ] = useState( 1 )
+    const [postsPerPage] = useState(5)
+
+
     
+
+
     //From redux store
     const {data} = general
 
@@ -22,11 +28,43 @@ const AllItems = ({setData,general}) => {
         return comparison;
       }
 
+    //Pagination
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = data.slice(indexOfFirstPost, indexOfLastPost)
+
       let sorted;
       if(data){
-        sorted = data.sort( compare );
+        sorted = currentPosts.sort( compare );
       }
-    // const sorted = data.sort( compare );
+ 
+    
+    const pageNumbers = [];
+    // data.length / postsPerPage
+    let i;
+    for ( let i = 2; i <= Math.ceil( data.length / postsPerPage ); i++ ){
+        pageNumbers.push(i)
+    }
+
+    //Paginate
+    const paginate = ( { e, number } ) => {
+        findActiveClass(e)
+        setCurrentPage( number );
+
+    }
+
+    const findActiveClass = (e) => {
+        const siblings = e.currentTarget.parentElement.children
+        const siblingsArray = Object.entries( siblings );
+
+        siblingsArray.forEach(arr=>{
+          
+            
+            arr[1].classList.remove( 'isActive' );
+               
+        })
+        e.currentTarget.classList.add('isActive')
+    }
 
    
     useEffect( () => {
@@ -123,21 +161,46 @@ const AllItems = ({setData,general}) => {
         )
     };
 
+
+    const pageButton = () => {
+
+       
+
+        return (
+            <div className="page-button">
+            {(pageNumbers.length > 1)?
+                    <>
+                    <div className="isActive" onClick={(e)=>paginate({e,number:1})}>
+                    <p >1</p>
+                </div>
+        
+                    <>
+                    { pageNumbers.map( number => (
+                        <div key={ number } onClick={(e)=>paginate({e,number})}>
+                            <p >{ number}</p>
+                        </div>
+                    ))}
+                    </> 
+                    </> : null }
+            </div>
+        )
+    }
+
     return (
         <div className="all-items">
             
             { (sorted)? 
                 sorted.map( obj => (
                
-                    <>
+                    <div key={obj.id}>
                         { ( obj.type === 'Login' ) ? 
                             loginItems(obj) : ( obj.type === 'card' ) ?
                          cardItems(obj)  :(obj.type === 'vault code')? vault(obj):(obj.type === 'keys')? keys(obj) :(obj.type === 'Notes')? Note(obj):null }
-                    </>
+                    </div>
                 ) ) : <h1>No Data Available</h1>}
             
             
-           
+           {pageButton()}
         </div>
     )
 }

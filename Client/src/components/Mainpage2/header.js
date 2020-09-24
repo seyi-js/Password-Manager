@@ -11,7 +11,7 @@ const header = ({setPopUpPage}) => {
         <div className="header">
             
             <p onClick={()=> setPopUp('Delete')}><i className="fa fa-trash"></i>Delete</p>
-            <p><i className="fa fa-pen"></i>Edit</p>
+            
             <p onClick={()=> setPopUp('Share')}><i className="fa fa-share-alt"></i>Share</p>
         </div>
     )

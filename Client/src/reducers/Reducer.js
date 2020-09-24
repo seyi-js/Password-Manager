@@ -1,7 +1,9 @@
-import {LOAD_DATA,DELETE_DATA,ADD_DATA} from '../actions/types'
+import {LOAD_DATA,DELETE_DATA,ADD_DATA,GET_SHARE_REQUEST} from '../actions/types'
 
 const initialState = {
-    data:[]
+    data: [],
+    fromOne: [],//Share Request from One
+    fromMany:[]//Share Request From Many
       
 }
   
@@ -23,6 +25,12 @@ export default ( state = initialState, action ) => {
             return {
                 ...state,
                 data:[action.payload, ...state.data]
+            }
+        case GET_SHARE_REQUEST:
+            return {
+                ...state,
+                fromOne: action.payload.fromOne,
+                fromMany:action.payload.fromMany
             }
         
             default:

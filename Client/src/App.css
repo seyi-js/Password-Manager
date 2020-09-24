@@ -105,7 +105,7 @@ div.sidebar-1  div p{
 
 div.sidebar-1  div p .fa{
  
-  margin-right:10px;
+  margin-right:5px;
    
  }
  div.sidebar-1  div p .fa-star{
@@ -117,13 +117,18 @@ div.sidebar-1  div p .fa{
  div.sidebar-1 div p .fa-trash{
    color:#b80e25;
  }
-
+ 
  
  div.sidebar-1  div span{
  
   font-size:15px;
   color:#8d97a9;
+  
    
+ }
+
+ div.sidebar-1 div.active span{
+  color:white;
  }
 
  div.sidebar-2  div{
@@ -197,7 +202,8 @@ width:46.3%;
 .mainpage1-header{
   display:flex;
   flex-direction:row;
-  justify-content:space-between;
+  /* justify-content:space-between; */
+  justify-content:flex-end;
   align-items:center;
   
 }
@@ -218,6 +224,7 @@ div.mainpage1-header input[type="text"]{
   padding:10px 30px;
   border-bottom-right-radius:10px;
   border-top-left-radius:10px;
+  display:none;
 }
 
 .search-bar .fa-search{
@@ -242,6 +249,35 @@ div.mainpage1-header .fa-plus{
 div.all-items{
   margin-top: 20px;
 }
+
+div.all-items div.page-button{
+  display: grid;
+  
+  grid-template-columns: repeat(5,auto);
+  margin-top:30px;
+  width:50%;
+  text-align:center;
+ 
+}
+
+div.all-items div.page-button div{
+  background:grey;
+  margin:5px 5px;
+  padding:10px 15px;
+  cursor:pointer;
+  transition:all 0.3s ease-in;
+
+}
+
+div.all-items div.page-button div.isActive{
+  background:#1e1e1e ;
+}
+
+div.all-items div.page-button div:hover{
+  background:#1e1e1e;
+}
+
+
 
 div.items{
   display: grid;
@@ -708,7 +744,7 @@ div.notes-mainpage-1{
 }
 div.notes-mainpage-1-inner{
   display:flex;
-  background:#404040;
+  /* background:#404040; */
   padding:10px 20px;
   margin-bottom:10px;
   border-bottom-left-radius:10px;
@@ -761,8 +797,201 @@ div.show-blurry-popUp{
   display:flex;
 }
 
+div.pop-up-box{
+  opacity:1;
+  animation: pop-up-box 0.6s linear;
+}
+
+@keyframes pop-up-box {
+  0%{
+   opacity:0;
+    /* margin-left:-1000px; */
+     
+    
+  }
+50%{
+  opacity:0.5;
+  /* margin-left:-500px; */
+
+}
+
+  100%{
+      opacity:1;
+      /* margin-left:0; */
+  }
+}
+
+div.loading{
+  /* background:grey; */
+  width:10%;
+  text-align:center;
+  
+  
+  /* border-radius:50%; */
+}
+
+div.loading  .fa{
+  animation: loading 1s infinite;
+  font-size:40px;
+  
+}
+
+@keyframes loading {
+  0%{
+    transform:rotateZ(60deg);
+  color:#f77c11d1;
+     
+    
+  }
+  /* 25%{
+    transform:rotateZ(120deg)
+  } */
+50%{
+  transform:rotateZ(180deg);
+ color:white;
+}
+
+/* 75%{
+  transform:rotateZ(240deg)
+}
+
+85%{
+  transform:rotateZ(300deg)
+} */
+
+  100%{
+    transform:rotateZ(360deg);
+    color:#f77c11d1;
+    font-size:50px;
+  }
+}
 
 /* SHARING CENTER */
+
+div.sharing-center{
+  display:grid;
+  grid-template-columns: 30% 70%;
+  width:70%;
+  height:70%;
+  background:#1e1e1e;
+  position:relative;
+  opacity:0;
+  border-bottom-right-radius:10px;
+  border-top-left-radius:10px;
+  
+}
+div.sharing-center div.left p.isActive{
+
+  background:#f77c11d1;
+
+}
+
+div.sharing-center div.left,
+  div.sharing-center div.right{
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  padding:0 10px;
+  
+}
+
+div.sharing-center div.left p{
+  margin:10px 0;
+  background:#404040;
+  padding:10px 15px;
+  width:70%;
+  font-size:13px;
+  text-align:center;  
+  transition:all 0.3s ease-in;
+}
+div.sharing-center div.left p:hover{
+  cursor:pointer;
+  background:#d5841d;
+}
+
+div.sharing-center div.right h1{
+  font-size: 15px;
+}
+
+div.sharing-center div.right h2{
+  font-size: 25px;
+}
+
+div.sharing-center div.right h5{
+  line-height:20px;
+  color:grey;
+}
+div.sharing-center div.right .fa-info-circle{
+  margin-right:10px;
+}
+div.sharing-center div.right div.request-from-one > div,
+  div.sharing-center div.right div.request-from-many > div{
+  /* background:blue; */
+  margin:15px 0;
+  padding:5px 10px;
+  border-left:1px solid grey
+}
+
+div.sharing-center div.right div.request-from-one div.options,
+  div.sharing-center div.right div.request-from-many div.options{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 15px 0;
+}
+
+div.sharing-center div.right div.request-from-one div.options p,
+  div.sharing-center div.right div.request-from-many div.options p,
+  div.sharing-center div.right div.send-share-request p{
+  margin:0 5px;
+  background:#404040;
+  padding:10px 10px;
+  cursor:pointer;
+  transition:all 0.3s ease-in;
+}
+
+div.sharing-center div.right div.request-from-one div.options p:hover,
+  div.sharing-center div.right div.request-from-many div.options p:hover,
+  div.sharing-center div.right div.send-share-request p:hover{
+  background:#d5841d;
+}
+
+
+div.sharing-center div.right div.send-share-request{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.sharing-center div.right div.send-share-request form div{
+  display:flex;
+  flex-direction: column;
+  margin:10px 0;
+}
+
+div.sharing-center div.right div.send-share-request form div input{
+  border:none;
+  padding:10px 10px;
+  background:#404040;
+  color:#7a7a7a;
+  margin:10px 0;
+}
+div.sharing-center div.right div.send-share-request form div label{
+  font-size:13px;
+}
+
+div.sharing-center div.right div.send-share-request form div h3{
+  font-size:13px;
+  color:grey;
+}
+
+
+
+
+
+/* SHARE */
 div.share{
   display:grid;
   grid-template-columns:repeat(2, 1fr);
@@ -778,27 +1007,7 @@ div.share{
   border-top-left-radius:10px;
 }
 
-div.pop-up-box{
-  opacity:1;
-  /* animation: pop-up-box 1s infinite; */
-}
 
-@keyframes pop-up-box {
-  0%{
-   opacity:0;
-    /* margin-left:-1000px; */
-     
-    
-  }
-50%{
-  opacity:0.5;
-}
-
-  100%{
-      opacity:1;
-      /* margin-left:0; */
-  }
-}
 div.share-to-one{
   background:-moz-linear-gradient(to right,#865932, #3e2929,#865932);
   background: -webkit-linear-gradient(to right,#865932, #3e2929,#865932); /*CHROME*/
@@ -891,7 +1100,8 @@ div.add-to-card > p,
 div.add-to-vault-codes > p,
 div.add-to-notes > p,
 div.add-to-keys > p,
-div.settings > p
+div.settings > p,
+div.sharing-center > p
 {
   position:absolute;
   right:20px;
@@ -908,7 +1118,8 @@ div.add-to-card > p:hover,
 div.add-to-vault-codes > p:hover,
 div.add-to-notes > p:hover,
 div.add-to-keys > p:hover,
-div.settings > p:hover
+div.settings > p:hover,
+div.sharing-center > p:hover
 {
   cursor:pointer;
   background:#ff2525;

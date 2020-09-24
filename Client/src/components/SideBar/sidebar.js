@@ -1,9 +1,19 @@
-import React, { useEffect } from 'react';
-import {getAndSetBlurryClass} from '../Utils/Utils'
+import React, { useEffect,useState } from 'react';
+import { getAndSetBlurryClass } from '../Utils/Utils'
+import {connect} from 'react-redux'
 
+const Sidebar = ({updatePage,setPopUpPage,general}) => {
+    const [favLength, setFavLength] =useState()
 
-const Sidebar = ({updatePage,setPopUpPage}) => {
+    const { data } = general;
 
+    
+
+    useEffect( () => {
+         setFavLength(data.filter( item => item.fav === true ).length )
+        
+    },[data])
+  
 //Set Active Class
 const setClass = ( {number, e} ) => {
        
@@ -44,12 +54,12 @@ const setClass = ( {number, e} ) => {
                 <div className="active" onClick={(e)=> setClass({number:1,e})}>
                     
                     <p><i className="fa fa-shield-alt"></i>All Items</p>
-                    <span>19</span>
+                   <span>{ data.length}</span>
                 </div>
                 <div onClick={(e)=> setClass({number:2,e})}>
                     
                     <p ><i className="fa fa-star"></i>Favourites</p>
-                    <span>4</span>
+                   <span>{ favLength}</span>
                 </div>
                 
                 
@@ -87,7 +97,10 @@ const setClass = ( {number, e} ) => {
            
 
             <div className="sidebar-footer">
-           
+            <div onClick={(e)=> setPopUp({number:1,e, page:"SharingCenter"})}>
+                    <i className="fa fa-share"></i>
+                    <p>Share Request</p>
+                </div>
                <div onClick={(e)=> setPopUp({number:1,e, page:"Settings"})}>
                     <i className="fa fa-cog"></i>
                     <p>Settings</p>
@@ -101,4 +114,8 @@ const setClass = ( {number, e} ) => {
     )
 }
 
-export default Sidebar
+const mapStateToProps = ( state ) => ( {
+    general:state.general
+})
+
+export default connect(mapStateToProps, null)(Sidebar)
