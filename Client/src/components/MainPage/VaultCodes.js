@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import {setFavColor,updateStar} from '../Utils/Utils'
 import { connect } from 'react-redux';
 const VaultCodes = ({setData, general}) => {
 
@@ -15,7 +16,7 @@ const VaultCodes = ({setData, general}) => {
                 
                 <p>{ d.desc.toUpperCase() }</p>
                 
-                <i className="fa fa-star"> </i>
+                <i style={setFavColor(d)} className="fa fa-star" onClick={(e)=>updateStar({e, d})}> </i>
             </div>
         )
     };

@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
+import {setFavColor,updateStar} from '../Utils/Utils'
 const Favourites = ({setData,general}) => {
     
     //From redux store
@@ -96,7 +97,7 @@ const Favourites = ({setData,general}) => {
                 
                 <p>{ d.desc}</p>
                 <p className="type">{ d.type}</p>
-                <i className="fa fa-star"> </i>
+                <i style={setFavColor(d)} className="fa fa-star" onClick={(e)=>updateStar({e, d})}> </i>
             </div>
         )
     };
@@ -106,7 +107,7 @@ const Favourites = ({setData,general}) => {
             <div className="key-items key-items-in-allitems" onClick={()=> setData(key)}>
                 <p>{ key.desc }</p>
                 <p className="type">{ key.category }</p>
-                <i className="fa fa-star"> </i>
+                <i style={setFavColor(key)} className="fa fa-star" onClick={(e)=>updateStar({e, d:key})}> </i>
             </div>
         )
     };
@@ -127,7 +128,7 @@ const Favourites = ({setData,general}) => {
             <p>{n.desc}</p>
             <p>{getNote(n)}...</p>
         </div>
-        <i className="fa fa-star"></i>
+        <i style={setFavColor(n)} className="fa fa-star" onClick={(e)=>updateStar({e, d:n})}></i>
             </div>
         )
     };

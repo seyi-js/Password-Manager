@@ -1,7 +1,7 @@
 // const tes = require('./test')
 
 import React, { useEffect } from 'react';
-import {loadData,loadRequest} from './actions/Actions';
+import {loadData,loadRequest,registerRoute} from './actions/Actions';
 import store from './store'
 
 
@@ -15,8 +15,10 @@ import Main from './components/Main'
 export const App =()=> {
 
         useEffect( () => {
+                
                 store.dispatch( loadData() )
                 store.dispatch(loadRequest())
+                
                 // generateRSAkeys()
         }, [])
     

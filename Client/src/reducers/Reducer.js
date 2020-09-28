@@ -1,9 +1,11 @@
-import {LOAD_DATA,DELETE_DATA,ADD_DATA,GET_SHARE_REQUEST} from '../actions/types'
+import {LOAD_DATA,DELETE_DATA,ADD_DATA,GET_SHARE_REQUEST,UPDATE_FAVOURITES} from '../actions/types'
 
 const initialState = {
     data: [],
     fromOne: [],//Share Request from One
-    fromMany:[]//Share Request From Many
+    fromMany:[],//Share Request From Many
+    isAuthenticated:false,
+    user: null
       
 }
   
@@ -31,6 +33,14 @@ export default ( state = initialState, action ) => {
                 ...state,
                 fromOne: action.payload.fromOne,
                 fromMany:action.payload.fromMany
+            }
+        case UPDATE_FAVOURITES:
+
+        
+            return{
+                ...state,
+               
+                // data:[action.payload, ...state.data]
             }
         
             default:

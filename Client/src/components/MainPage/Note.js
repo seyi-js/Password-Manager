@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-
+import {setFavColor,updateStar} from '../Utils/Utils'
 const Note =({general, setData})=>{
 
     //From redux store
@@ -22,7 +22,7 @@ const Note =({general, setData})=>{
                     <p>{n.desc}</p>
                     <p>{getNote(n)}...</p>
                 </div>
-                <i className="fa fa-star"></i>
+                <i style={setFavColor(n)} className="fa fa-star" onClick={(e)=>updateStar({e, d:n})}></i>
             </div>
         )
     };

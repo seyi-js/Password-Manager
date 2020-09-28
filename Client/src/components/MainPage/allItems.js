@@ -1,5 +1,7 @@
 import React, {useEffect,useState} from 'react'
+
 import { connect } from 'react-redux'
+import {setFavColor,updateStar} from '../Utils/Utils'
 const AllItems = ({setData,general}) => {
     const [ currentPage, setCurrentPage ] = useState( 1 )
     const [postsPerPage] = useState(5)
@@ -42,7 +44,7 @@ const AllItems = ({setData,general}) => {
     const pageNumbers = [];
     // data.length / postsPerPage
     let i;
-    for ( let i = 2; i <= Math.ceil( data.length / postsPerPage ); i++ ){
+    for ( let i = 2; i <= Math.ceil( 20 ); i++ ){
         pageNumbers.push(i)
     }
 
@@ -52,6 +54,8 @@ const AllItems = ({setData,general}) => {
         setCurrentPage( number );
 
     }
+
+
 
     const findActiveClass = (e) => {
         const siblings = e.currentTarget.parentElement.children
@@ -65,6 +69,11 @@ const AllItems = ({setData,general}) => {
         })
         e.currentTarget.classList.add('isActive')
     }
+
+
+
+
+    
 
    
     useEffect( () => {
@@ -117,6 +126,8 @@ const AllItems = ({setData,general}) => {
         )
     };
 
+   
+    
 
     
     const vault = ( d ) => {
@@ -125,7 +136,7 @@ const AllItems = ({setData,general}) => {
                 
                 <p>{ d.desc}</p>
                 <p className="type">{ d.type}</p>
-                <i className="fa fa-star"> </i>
+                <i style={setFavColor(d)} className="fa fa-star" onClick={(e)=>updateStar({e, d})}> </i>
             </div>
         )
     };
@@ -135,7 +146,7 @@ const AllItems = ({setData,general}) => {
             <div className="key-items key-items-in-allitems" onClick={()=> setData(key)}>
                 <p>{ key.desc }</p>
                 <p className="type">{ key.category }</p>
-                <i className="fa fa-star"> </i>
+                <i style={setFavColor(key)} className="fa fa-star" onClick={(e)=>updateStar({e, d:key})}> </i>
             </div>
         )
     };
@@ -156,19 +167,39 @@ const AllItems = ({setData,general}) => {
             <p>{n.desc}</p>
             <p>{getNote(n)}...</p>
         </div>
-        <i className="fa fa-star"></i>
+        <i style={setFavColor(n)} className="fa fa-star" onClick={(e)=>updateStar({e, d:n})} ></i>
             </div>
         )
     };
 
 
     const pageButton = () => {
-
+        // const numbers = pageNumbers.slice(0,10)
+        let right = [];
+        let left =[]
+        const setRight = () => {
+            
+          
+            right = [... right,pageNumbers.shift()]
+            // setCurrentPage(right[0])
+            
+            console.log(right)
+             
+        }
        
+        const setLeft = () => {
+            pageNumbers.unshift( right.pop() )
+            setCurrentPage(pageNumbers[0])
+            
+            console.log(pageNumbers)
+        }
 
         return (
             <div className="page-button">
-            {(pageNumbers.length > 1)?
+
+                <i className="fa fa-chevron-left" onClick={()=>setLeft()}></i>
+                <i className="fa fa-chevron-right" onClick={()=>setRight()}></i>
+            {(pageNumbers.length > 0)?
                     <>
                     <div className="isActive" onClick={(e)=>paginate({e,number:1})}>
                     <p >1</p>

@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react'
 import { connect } from 'react-redux'
+import {setFavColor,updateStar} from '../Utils/Utils'
 const Login = ({setData,general}) => {
 
     //From redux store
     const {data} = general
 
-    function compare(a, b) {
+    const  compare=(a, b) =>{
         // Use toUpperCase() to ignore character casing
         if ( a.type === 'Login' && b.type === 'Login' ) {
         
@@ -44,7 +45,7 @@ const Login = ({setData,general}) => {
             }
             // console.log(sorted[i])
         }
-    },[sorted])
+    })
 
     return (
         <div className="logins">
@@ -60,7 +61,7 @@ const Login = ({setData,general}) => {
                         <p className="linked_acct">{ obj.linked_acct }</p>
                         <p className="username">{ obj.username_email}</p>
                     </div>
-                    
+                    <i style={setFavColor(obj)} className="fa fa-star"  onClick={(e)=>updateStar({e, d:obj})}></i>
                         
                    
                   

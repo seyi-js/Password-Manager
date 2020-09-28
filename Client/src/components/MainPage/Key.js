@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import {setFavColor,updateStar} from '../Utils/Utils'
 
 import {connect} from 'react-redux'
 const Keys = ({general,setData}) => {
@@ -44,7 +45,8 @@ const Keys = ({general,setData}) => {
             <div className="key-items" onClick={()=> setData(key)}>
                 <p>{ key.desc }</p>
                 <p className="type">{ key.category }</p>
-                <i className="fa fa-star"> </i>
+                <i style={setFavColor(key)} className="fa fa-star" onClick={(e)=>updateStar({e, d:key})}> </i>
+
             </div>
         )
     }

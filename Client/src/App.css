@@ -322,6 +322,11 @@ div.items h1{
 
 }
 
+div.items .fa-star{
+  display:grid;
+  justify-items:flex-end;
+}
+
 .details{
   display:flex;
   flex-direction:column;
@@ -799,7 +804,7 @@ div.show-blurry-popUp{
 
 div.pop-up-box{
   opacity:1;
-  animation: pop-up-box 0.6s linear;
+  animation: pop-up-box 0.6s ease-in;
 }
 
 @keyframes pop-up-box {
@@ -875,7 +880,7 @@ div.sharing-center{
   height:70%;
   background:#1e1e1e;
   position:relative;
-  opacity:0;
+  /* opacity:0; */
   border-bottom-right-radius:10px;
   border-top-left-radius:10px;
   
@@ -1002,7 +1007,7 @@ div.share{
   height:70%;
   /* border-radius:10px; */
   position:relative;
-  opacity:0;
+  /* opacity:0; */
   border-bottom-right-radius:10px;
   border-top-left-radius:10px;
 }

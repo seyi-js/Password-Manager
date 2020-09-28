@@ -1,5 +1,13 @@
-import { LOAD_DATA,DELETE_DATA, ADD_DATA,GET_SHARE_REQUEST} from './types';
+import { LOAD_DATA,DELETE_DATA, ADD_DATA,GET_SHARE_REQUEST,UPDATE_FAVOURITES} from './types';
+import { generateENK,generateRandomChars,encryptUserData} from '../components/Utils/Utils'
+import Axios from 'axios'
 
+
+const config = {
+    headers: {
+        "Content-Type": "application/json"
+    }
+}
 
 export const deleteFromUI= (id)=>(dispatch)=>{
     dispatch({
@@ -15,6 +23,129 @@ export const addData =(data)=>dispatch=>{
 
     })
 }
+
+
+export const updateFav=(data)=>dispatch=>{
+if(data.fav ){
+    data.fav=false;
+}else{
+    data.fav=true
+}
+    
+    
+
+    dispatch({
+        type:UPDATE_FAVOURITES,
+        payload:data
+    })
+}
+
+
+
+
+
+
+//Register a User
+export const registerRoute=(data)=>dispatch=>{
+    let pass = data.password;
+    let salt = data.email;
+    let keyLen = 32;
+    let iteration=100100
+    //Generate Vault Key
+    generateENK({pass,keyLen,salt,iteration})
+        .then(vaultKey=>{
+
+    //Generate Recovery Key
+    let salt = generateRandomChars()
+    generateENK({pass, salt,keyLen})
+            .then(RKey=>{
+                //Encrypt vaultKey
+                
+                const encryptedVaultKey = encryptUserData({data:vaultKey,key:RKey});
+
+                //Generate Login Hash
+    generateENK({pass:vaultKey,salt,iteration:100101,keyLen:32})
+            .then(loginHash=>{
+                
+                const dataToBeSent={
+                    email:data.email,
+                    loginHash:loginHash.toString('hex'),
+                    encryptedVaultKey
+                }
+
+                console.log(dataToBeSent)
+
+                //Save Recovery Key and vault key to local Storage after successful Login/Registration
+                const body =JSON.stringify(dataToBeSent)
+                Axios
+                .post('',body,config)
+                .then(res=> console.log(res))
+                .catch(err=>console.log(err))
+
+            })
+
+            });
+            // .catch(err=>console.log(err))
+        })
+        .catch(err=>console.log(err))
+}
+
+
+//Login a User
+export const loginRoute=(data)=>dispatch=>{
+    let pass = data.password;
+    let salt = data.email;
+    let keyLen = 32;
+    let iteration=100100
+    //Generate Vault Key
+    generateENK({pass,keyLen,salt,iteration})
+        .then(vaultKey=>{
+
+    //Generate Recovery Key
+    let salt = generateRandomChars()
+    generateENK({pass, salt,keyLen})
+            .then(RKey=>{
+                //Encrypt vaultKey
+                
+                const encryptedVaultKey = encryptUserData({data:vaultKey,key:RKey});
+
+                //Generate Login Hash
+    generateENK({pass:vaultKey,salt,iteration:100101,keyLen:32})
+            .then(loginHash=>{
+                
+                const dataToBeSent={
+                    email:data.email,
+                    loginHash:loginHash.toString('hex'),
+                    encryptedVaultKey
+                }
+
+                console.log(dataToBeSent)
+
+                //Save Recovery Key and vault key to local Storage after successful Login/Registration
+                const body =JSON.stringify(dataToBeSent)
+                Axios
+                .post('',body,config)
+                .then(res=> console.log(res))
+                .catch(err=>console.log(err))
+
+            })
+
+            });
+            // .catch(err=>console.log(err))
+        })
+        .catch(err=>console.log(err))
+}
+
+
+
+
+
+
+
+
+
+
+
 
 export const loadRequest = () => dispatch => {
     const requests = {
@@ -55,6 +186,9 @@ export const loadRequest = () => dispatch => {
 }
 
 export const loadData = () => ( dispatch ) => {
+    const decryptedUserData =[];
+
+    //Run a decrypt function for each data before sending to store
     dispatch( {
         type: LOAD_DATA,
         payload: [

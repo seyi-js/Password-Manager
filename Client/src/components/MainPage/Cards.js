@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
+import {setFavColor,updateStar} from '../Utils/Utils'
+
 const Cards = ({setData,general}) => {
 
  //From redux store
@@ -60,7 +62,7 @@ const Cards = ({setData,general}) => {
                                 <p className="details-1">{ card.bank }</p>
                                 <p className="details-2">{ card.CardNumber}</p>
                             </div>
-                        
+                            <i style={setFavColor(card)} className="fa fa-star"  onClick={(e)=>updateStar({e, d:card})}></i>
                         </div>
                         : null }
                 </>

@@ -1,5 +1,5 @@
 import React,{ useEffect }  from 'react'
-import {loadDom, copyToClipBoard} from '../Utils/Utils'
+import {loadDom, copyToClipBoard,setFavColor,updateStar} from '../Utils/Utils'
 const Logins = ({data,disabled,setDisabled}) => {
     
     
@@ -36,7 +36,7 @@ const Logins = ({data,disabled,setDisabled}) => {
                     <p className="type">{ data.type }</p>
                 </div>
                 
-                    <p className="type star"><i className="fa fa-star"></i></p>
+                   
             
         
             </div>
