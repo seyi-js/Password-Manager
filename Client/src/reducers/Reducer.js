@@ -1,11 +1,14 @@
-import {LOAD_DATA,DELETE_DATA,ADD_DATA,GET_SHARE_REQUEST,UPDATE_FAVOURITES} from '../actions/types'
+import {LOAD_DATA,DELETE_DATA,ADD_DATA,
+    GET_SHARE_REQUEST,UPDATE_FAVOURITES,
+LOGIN_SUCCESS,REGISTER_SUCCESS} from '../actions/types'
 
 const initialState = {
     data: [],
     fromOne: [],//Share Request from One
     fromMany:[],//Share Request From Many
     isAuthenticated:false,
-    user: null
+    user: null,
+    token:localStorage.getItem('token')
       
 }
   
@@ -34,6 +37,15 @@ export default ( state = initialState, action ) => {
                 fromOne: action.payload.fromOne,
                 fromMany:action.payload.fromMany
             }
+
+        case REGISTER_SUCCESS:
+        case LOGIN_SUCCESS:
+            localstorage.setItem('token',action.payload.token)
+            return{
+                ...state,
+                isAuthenticated:true,
+                token:action.payload.token
+            };
         case UPDATE_FAVOURITES:
 
         

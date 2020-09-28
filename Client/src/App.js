@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import {loadData,loadRequest,registerRoute} from './actions/Actions';
 import store from './store'
-
+import { Switch, Route } from 'react-router-dom';
 
 
 import './App.css'
@@ -23,7 +23,7 @@ export const App =()=> {
         }, [])
     
         return (
-             
+             <Switch>
                     <React.Fragment>
 
                         <Main />
@@ -37,7 +37,7 @@ export const App =()=> {
                     
                     
                 </React.Fragment>
-               
+                </Switch>
         )
     
 }
