@@ -1,4 +1,8 @@
-import { LOAD_DATA,DELETE_DATA, ADD_DATA,GET_SHARE_REQUEST,UPDATE_FAVOURITES} from './types';
+import {
+    LOAD_DATA, DELETE_DATA, ADD_DATA,
+    GET_SHARE_REQUEST, UPDATE_FAVOURITES, LOGIN_FAIL,
+    REGISTER_FAIL
+} from './types';
 import { generateENK,generateRandomChars,encryptUserData} from '../components/Utils/Utils'
 import Axios from 'axios'
 
@@ -126,7 +130,10 @@ export const loginRoute=(data)=>dispatch=>{
                 Axios
                 .post('',body,config)
                 .then(res=> console.log(res))
-                .catch(err=>console.log(err))
+                    .catch( err => dispatch( {
+                        type: LOGIN_FAIL,
+                        payload:"Opps! there has been a problem"
+                }))
 
             })
 
