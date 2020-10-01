@@ -3,7 +3,15 @@ import Mainpage1 from './MainPage/mainpage1'
 import Mainpage2 from './Mainpage2/mainpage2'
 import Sidebar from './SideBar/sidebar';
 import BlurryPopUp from './PopUps/BlurryPopUp'
-const Main = () => {
+import { connect } from 'react-redux'
+import {getAndRemoveClass} from './Utils/Utils'
+const Main = (  ) => {
+    
+    useEffect( () => {
+        
+            getAndRemoveClass()
+        
+    },[])
 
     const [ page, setPage ] = useState(1);
     const [popUpPage, setPopUpPage]=useState();//Pages to be displayed on PopUp

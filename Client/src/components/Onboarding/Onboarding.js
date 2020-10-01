@@ -1,14 +1,16 @@
 import React, { useEffect,useState} from 'react'
 import './Onboarding.css'
-import { getAndSetBlurryClass } from '../Utils/Utils'
+import { getAndSetBlurryClass,getAndRemoveClass } from '../Utils/Utils'
 import { connect } from 'react-redux';
 import store from '../../store'
-import {loginRoute} from '../../actions/Actions'
+import {loginRoute,loadRequest,registerRoute,clearData} from '../../actions/Actions'
 const Onboarding = ({general}) => {
 
     const [ type, setType ] = useState( 'password' );
     const [error, setError] = useState('')
-    const [isLoading, setIsLoading] =useState(false)
+    const [ isLoading, setIsLoading ] = useState( false )
+    //From Redux Store
+    const { loginError, registrationError} = general;
 
     const toggleEye = ( e ) => {
         const parent = e.target.parentElement;
@@ -31,32 +33,54 @@ const Onboarding = ({general}) => {
     
     const submitSignIn=(e)=>{
         e.preventDefault();
-        // var span = document.getElementById( 'console' );
-        // var counter = 0;
-        // span.textContent = counter.toString();
+        console.log( 'starting' )
+        store.dispatch(clearData())
         
-        // setInterval( function () {
-        //     counter++;
-        //     span.textContent += " " + counter.toString();
-        // }, 2000 );
-
+        setError('')
         setIsLoading(true)
         const data = {
             password: 'seyijs',
             email:'seyi@js.cpm'
         }
-
-        setTimeout( () => {
-            store.dispatch(loginRoute(data))
-       },1000 * 2)
+        store.dispatch(loginRoute(data))
+        // store.dispatch(registerRoute(data))
+        
+            // loginRoute(data)
+            
+            // store.dispatch(loadRequest())
+       
        
     }
 
+
+    //Check For Isloading
     useEffect( () => {
         if ( isLoading ) {
             getAndSetBlurryClass()
-       } 
-    },[isLoading])
+        } 
+        
+        
+    }, [ isLoading] )
+    
+
+    //CHeck For Error
+    useEffect( () => {
+        if ( loginError ) {
+            console.log(loginError)
+            setIsLoading( false )
+            getAndRemoveClass()
+            setError(loginError)
+        } else if ( registrationError ) {
+            setError( registrationError )
+            getAndRemoveClass()
+            
+        } 
+
+        
+    },[loginError,registrationError])
+
+
+
     const onLoad = () => {
         const signIn = document.getElementById('signIn')
         const signInButton = document.getElementById('sign-In')
@@ -101,13 +125,13 @@ const Onboarding = ({general}) => {
         
     }
     
-
+    //Load This when page Loads
     useEffect( () => {
         onLoad()
-    })
+    } );
 
 
-    const { loginError, registrationError } = general;
+    
 
 
     return (
@@ -115,6 +139,8 @@ const Onboarding = ({general}) => {
             <div className="wrapper" id="wrapper">
             <div className="form-wrapper sign-up-wrapper">
                     <form>
+                    <p>{error}</p>
+                        
                         <h1>Create Account</h1>
                 <input type="email" placeholder="Email"/>
                         <section className="user-password">
@@ -130,7 +156,7 @@ const Onboarding = ({general}) => {
         </div>
         <div className="form-wrapper sign-in-wrapper">
                     <form>
-                    <p>{ loginError}</p>
+                    <p>{error}</p>
                         <h1>Sign in</h1>
                         <div><span id="console"></span></div>
                         

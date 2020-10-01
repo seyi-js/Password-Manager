@@ -1,7 +1,7 @@
 import {LOAD_DATA,DELETE_DATA,ADD_DATA,
     GET_SHARE_REQUEST,UPDATE_FAVOURITES,
     LOGIN_SUCCESS, REGISTER_SUCCESS,
-    LOGIN_FAIL,REGISTER_FAIL} from '../actions/types'
+    LOGIN_FAIL,REGISTER_FAIL,CLEAR} from '../actions/types'
 
 const initialState = {
     data: [],
@@ -10,8 +10,8 @@ const initialState = {
     isAuthenticated:false,
     user: null,
     token: localStorage.getItem( 'token' ),
-    loginError: '',
-    registrationError:''
+    loginError: null,
+    registrationError:null
       
 }
   
@@ -50,7 +50,12 @@ export default ( state = initialState, action ) => {
                 token:action.payload.token
             };
         
-        
+        case CLEAR:
+            return {
+                ...state,
+                loginError: null,
+                registrationError:null
+            }
         case LOGIN_FAIL:
             return {
                 ...state,

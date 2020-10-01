@@ -100,13 +100,26 @@ key = await crypto.pbkdf2Sync(pass, salt, iteration, keyLen, 'sha256');
   return key;
   
 }
+const gen = () => {
+  crypto.pbkdf2( 'd454f4t4t', '123213de4dc', 100100,32, 'sha256', ( err, key ) => {
+    if ( err ) {
+      console.log(err)
+    }
 
+    console.log(key.toString('hex'))
+  })
+}
+
+gen()
 
 const key =  generateENK({pass:"seyi", salt:"seyijs@gmail.com",keyLen:32})
-key.then((key)=>{
-  console.log(key.toString('hex'));
+key.then( ( key ) => {
+  
+  // console.log(key.toString('hex'));
 
 
+
+console.log('after')
   const encryptData = ( data  ) => {
     let iv = crypto.pseudoRandomBytes(16)
     let cipher = crypto.createCipheriv( "aes-256-cbc", Buffer.from(key, 'hex'),iv );
@@ -132,7 +145,7 @@ key.then((key)=>{
     decrypted = Buffer.concat( [ decrypted, decipher.final() ] );
     return decrypted.toString()
 }
-const d =decryptData(encryptData(JSON.stringify(data)))
-console.log(JSON.parse(d).name)
+// const d =decryptData(encryptData(JSON.stringify(data)))
+// console.log(JSON.parse(d).name)
 })
 

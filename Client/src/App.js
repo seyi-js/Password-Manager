@@ -42,7 +42,7 @@ export const App =({general})=> {
                                 <BlurryPopUp/>
                                 
                                 { ( isAuthenticated ) ?
-                                        <Route exact path='/dashboard'  component={ Main } /> : 
+                                        <Route exact path='/dashboard' isAuthenticated={isAuthenticated}  component={ Main } /> : 
                                         <Redirect to="/" />
                                 }
                     

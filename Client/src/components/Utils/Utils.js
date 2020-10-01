@@ -131,15 +131,30 @@ export const generateRSAkeys = async() => {
 }
 
 //Generate Encryption Keys
-export const generateENK= async ({pass,salt,iteration=100000,keyLen})=>{
-    let key;
-    // console.log(pass)
-  key = await Crypto.pbkdf2Sync(pass, salt, iteration, keyLen, 'sha256');
+// export const generateENK= async ({pass,salt,iteration=100000,keyLen})=>{
+//     let key;
+//     // console.log(pass)
+//   key = await Crypto.pbkdf2Sync(pass, salt, iteration, keyLen, 'sha256');
     
-    return key;
+//     return key;
+    
+// }
+// const encryptedVaultKey = encryptUserData({data:vaultKey,Key:RKey});
+
+
+//Generate Encryption Keys
+export const generateENK= ({pass,salt,iteration=100000,keyLen,Key})=>{
+    let Fkey;
+    const newFunc = Crypto.pbkdf2( pass, salt, iteration, keyLen, 'sha256', function ( err, key ) {
+        // console.log( key );
+
+        Key[ 'key' ] = key;
+        
+        return key;
+    } );
+    
     
 }
-
 
 //Set Color
 export const setFavColor =(e)=>{
@@ -166,7 +181,7 @@ export const encryptUserData =({data,key})=>{
         let cipher = Crypto.createCipheriv( "aes-256-cbc", Buffer.from(key, 'hex'),iv );
         let encrypted = cipher.update(data );
         encrypted = Buffer.concat( [ encrypted, cipher.final() ] );
-        
+        console.log(encrypted)
         return { iv:iv.toString('hex'), encryptedData: encrypted.toString( 'hex' ) };
     }
     

@@ -1,7 +1,9 @@
 import {
     LOAD_DATA, DELETE_DATA, ADD_DATA,
     GET_SHARE_REQUEST, UPDATE_FAVOURITES, LOGIN_FAIL,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    LOGIN_SUCCESS,
+    CLEAR
 } from './types';
 import { generateENK,generateRandomChars,encryptUserData} from '../components/Utils/Utils'
 import Axios from 'axios'
@@ -44,8 +46,27 @@ if(data.fav ){
     })
 }
 
+export const clearData = () => dispatch => {
+    dispatch( {
+        type:CLEAR,
+    })
+}
 
+// const  createKey=({Key,pass,salt,keyLen,iteration})=> {
 
+//     if ( !Key ) {
+//         throw new Error( "k_object is not a valid object." );
+//     }
+
+    
+    
+    
+//     //Generate Vault Key
+//      generateENK( { pass, keyLen, salt, iteration ,Key} );
+    
+    
+
+// }
 
 
 
@@ -54,94 +75,151 @@ export const registerRoute=(data)=>dispatch=>{
     let pass = data.password;
     let salt = data.email;
     let keyLen = 32;
-    let iteration=100100
-    //Generate Vault Key
-    generateENK({pass,keyLen,salt,iteration})
-        .then(vaultKey=>{
+    let iteration = 100100;
+    let Key = {};
+    let vaultKey;
+    let RKey;
+    let loginHash;
+    let encryptedVaultKey;
 
-    //Generate Recovery Key
-    let salt = generateRandomChars()
-    generateENK({pass, salt,keyLen})
-            .then(RKey=>{
-                //Encrypt vaultKey
-                
-                const encryptedVaultKey = encryptUserData({data:vaultKey,key:RKey});
+    generateENK( {Key,pass,salt,keyLen,iteration });
+    
 
-                //Generate Login Hash
-    generateENK({pass:vaultKey,salt,iteration:100101,keyLen:32})
-            .then(loginHash=>{
-                
-                const dataToBeSent={
-                    email:data.email,
-                    loginHash:loginHash.toString('hex'),
-                    encryptedVaultKey
-                }
+const checkKey =()=> {
+    if ( Key['key'] && !vaultKey) {
+        // console.log( 'Key has been generated: ', vaultKey);
+        
+        vaultKey = Key[ 'key' ];
+        Key = {};
 
-                console.log(dataToBeSent)
+        //Generate RKey here
+       
+        salt = generateRandomChars();
+        pass = generateRandomChars();
+        generateENK( { Key, pass, salt, keyLen, iteration } );
+       
+        
+    } else if ( Key[ 'key' ] && vaultKey && !RKey ) {
+        
+        RKey = Key[ 'key' ];
+        Key = {};
+        //Generate Login Hash Here
+       
+        iteration = 100101;
+        pass = vaultKey;
+        generateENK( {Key,pass,salt,keyLen,iteration });
+        
+        
+        
+    } else if (Key[ 'key' ] && vaultKey && RKey && !loginHash) { 
+        loginHash = Key[ 'key' ];
+        Key = {};
+        encryptedVaultKey = encryptUserData({data:vaultKey,key:RKey});
 
-                //Save Recovery Key and vault key to local Storage after successful Login/Registration
-                const body =JSON.stringify(dataToBeSent)
-                Axios
-                .post('',body,config)
-                .then(res=> console.log(res))
-                .catch(err=>console.log(err))
+    }
+    else if (vaultKey && RKey && loginHash && encryptedVaultKey  ) {
+        
+        
+        clearInterval( interval_handle );
+        //Start Processing Sending request
 
-            })
+    const dataToBeSent={
+                email:data.email,
+        loginHash: loginHash.toString( 'hex' ),
+                    
+               encryptedVaultKey
+        }
 
-            });
-            // .catch(err=>console.log(err))
-        })
-        .catch(err=>console.log(err))
+
+        const body = JSON.stringify( dataToBeSent );
+
+        console.log(dataToBeSent)
+        
+        
+        Axios
+            .post( '', body, config )
+            .then()
+            .catch( err => dispatch( {
+                type: REGISTER_FAIL,
+                payload:"opps! there has been a problem"
+            }))
+        
+    }
 }
 
 
-//Login a User
-export const loginRoute=(data)=>dispatch=>{
+    // console.log(Key)
+let interval_handle = setInterval( checkKey, 50);
+}
+
+
+export const loginRoute =  ( data ) => dispatch=> {
+
     let pass = data.password;
     let salt = data.email;
     let keyLen = 32;
-    let iteration=100100
-    //Generate Vault Key
-    generateENK({pass,keyLen,salt,iteration})
-        .then(vaultKey=>{
+    let iteration = 100100;
+    let Key = {};
+    let vaultKey;
+    
+    let loginHash;
 
-    //Generate Recovery Key
-    let salt = generateRandomChars()
-    generateENK({pass, salt,keyLen})
-            .then(RKey=>{
-                //Encrypt vaultKey
+
+    generateENK( { pass, keyLen, salt, iteration ,Key} );
+    
+
+const checkKey =()=> {
+    if ( Key['key'] && !vaultKey) {
+        // console.log( 'Key has been generated: ', vaultKey);
+        
+        vaultKey = Key[ 'key' ];
+        Key = {};
+
+       //Generate Login Hash Here
+       
+       iteration = 100101;
+       pass = vaultKey;
+       generateENK( {pass,salt,keyLen,iteration,Key });
+       
+        
+    } else if ( Key[ 'key' ] && vaultKey &&  !loginHash ) {
+        loginHash = Key[ 'key' ];
+        Key = {};
+        clearInterval( interval_handle );
+
+
+        //Start Processing Sending request
+
+    const dataToBeSent={
+                email:data.email,
+                loginHash:loginHash.toString('hex'),
                 
-                const encryptedVaultKey = encryptUserData({data:vaultKey,key:RKey});
+        }
 
-                //Generate Login Hash
-    generateENK({pass:vaultKey,salt,iteration:100101,keyLen:32})
-            .then(loginHash=>{
-                
-                const dataToBeSent={
-                    email:data.email,
-                    loginHash:loginHash.toString('hex'),
-                    encryptedVaultKey
-                }
+        const body = JSON.stringify( dataToBeSent );
 
-                console.log(dataToBeSent)
-
-                //Save Recovery Key and vault key to local Storage after successful Login/Registration
-                const body =JSON.stringify(dataToBeSent)
-                Axios
-                .post('',body,config)
-                .then(res=> console.log(res))
-                    .catch( err => dispatch( {
-                        type: LOGIN_FAIL,
-                        payload:"Opps! there has been a problem"
-                }))
-
-            })
-
-            });
-            // .catch(err=>console.log(err))
-        })
-        .catch(err=>console.log(err))
+        console.log(body)
+        
+        Axios
+            .post( '', body, config )
+            .then()
+            .catch( err => dispatch( {
+                type: LOGIN_FAIL,
+                payload:"opps! there has been a problem"
+            }))
+        
+    }
 }
+
+
+    // console.log(Key)
+let interval_handle = setInterval( checkKey, 50);
+  
+    
+    
+}
+
+
 
 
 
@@ -182,7 +260,7 @@ export const loadRequest = () => dispatch => {
             },
             {
                 username:"john",
-                type:"keys"
+                type:"Keys"
             },
     ]
     }
@@ -295,7 +373,7 @@ export const loadData = () => ( dispatch ) => {
             {   
 
                 id:'123350098908908997945',
-                type: 'keys',
+                type: 'Keys',
                 category: 'SSH',
                 value: 'gdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdvgdgdgdhdgdhdhdasfsfffdfdvdv',
                 desc:'Github SSH',
@@ -304,7 +382,7 @@ export const loadData = () => ( dispatch ) => {
             },
             {
                 id:'12438887970025465',
-                type: 'keys',
+                type: 'Keys',
                 category: 'RSA',
                 privateKey: 'hhshghjsgfgf',
                 publicKey: 'svhdvgsdvgvdsvdv',
@@ -315,8 +393,8 @@ export const loadData = () => ( dispatch ) => {
             },
             {
                 id:'177777777732235',
-                type: 'keys',
-                category: 'ENCRYPTION KEY',
+                type: 'Keys',
+                category: 'ENCRYPTION Key',
                 value: 'dddddddddd',
                 desc: 'SD CARD',
                 fav: true
@@ -340,5 +418,26 @@ export const loadData = () => ( dispatch ) => {
         ]
     } )
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
