@@ -31,15 +31,18 @@ export const App =({general})=> {
                         
                                 { ( !isAuthenticated ) ?
                                         
-
+                                        
+                                                
                                         <Route exact path='/' component={ Onboarding } />
                                         : <Redirect to="/dashboard" />
+                                        
+                                       
 
                                         
                                         
                                 }
                                 
-                                <BlurryPopUp/>
+                                
                                 
                                 { ( isAuthenticated ) ?
                                         <Route exact path='/dashboard' isAuthenticated={isAuthenticated}  component={ Main } /> : 

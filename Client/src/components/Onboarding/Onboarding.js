@@ -3,6 +3,8 @@ import './Onboarding.css'
 import { getAndSetBlurryClass,getAndRemoveClass } from '../Utils/Utils'
 import { connect } from 'react-redux';
 import store from '../../store'
+import BlurryPopUp from '../PopUps/BlurryPopUp'
+
 import {loginRoute,loadRequest,registerRoute,clearData} from '../../actions/Actions'
 const Onboarding = ({general}) => {
 
@@ -42,8 +44,8 @@ const Onboarding = ({general}) => {
             password: 'seyijs',
             email:'seyi@js.cpm'
         }
-        store.dispatch(loginRoute(data))
-        // store.dispatch(registerRoute(data))
+        // store.dispatch(loginRoute(data))
+        store.dispatch(registerRoute(data))
         
             // loginRoute(data)
             
@@ -136,6 +138,7 @@ const Onboarding = ({general}) => {
 
     return (
         <div className="onboarding">
+            <BlurryPopUp/>
             <div className="wrapper" id="wrapper">
             <div className="form-wrapper sign-up-wrapper">
                     <form>

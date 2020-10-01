@@ -3,7 +3,8 @@ import {
     GET_SHARE_REQUEST, UPDATE_FAVOURITES, LOGIN_FAIL,
     REGISTER_FAIL,
     LOGIN_SUCCESS,
-    CLEAR
+    CLEAR,
+    REGISTER_SUCCESS
 } from './types';
 import { generateENK,generateRandomChars,encryptUserData} from '../components/Utils/Utils'
 import Axios from 'axios'
@@ -140,7 +141,7 @@ const checkKey =()=> {
             .post( '', body, config )
             .then()
             .catch( err => dispatch( {
-                type: REGISTER_FAIL,
+                type: REGISTER_SUCCESS,
                 payload:"opps! there has been a problem"
             }))
         

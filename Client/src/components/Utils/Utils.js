@@ -181,7 +181,7 @@ export const encryptUserData =({data,key})=>{
         let cipher = Crypto.createCipheriv( "aes-256-cbc", Buffer.from(key, 'hex'),iv );
         let encrypted = cipher.update(data );
         encrypted = Buffer.concat( [ encrypted, cipher.final() ] );
-        console.log(encrypted)
+       
         return { iv:iv.toString('hex'), encryptedData: encrypted.toString( 'hex' ) };
     }
     

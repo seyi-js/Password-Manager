@@ -7,14 +7,14 @@ import { connect } from 'react-redux'
 import {getAndRemoveClass} from './Utils/Utils'
 const Main = (  ) => {
     
-    useEffect( () => {
+    // useEffect( () => {
         
-            getAndRemoveClass()
+    //         getAndRemoveClass()
         
-    },[])
+    // },[])
 
     const [ page, setPage ] = useState(1);
-    const [popUpPage, setPopUpPage]=useState();//Pages to be displayed on PopUp
+    const [popUpPage, setPopUpPage]=useState('Share');//Pages to be displayed on PopUp
     const [ data, setData ] = useState();//Data to be displayed on Mainpage2
 
     const updatePage = (number) => {

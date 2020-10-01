@@ -12,7 +12,7 @@ import Settings from './Settings/Settings'
 const BlurryPopUp =({popUpPage,data,setPopUpPage})=>{
     return(
         <div className="blurry-popUp">
-           {(popUpPage)?(popUpPage ==='SharingCenter')? <SharingCenter/>
+        {(popUpPage ==='SharingCenter')? <SharingCenter/>
            :
            (popUpPage ==='Share')? <Share setPopUpPage={setPopUpPage}/>
            :(popUpPage ==='Delete')? <Delete data={data} setPopUpPage={setPopUpPage}/>
@@ -20,9 +20,7 @@ const BlurryPopUp =({popUpPage,data,setPopUpPage})=>{
            :(popUpPage === 'Vault')? <Vault setPopUpPage={setPopUpPage}/>:(popUpPage === 'Notes')? <Notes setPopUpPage={setPopUpPage}/>
            :(popUpPage === 'Keys')? <Keys popUpPage={popUpPage} setPopUpPage={setPopUpPage}/>
            :(popUpPage === 'Loading')? <Loading/>
-           :(popUpPage === 'Settings')? <Settings />:null:<Loading/>}
-            
-
+           :(popUpPage === 'Settings')? <Settings />:<Loading/>}
             
         </div>
     )
