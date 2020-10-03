@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition:all 0.3s ease-in;
   
 }
 
@@ -1187,10 +1188,19 @@ div.add-to-login{
   height:70%;
   background:#1e1e1e;
   display: flex;
+  flex-direction:column;
   border-radius:10px;
   position:relative;
 }
-
+div.add-to-login h5{
+  font-size:15px;
+  text-align:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-top:20px;
+  color:red;
+}
 div.add-to-login form{
   display:flex;
   flex-direction:column;

@@ -1,0 +1,89 @@
+
+
+@media screen and (max-width: 1350px){
+    
+    .active{
+      border-radius: 10px;
+    }
+    div.sidebar-1  div{
+    
+        padding: 10px 10px;
+   
+       
+    }
+
+       div.sidebar-1  div p{
+        font-size: 14px;
+        
+      }
+
+      div.sidebar-1   div:hover , div.sidebar-2 div:hover {
+        
+        border-radius:10px;
+        
+      }
+
+      div.sidebar-2  div{
+        padding: 10px 10px;
+      }
+      div.sidebar-2 h3{
+        font-size: 14px;
+      }
+
+      div.sidebar-2 div p,
+      div.sidebar-2 div .fa,
+      div.sidebar-footer div p,
+      div.sidebar-footer div .fa{
+        font-size: 14px;
+      }
+      div.sidebar-footer div{
+        
+        padding: 10px 5px;
+       
+       
+      }
+
+      div.sidebar-footer div:nth-of-type(1):hover{
+        border-radius:10px;
+      }
+      div.sidebar-footer div:nth-of-type(2):hover{
+        border-radius:10px;
+      }
+
+
+
+    
+}
+
+
+@media screen and (max-width: 1350px){
+  .sidebar-wrapper{
+    width:15%;
+  }
+  .mainpage1-wrapper{
+    left:16%;
+    /* width:38.6%; */
+  }
+  div.items{
+    width:80%;
+  }
+
+  .mainpage2-wrapper{
+    width:37.5%;
+  }
+}
+
+@media screen and (max-width: 1005px){
+  div.items{
+    width:100%;
+  }
+
+  .mainpage1-wrapper{
+    
+    width:41.1%;
+  }
+
+  .mainpage2-wrapper{
+    width:40%;
+  }
+}

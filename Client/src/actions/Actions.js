@@ -3,6 +3,7 @@ import {
     GET_SHARE_REQUEST, UPDATE_FAVOURITES, LOGIN_FAIL,
     REGISTER_FAIL,
     LOGIN_SUCCESS,
+    GET_POSSIBLE_PASSWORDS,
     CLEAR,
     REGISTER_SUCCESS
 } from './types';
@@ -24,6 +25,16 @@ export const deleteFromUI= (id)=>(dispatch)=>{
 }
 
 export const addData =(data)=>dispatch=>{
+    let key = 'eadabc1fbdbf4f2098cf3ec9ed59b0635b9efa378de4cf023666cf6f8f350892'
+
+    //GetKey From local Storage
+    const jsonData =JSON.stringify(data)
+    const dataToBeSent = {
+        type: data.type,
+        encryptedUserData: encryptUserData({data:jsonData,key}),
+    }
+
+    console.log(dataToBeSent)
     dispatch({
         type:ADD_DATA,
         payload:data
@@ -88,9 +99,11 @@ export const registerRoute=(data)=>dispatch=>{
 
 const checkKey =()=> {
     if ( Key['key'] && !vaultKey) {
-        // console.log( 'Key has been generated: ', vaultKey);
         
         vaultKey = Key[ 'key' ];
+        console.log( 'Key has been generated: ', vaultKey.toString('hex'));
+
+        //saveVaultKeyToLocalStorage
         Key = {};
 
         //Generate RKey here
@@ -139,7 +152,9 @@ const checkKey =()=> {
         
         Axios
             .post( '', body, config )
-            .then()
+            .then( res => {
+                localStorage.setItem('vaultKey', vaultKey)
+            })
             .catch( err => dispatch( {
                 type: REGISTER_SUCCESS,
                 payload:"opps! there has been a problem"
@@ -174,6 +189,7 @@ const checkKey =()=> {
         // console.log( 'Key has been generated: ', vaultKey);
         
         vaultKey = Key[ 'key' ];
+        //saveVaultKeyToLocalStorage
         Key = {};
 
        //Generate Login Hash Here
@@ -203,7 +219,8 @@ const checkKey =()=> {
         
         Axios
             .post( '', body, config )
-            .then()
+                
+            .then( res => localStorage.setItem('vaultKey', vaultKey))
             .catch( err => dispatch( {
                 type: LOGIN_FAIL,
                 payload:"opps! there has been a problem"
@@ -222,6 +239,35 @@ let interval_handle = setInterval( checkKey, 50);
 
 
 
+export const getPossiblePasswords = () => dispatch => {
+    
+    Axios
+        .get( '' )
+        .catch( res => dispatch( {
+            type: GET_POSSIBLE_PASSWORDS,
+            payload:['123456',   'password',   '12345678',   'qwerty',     '123456789',
+            '12345',    '1234',       '111111',     '1234567',    'dragon',
+            '123123',   'baseball',   'abc123',     'football',   'monkey',
+            'letmein',  'shadow',     'master',     '666666',     'qwertyuiop',
+            '123321',   'mustang',    '1234567890', 'michael',    '654321',
+            'superman', '1qaz2wsx',   '7777777',    '121212',     '000000',
+            'qazwsx',   '123qwe',     'killer',     'trustno1',   'jordan',
+            'jennifer', 'zxcvbnm',    'asdfgh',     'hunter',     'buster',
+            'soccer',   'harley',     'batman',     'andrew',     'tigger',
+            'sunshine', 'iloveyou',   '2000',       'charlie',    'robert',
+            'thomas',   'hockey',     'ranger',     'daniel',     'starwars',
+            'klaster',  '112233',     'george',     'computer',   'michelle',
+            'jessica',  'pepper',     '1111',       'zxcvbn',     '555555',
+            '11111111', '131313',     'freedom',    '777777',     'pass',
+            'maggie',   '159753',     'aaaaaa',     'ginger',     'princess',
+            'joshua',   'cheese',     'amanda',     'summer',     'love',
+            'ashley',   'nicole',     'chelsea',    'biteme',     'matthew',
+            'access',   'yankees',    '987654321',  'dallas',     'austin',
+            'thunder',  'taylor',     'matrix',     'mobilemail', 'mom',
+            'monitor',  'monitoring', 'montana',    'moon']
+        }) )
+    .catch(err=>console.log(err))
+}
 
 
 

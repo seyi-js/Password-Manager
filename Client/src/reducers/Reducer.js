@@ -1,7 +1,7 @@
 import {LOAD_DATA,DELETE_DATA,ADD_DATA,
     GET_SHARE_REQUEST,UPDATE_FAVOURITES,
     LOGIN_SUCCESS, REGISTER_SUCCESS,
-    LOGIN_FAIL,REGISTER_FAIL,CLEAR} from '../actions/types'
+    LOGIN_FAIL,REGISTER_FAIL,CLEAR,GET_POSSIBLE_PASSWORDS} from '../actions/types'
 
 const initialState = {
     data: [],
@@ -11,7 +11,8 @@ const initialState = {
     user: null,
     token: localStorage.getItem( 'token' ),
     loginError: null,
-    registrationError:null
+    registrationError: null,
+    possiblePasswords: []
       
 }
   
@@ -32,14 +33,19 @@ export default ( state = initialState, action ) => {
         case ADD_DATA:
             return {
                 ...state,
-                data:[action.payload, ...state.data]
-            }
+                data: [ action.payload, ...state.data ]
+            };
         case GET_SHARE_REQUEST:
             return {
                 ...state,
                 fromOne: action.payload.fromOne,
-                fromMany:action.payload.fromMany
-            }
+                fromMany: action.payload.fromMany
+            };
+        case GET_POSSIBLE_PASSWORDS:
+            return {
+                ...state,
+                possiblePasswords: action.payload
+            };
 
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
@@ -67,6 +73,8 @@ export default ( state = initialState, action ) => {
                 ...state,
                 registrationError: action.payload
             };
+     
+            
         case UPDATE_FAVOURITES:
 
         

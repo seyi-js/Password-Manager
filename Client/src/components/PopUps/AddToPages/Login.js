@@ -1,8 +1,9 @@
 import React, {useState,useEffect} from 'react'
 import { cancel, getAndRemoveClass,generatePassword } from '../../Utils/Utils'
 import store from '../../../store'
-import {addData} from '../../../actions/Actions'
-const Login = ({setPopUpPage}) => {
+import { addData } from '../../../actions/Actions'
+import {connect} from 'react-redux'
+const Login = ({setPopUpPage,general}) => {
 
     const [account, setAccount] = useState('');
     const [username, setUsername] = useState('');
@@ -11,6 +12,8 @@ const Login = ({setPopUpPage}) => {
     const [ checkBox, setCheckBox ] = useState( true );
     const [allDone,setAlldone] = useState(false)
 
+
+    const {possiblePasswords} =general
 
     
     const setUpadtePassword = ( e ) => {
@@ -24,13 +27,15 @@ const Login = ({setPopUpPage}) => {
     }
     
     useEffect( () => {
+
         if ( account && username && checkBox) {
             setAlldone(true)
             
         } else if ( account && username && password ) {
             setAlldone(true)
             
-        }else{
+        }
+        else {
            setAlldone(false)
         }
     },[username,password,checkBox])
@@ -59,10 +64,10 @@ const Login = ({setPopUpPage}) => {
     const saveForm = () => {
 
         let loginCredential;
-        setPopUpPage( 'Loading' );
-        setTimeout( () => {
+        
+        
             if ( account && username && checkBox) {
-            
+                setPopUpPage( 'Loading' );
                 loginCredential = {
                     id: '121323',
                     linked_acct: account,
@@ -72,19 +77,40 @@ const Login = ({setPopUpPage}) => {
                     fav: false
                     
                 }
+
+                setTimeout( () => {
+                    store.dispatch(addData(loginCredential))
+                    getAndRemoveClass();
+                    setAccount( '' );
+                    setPassword( '' )
+                    setUsername('')
+               },1000 * 2)
                 
                 
             } else if ( account && username && password ) {
-                loginCredential = {
-                    id: '121323',
-                    linked_acct: account,
-                    username_email: username,
-                    password:password,
-                    type: 'Login',
-                    fav: false
-                    
-                }
                 
+                
+                const searchFor = possiblePasswords.indexOf( password )
+                if ( searchFor === -1 ) {
+                    setPopUpPage( 'Loading' );
+                    loginCredential = {
+                        id: '121323',
+                        linked_acct: account,
+                        username_email: username,
+                        password:password,
+                        type: 'Login',
+                        fav: false
+                        
+                    } 
+
+                    store.dispatch(addData(loginCredential))
+                getAndRemoveClass();
+                setAccount( '' );
+                setPassword( '' )
+                setUsername('')
+                } else {
+                    setErrorMsg('Password too weak')
+                }
                 
                 
             }else{
@@ -92,18 +118,15 @@ const Login = ({setPopUpPage}) => {
             }
             
     
-            store.dispatch(addData(loginCredential))
-                getAndRemoveClass();
-                setAccount( '' );
-                setPassword( '' )
-                setUsername('')
-        }, 1000 * 2)
+            
+       
     }
     return (
         <div className="add-to-login pop-up-box">
-            
+        <h5>{errorMsg}</h5>
             <form>
                 <div className="account">
+               
                     <label>Account/Website</label>
                     <input type="text" value={account} placeholder="e.g Twitter,Facebook e.t.c" onChange={(e)=>setAccount(e.target.value)} />
                 
@@ -132,4 +155,8 @@ const Login = ({setPopUpPage}) => {
     )
 }
 
-export default Login
+const mapStateToProps = ({general})=> ( {
+    general
+})
+
+export default connect(mapStateToProps, null)(Login)

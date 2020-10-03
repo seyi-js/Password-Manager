@@ -1,28 +1,30 @@
 // const tes = require('./test')
 
 import React, { useEffect } from 'react';
-import {loadData,loadRequest,registerRoute} from './actions/Actions';
+import {loadData,loadRequest,getPossiblePasswords} from './actions/Actions';
 import store from './store'
 import { Switch, Route,Redirect } from 'react-router-dom';
 import Onboarding from './components/Onboarding/Onboarding'
 import {connect} from 'react-redux'
 import './App.css'
+import './mobile.css'
 import Main from './components/Main'
 import BlurryPopUp from './components/PopUps/BlurryPopUp'
 
 
 
 export const App =({general})=> {
-
+        const {isAuthenticated} = general;
         useEffect( () => {
                 
                 store.dispatch( loadData() )
                 store.dispatch(loadRequest())
+                store.dispatch(getPossiblePasswords())
                 
                 // generateRSAkeys()
         }, [] )
         
-        const {isAuthenticated} = general;
+      
     
         return (
                 <Switch>
@@ -44,7 +46,7 @@ export const App =({general})=> {
                                 
                                 
                                 
-                                { ( isAuthenticated ) ?
+                                { ( !isAuthenticated ) ?
                                         <Route exact path='/dashboard' isAuthenticated={isAuthenticated}  component={ Main } /> : 
                                         <Redirect to="/" />
                                 }
