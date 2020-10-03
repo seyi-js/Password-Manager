@@ -110,7 +110,7 @@ const gen = () => {
   })
 }
 
-gen()
+// gen()
 
 const key =  generateENK({pass:"seyi", salt:"seyijs@gmail.com",keyLen:32})
 key.then( ( key ) => {
@@ -119,7 +119,7 @@ key.then( ( key ) => {
 
 
 
-console.log('after')
+// console.log('after')
   const encryptData = ( data  ) => {
     let iv = crypto.pseudoRandomBytes(16)
     let cipher = crypto.createCipheriv( "aes-256-cbc", Buffer.from(key, 'hex'),iv );
@@ -149,3 +149,12 @@ console.log('after')
 // console.log(JSON.parse(d).name)
 })
 
+const text = "samuD2"
+
+console.log(text.match(/[0-9]/g))
+console.log(text.match(/[A-Z]/g))
+console.log(text.match(/[a-z]/g))
+console.log( text.match( /[A-Z0-9a-z]+/ ) )
+
+console.log(text.match(/[0-9]+^[A-Z]+/g))
+// console.log(text.match(/{12,}/g))

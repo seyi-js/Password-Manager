@@ -9,8 +9,17 @@ import {loginRoute,loadRequest,registerRoute,clearData} from '../../actions/Acti
 const Onboarding = ({general}) => {
 
     const [ type, setType ] = useState( 'password' );
-    const [error, setError] = useState('')
-    const [ isLoading, setIsLoading ] = useState( false )
+    const [ error, setError ] = useState( '' );
+    const [ isLoading, setIsLoading ] = useState( false );
+    const [ email, setEmail ] = useState( '' );
+    const [password1, setPassword1] = useState('')
+    const [ password2, setPassword2 ] = useState( '' )
+    const [ userName, setUsername ] = useState( '' )
+    const [ password, setPassword ] = useState( '' );
+    const [verificationDone,setVerificationDone] = useState(false)
+
+
+
     //From Redux Store
     const { loginError, registrationError} = general;
 
@@ -33,25 +42,114 @@ const Onboarding = ({general}) => {
             setType('password')
     }
     
-    const submitSignIn=(e)=>{
-        e.preventDefault();
-        console.log( 'starting' )
-        store.dispatch(clearData())
+
+
+    const verifySignUp = () => {
+
         
-        setError('')
-        setIsLoading(true)
-        const data = {
-            password: 'seyijs',
-            email:'seyi@js.cpm'
+        
+    }
+
+    useEffect( () => {
+        let passwordNumber = password1.match(/[0-9]/g);
+        let passwordUpper =password1.match(/[A-Z]/g);
+        let passwordLower =password1.match(/[a-z]/g);
+        let passwordLength = password1.match( /[A-Z0-9a-z]{14,}/g );
+
+        if ( !passwordNumber ) {
+            const number = document.getElementsByClassName( 'number' );
+            number[0].style.color ='grey'
         }
-        // store.dispatch(loginRoute(data))
-        store.dispatch(registerRoute(data))
+        if ( !passwordUpper ) {
+    const upper = document.getElementsByClassName( 'upper' );
+            upper[0].style.color ='grey'
+        }
+        if ( !passwordLower ) {
+            const lower = document.getElementsByClassName( 'lower' );
+            lower[0].style.color ='grey'
+        }
+        if ( !passwordLength ) {
+            const chars = document.getElementsByClassName( 'chars' );
+            chars[0].style.color ='grey'
+        }
+        if ( password1 === email ) {
+            const email = document.getElementsByClassName( 'email' );
+            email[0].style.color ='grey'
+        }
+
+
+
+        if(passwordNumber){
+            const number = document.getElementsByClassName( 'number' );
+            number[0].style.color ='#f77c11'
+        }
+        if ( passwordUpper ) {
+            const upper = document.getElementsByClassName( 'upper' );
+            upper[0].style.color ='#f77c11'
+            // console.log(upper[0].style.color)
+
+        }
+        if ( passwordLower ) {
+            const lower = document.getElementsByClassName('lower')
+            lower[0].style.color ='#f77c11'
+        }
+        if ( passwordLength ) {
+            const chars = document.getElementsByClassName('chars')
+            chars[0].style.color ='#f77c11'
+        }
+        if ( password1 !== email ) {
+            const email = document.getElementsByClassName('email')
+            email[0].style.color ='#f77c11'
+        }
+        if ( password1 !== password2 ) {
+            setError('Passwords are not equal')
+        }
+        if ( passwordLength && passwordLower && passwordNumber && passwordUpper && password1 !== email && password1 === password2 ) {
+            setVerificationDone(true)
+        } else {
+            setVerificationDone(false)
+        }
+    },[password1,email,password2])
+    
+    
+    const submitSignIn = ( e ) => {
+        e.preventDefault();
+        if ( password && userName ) {
+            store.dispatch(clearData())
+        
+            setError('')
+            setIsLoading(true)
+            const data = {
+                password,
+                email:userName
+            }
+            store.dispatch(loginRoute(data)) 
+        }
+      
+        
         
             // loginRoute(data)
             
             // store.dispatch(loadRequest())
        
        
+    }
+
+    const signUpButton = ( e ) => {
+        e.preventDefault();
+       
+        const data = {
+            email,
+            password: password1,
+        }
+
+        if ( verificationDone ) {
+            store.dispatch( clearData() )
+            setError( '' )
+            setIsLoading(true)
+            store.dispatch( registerRoute( data ) );
+            // setEmail('')
+        }
     }
 
 
@@ -68,7 +166,7 @@ const Onboarding = ({general}) => {
     //CHeck For Error
     useEffect( () => {
         if ( loginError ) {
-            console.log(loginError)
+            
             setIsLoading( false )
             getAndRemoveClass()
             setError(loginError)
@@ -76,7 +174,14 @@ const Onboarding = ({general}) => {
             setError( registrationError )
             getAndRemoveClass()
             
-        } 
+        } else {
+            setEmail( '' )
+            setPassword( '' )
+            setPassword1('')
+            setPassword2('')
+            setUsername( '' )
+            setVerificationDone(false)
+        }
 
         
     },[loginError,registrationError])
@@ -133,7 +238,22 @@ const Onboarding = ({general}) => {
     } );
 
 
+    const validation = () => {
+        return (
+            <div className="validation">
+                
+                <div className="number"><i className="fa fa-check-circle"></i>Atleast 1 number.</div>
+                <div className="upper"><i className="fa fa-check-circle"></i>Atleast 1 Uppercase.</div>
+                <div className="lower"><i className="fa fa-check-circle"></i>Atleast 1 Lowercase.</div>
+                <div className="chars"><i className="fa fa-check-circle"></i>14 characters or more.</div>
+                <div className="email"><i className="fa fa-check-circle"></i>Not equal to your email.</div>
+            </div>
+        )
+    }
     
+    const setShowValidate =() => {
+       document.getElementsByClassName('validation')[0].style.display='flex'
+   }
 
 
     return (
@@ -145,14 +265,19 @@ const Onboarding = ({general}) => {
                     <p>{error}</p>
                         
                         <h1>Create Account</h1>
-                <input type="email" placeholder="Email"/>
+                <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="Email"/>
                         <section className="user-password">
-                            <input type={type} placeholder="Enter Password"/>
+                            <input type={ type } onClick={()=>setShowValidate()} placeholder="Enter Password" value={password1} onChange={(e)=>setPassword1(e.target.value) }/>
                             <i onClick={(e)=>toggleEye(e)} className="fa fa-eye"></i>
                             <i onClick={(e)=>toggleEyeSlash(e)}  className="fa fa-eye-slash"></i>
                         </section>
-                <input type={type} placeholder="Confirm Password"/>
-                <button >Sign Up</button>
+
+
+                        { validation() }
+                        
+                        <input type={ type } value={ password2 } onChange={ ( e ) => setPassword2( e.target.value ) } placeholder="Confirm Password" />
+                        
+                <button onClick={e=>signUpButton(e)} >Sign Up</button>
                 <a id="sign-Up" class="sign">Already a member ? <span >Sign-in</span></a>
 
             </form>
@@ -165,9 +290,9 @@ const Onboarding = ({general}) => {
                         
                 
                 
-                <input type="email" placeholder="Email"/>
+                <input type="email" value={userName} onChange={e=>setUsername(e.target.value)} placeholder="Email"/>
                 <section className="user-password">
-                            <input type={type} placeholder="Enter Password"/>
+                            <input type={type} value={password} onChange={e=>setPassword(e.target.value)} placeholder="Enter Password"/>
                             <i onClick={(e)=>toggleEye(e)} className="fa fa-eye"></i>
                             <i onClick={(e)=>toggleEyeSlash(e)}  className="fa fa-eye-slash"></i>
                         </section>

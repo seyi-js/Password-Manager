@@ -55,11 +55,11 @@ function continueProcessing() {
 
 }
 
-createKey(key_object);
+// createKey(key_object);
 
 interval_handle = setInterval( checkKey, 100 );
 
-console.log( 'Exiting...' );
+// console.log( 'Exiting...' );
 
 // function sleep(milliseconds ) {
     
@@ -84,3 +84,7 @@ console.log( 'Exiting...' );
 // t2 = new Date().getTime();
 
 // console.log( `Took ${t2 - t1} millisecond(s).` );
+
+
+
+)

@@ -373,3 +373,23 @@ div.onboarding .overlay-right{
 div.onboarding .wrapper.right-panel-active .overlay-right {
 	transform: translateX(20%);
 }
+
+
+div.onboarding div.validation{
+    /* color: #f77c11; */
+    color:grey;
+display: none;
+flex-direction: column;
+align-items: baseline;
+text-align: left;
+width: 100%;
+}
+
+div.onboarding div.validation div{
+    margin:3px 0;
+    font-size:13px;
+}
+
+div.onboarding div.validation div .fa{
+    margin-right:5px;
+}
