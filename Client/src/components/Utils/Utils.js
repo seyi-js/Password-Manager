@@ -115,17 +115,19 @@ export const copyToClipBoard = (id) => {
 
 //Generate Public and Private Keys
 export const generateRSAkeys = async() => {
-
+    
     let privateKey;
     let publicKey;
+    // rsa.generateKeyPair()
+    // .then((key)=> alert('asdasffsfsf'))
     await rsa.generateKeyPairAsync().then(
         async function ( keyPair ) {
+           
             publicKey = keyPair.publicKey;
             privateKey = keyPair.privateKey;
             // console.log( publicKey,privateKey );
         } );
-    
-   
+        
 
     return {pKey:privateKey, pubKey:publicKey};
 }
