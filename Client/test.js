@@ -6,6 +6,8 @@ console.log(key.getPrivateKey().toString('base64'))
    
 }
 
-generateRSAkeys()
+// generateRSAkeys()
+
+
 
 // module.exports = {generateRSAkeys};

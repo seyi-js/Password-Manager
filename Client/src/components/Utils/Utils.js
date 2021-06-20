@@ -8,6 +8,7 @@ import Crypto from 'crypto'
 
 
 
+
 var rsa = new RSA();
 
 export   const loadDom = () => {
@@ -225,3 +226,4 @@ export const decryptUserData =({data,key})=>{
 }
 // const result =generateENK({pass:"samuel", salt:"seyi",keyLen:16})
 // result.then(r=>console.log(r.toString('hex')))
+
